@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <title>LightSeeker</title>
+    <meta charset="UTF-8">
+    <link href="../../css/custom.css.scss" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-30302804-1']);
+        _gaq.push(['_setDomainName', 'jeffreybiles.com']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script></head>
+<body>
+<div id="game">
+    <div>
+        <button id="normalMode" > Normal Mode</button>
+        <button id="hardMode"> Hard Mode</button>
+        <button id="insaneMode"> Insane Mode </button>
+        ||
+        <button id="spookMode"> Spook Mode </button>
+        <button id="hardSpookMode"> Hard Spook Mode</button>
+    </div>
+    <div id="holdsMyGame">
+        <canvas id="myCanvas" width=800 height=600></canvas>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="../../javascripts/lightSeeker.js"></script>
+</body>
+</html>
