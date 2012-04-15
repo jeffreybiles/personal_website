@@ -1,5 +1,5 @@
 (function() {
-  var Enemy, Key, Player, Square, answer, boardHeight, boardWidth, canvas, canvasId, checkEnemies, cooldown, cooldownTimer, ctx, difficulty, drawBackground, drawEnemies, drawGrid, enemies, enemyFactory, frequency, gameMode, gameOver, health, level, mainLoop, makeNumberGrid, moveAllEnemies, newAnswer, newEquation, numbers, player, rand, revertColor, score, startGame, startingHealth, style, text,
+  var Enemy, Key, Player, Square, answer, boardHeight, boardWidth, canvas, canvasId, checkEnemies, cooldown, cooldownTimer, ctx, difficulty, drawBackground, drawEnemies, drawGrid, enemies, enemyFactory, frequency, gameMode, gameOver, health, isChaseHorizontal, isChaseVertical, level, mainLoop, makeNumberGrid, moveAllEnemies, newAnswer, newEquation, newSquareFactory, numbers, player, rand, revertColor, score, startGame, startingHealth, style, text,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
@@ -39,7 +39,7 @@
 
   answer = 5;
 
-  style = 'subtract';
+  style = 'add';
 
   text = function(text, x, y, color, size, style) {
     if (color == null) color = '#000';
@@ -184,26 +184,35 @@
       this.width = canvas.width / (boardWidth + 2);
       this.stillAround = true;
       roll = Math.random();
-      if (roll < 0.4) {
+      if (roll < 0.3) {
         this.type = 'horizontal';
         this.x = 0;
         this.y = rand(boardHeight) + 1;
         this.color = '#906666';
-      } else if (roll < 0.8) {
+      } else if (roll < 0.6) {
         this.type = 'vertical';
         this.y = 0;
         this.x = rand(boardWidth) + 1;
         this.color = '#C0A6A6';
-      } else if (roll < 0.97) {
+      } else if (roll < 0.9) {
         this.type = 'wander';
         this.x = 0;
         this.y = rand(boardHeight) + 1;
         this.color = '#7D26CD';
+      } else if (roll < 0.95) {
+        if (!enemies.some(isChaseHorizontal)) {
+          this.type = 'chase-horizontal';
+          this.x = 0;
+          this.y = rand(boardHeight) + 1;
+          this.color = '#EE7621';
+        }
       } else {
-        this.type = 'chase';
-        this.x = 0;
-        this.y = rand(boardHeight) + 1;
-        this.color = '#EE7621';
+        if (!enemies.some(isChaseVertical)) {
+          this.type = 'chase-vertical';
+          this.y = 0;
+          this.x = rand(boardWidth) + 1;
+          this.color = '#AE5600';
+        }
       }
     }
 
@@ -218,7 +227,7 @@
           break;
         case 'wander':
           roll = Math.random();
-          if (roll < 0.25) {
+          if (roll < 0.3) {
             this.x += 1;
           } else if (roll < 0.5) {
             this.x -= 1;
@@ -228,7 +237,7 @@
             this.y -= 1;
           }
           break;
-        default:
+        case 'chase-horizontal':
           if (this.x > player.x) {
             this.x -= 1;
           } else if (this.x < player.x) {
@@ -237,6 +246,17 @@
             this.y -= 1;
           } else {
             this.y += 1;
+          }
+          break;
+        default:
+          if (this.y > player.y) {
+            this.y -= 1;
+          } else if (this.y < player.y) {
+            this.y += 1;
+          } else if (this.x < player.x) {
+            this.x += 1;
+          } else {
+            this.x -= 1;
           }
       }
       if (!((-1 < (_ref = this.x) && _ref < boardWidth + 1) && (-1 < (_ref2 = this.y) && _ref2 < boardHeight + 1))) {
@@ -247,6 +267,14 @@
     return Enemy;
 
   })(Square);
+
+  isChaseHorizontal = function(element) {
+    return element.type === 'chase-horizontal';
+  };
+
+  isChaseVertical = function(element) {
+    return element.type === 'chase-vertical';
+  };
 
   moveAllEnemies = function(canvas) {
     var enemy, _i, _len;
@@ -345,6 +373,7 @@
         score += 1;
         health += 0.25;
         numbers[this.x][this.y] = newEquation();
+        newSquareFactory(boardHeight);
         return newAnswer();
       } else {
         this.color = 'red';
@@ -356,6 +385,15 @@
     return Player;
 
   })(Square);
+
+  newSquareFactory = function(number) {
+    var i, _results;
+    _results = [];
+    for (i = 0; 0 <= number ? i <= number : i >= number; 0 <= number ? i++ : i--) {
+      _results.push(numbers[rand(boardWidth) + 1][rand(boardHeight) + 1] = newEquation());
+    }
+    return _results;
+  };
 
   revertColor = function(color) {
     return player.color = color;
@@ -385,6 +423,7 @@
 
   startGame = function() {
     var oldCanvas;
+    score = 0;
     makeNumberGrid();
     canvasId = Math.random().toString();
     oldCanvas = $('#holdsMyGame canvas').remove();
@@ -393,8 +432,6 @@
     ctx = canvas.getContext("2d");
     canvas.tabIndex = 1;
     cooldown = false;
-    score = 0;
-    level = 1;
     health = 3;
     enemies = [];
     player = new Player(3, 3);
@@ -405,18 +442,6 @@
   };
 
   jQuery(function($) {
-    $('#easy').click(function() {
-      difficulty = 5;
-      startGame();
-    });
-    $('#normal').click(function() {
-      difficulty = 11;
-      startGame();
-    });
-    $('#hard').click(function() {
-      difficulty = 31;
-      startGame();
-    });
     $('#add').click(function() {
       style = 'add';
       startGame();

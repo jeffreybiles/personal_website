@@ -13,6 +13,7 @@ window.addEventListener 'keyup', ((event) -> Key.onKeyup(event); event.preventDe
 window.addEventListener 'keydown', ((event) -> Key.onKeydown(event); event.preventDefault(); return false), false
 
 startGame = ->
+  score = 0
   makeNumberGrid()
   canvasId = Math.random().toString()
   oldCanvas = $('#holdsMyGame canvas').remove()
@@ -21,8 +22,6 @@ startGame = ->
   ctx = canvas.getContext("2d")
   canvas.tabIndex = 1
   cooldown = false
-  score = 0
-  level = 1
   health = 3
   enemies = []
   player = new Player(3,3)
@@ -35,20 +34,20 @@ startGame = ->
 
 
 jQuery ($) ->
-  $('#easy').click ->
-    difficulty = 5
-    startGame()
-    return
-
-  $('#normal').click ->
-    difficulty = 11
-    startGame()
-    return
-
-  $('#hard').click ->
-    difficulty = 31
-    startGame()
-    return
+#  $('#easy').click ->
+#    difficulty = 5
+#    startGame()
+#    return
+#
+#  $('#normal').click ->
+#    difficulty = 11
+#    startGame()
+#    return
+#
+#  $('#hard').click ->
+#    difficulty = 31
+#    startGame()
+#    return
 
   $('#add').click ->
     style = 'add'

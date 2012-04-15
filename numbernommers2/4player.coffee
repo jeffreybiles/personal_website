@@ -33,11 +33,15 @@ class Player extends Square
       score += 1
       health += 0.25
       numbers[@x][@y] = newEquation()
+      newSquareFactory(boardHeight)
       newAnswer()
     else
       @color = 'red'
       setTimeout(revertColor, 300, oldColor)
       health -= 1
+
+newSquareFactory = (number) ->
+  numbers[rand(boardWidth)+1][rand(boardHeight) + 1] = newEquation() for i in [0..number]
 
 revertColor = (color) ->
   player.color = color

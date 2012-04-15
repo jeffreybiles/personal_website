@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
-    <title>Number Nommers</title>
+    <title>Number Nommers 2</title>
     <?php include('../header.php') ?>
 </head>
 <body>
@@ -9,17 +9,11 @@
 <?php include("../navbar.php") ?>
 <div class="container">
     <div id="game">
-        <div>
-            <button id="easy" >Easy</button>
-            <button id="normal">Normal</button>
-            <button id="hard">Hard</button>
-        </div>
 
         <div>
             <button id="add" >Add</button>
             <button id="subtract">Subtract</button>
         </div>
-        Arrows to move, spacebar to nom.
         <div id="holdsMyGame">
             <canvas id="myCanvas" width=800 height=600></canvas>
         </div>

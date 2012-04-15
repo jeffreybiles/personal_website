@@ -16,4 +16,4 @@ cooldown = false
 gameOver = false
 numbers = [[],[]]
 answer = 5
-style = 'subtract'
+style = 'add'

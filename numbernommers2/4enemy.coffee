@@ -5,26 +5,33 @@ class Enemy extends Square
     @stillAround = true
 
     roll = Math.random()
-    if roll < 0.4
+    if roll < 0.3
       @type = 'horizontal'
       @x = 0
       @y = rand(boardHeight) + 1
       @color = '#906666'
-    else if roll < 0.8
+    else if roll < 0.6
       @type = 'vertical'
       @y = 0
       @x = rand(boardWidth) + 1
       @color = '#C0A6A6'
-    else if roll < 0.97
+    else if roll < 0.9
       @type = 'wander'
       @x = 0
       @y = rand(boardHeight) + 1
       @color = '#7D26CD'
+    else if roll < 0.95
+      unless enemies.some(isChaseHorizontal)
+        @type = 'chase-horizontal'
+        @x = 0
+        @y = rand(boardHeight) + 1
+        @color = '#EE7621'
     else
-      @type = 'chase'
-      @x = 0
-      @y = rand(boardHeight) + 1
-      @color = '#EE7621'
+      unless enemies.some(isChaseVertical)
+        @type = 'chase-vertical'
+        @y = 0
+        @x = rand(boardWidth) + 1
+        @color = '#AE5600'
 
 
   move: ->
@@ -35,7 +42,7 @@ class Enemy extends Square
         @y += 1
       when 'wander'
         roll = Math.random()
-        if roll < 0.25
+        if roll < 0.3
           @x += 1
         else if roll < 0.5
           @x -= 1
@@ -43,7 +50,7 @@ class Enemy extends Square
           @y += 1
         else
           @y -= 1
-      else
+      when 'chase-horizontal'
         if @x > player.x
           @x -= 1
         else if @x < player.x
@@ -52,9 +59,24 @@ class Enemy extends Square
           @y -= 1
         else
           @y += 1
+      else #chase-vertical
+        if @y > player.y
+          @y -= 1
+        else if @y < player.y
+          @y += 1
+        else if @x < player.x
+          @x += 1
+        else
+          @x -= 1
 
     unless -1 < @x < boardWidth + 1 && -1 < @y < boardHeight + 1
       @stillAround = false
+
+isChaseHorizontal = (element) ->
+  element.type == 'chase-horizontal'
+
+isChaseVertical = (element) ->
+  element.type == 'chase-vertical'
 
 moveAllEnemies = (canvas) ->
   enemy.move() for enemy in enemies
@@ -86,3 +108,4 @@ checkEnemies = ->
   enemyFactory(score/3 - enemies.length)
   if health <= 0
     startGame()
+
