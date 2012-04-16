@@ -43,7 +43,7 @@
 
   text = function(text, x, y, color, size, style) {
     if (color == null) color = '#000';
-    if (size == null) size = 18;
+    if (size == null) size = 16;
     if (style == null) style = 'sans-serif';
     ctx.fillStyle = color;
     ctx.font = "bold " + size + "px " + style;
@@ -91,17 +91,13 @@
     for (i = 1; 1 <= boardWidth ? i <= boardWidth : i >= boardWidth; 1 <= boardWidth ? i++ : i--) {
       for (j = 1; 1 <= boardHeight ? j <= boardHeight : j >= boardHeight; 1 <= boardHeight ? j++ : j--) {
         ctx.strokeRect(i * width, j * height, width, height);
-        if (difficulty >= 12) {
-          offset = 0.2;
-        } else {
-          offset = 0.3;
-        }
+        offset = 0.2;
         text(numbers[i][j], (i + offset) * width, (j + 0.5) * height);
       }
     }
     text("health: " + health, 10, 30);
     text("score: " + score, 10, 50);
-    text("target: " + answer, canvas.width - 100, 30);
+    text("target: " + answer, canvas.width - 150, 30);
   };
 
   cooldownTimer = function() {

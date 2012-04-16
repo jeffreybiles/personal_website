@@ -1,5 +1,5 @@
 
-text = (text, x, y, color = '#000', size = 18, style = 'sans-serif')->
+text = (text, x, y, color = '#000', size = 16, style = 'sans-serif')->
   ctx.fillStyle = color
   ctx.font = "bold #{size}px #{style}"
   ctx.textBaseline = 'middle'
@@ -34,12 +34,12 @@ drawGrid = ->
   for i in [1..boardWidth]
     for j in [1..boardHeight]
       ctx.strokeRect(i*width, j*height, width, height)
-      if difficulty >= 12 then offset = 0.2 else offset = 0.3
+      offset = 0.2
 
       text(numbers[i][j], (i+offset)*width, (j+0.5)*height)
   text("health: #{health}", 10, 30)
   text("score: #{score}", 10, 50)
-  text("target: #{answer}", canvas.width - 100, 30)
+  text("target: #{answer}", canvas.width - 150, 30)
   return
 
 cooldownTimer = ->
