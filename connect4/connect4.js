@@ -1,5 +1,5 @@
 (function() {
-  var Key, bgColor, black, boardHeight, boardWidth, canvas, canvasId, computerRound, ctx, drawGrid, gameMode, grid, mainLoop, makeEmptyGrid, orange, playMove, playerPosition, playerRound, playerTurn, rand, red, squareHeight, squareWidth, startGame, testWin, text, winner;
+  var Key, bgColor, black, boardHeight, boardWidth, canvas, canvasId, catGame, computerRound, ctx, drawGrid, gameMode, grid, mainLoop, makeEmptyGrid, orange, playMove, playerPosition, playerRound, playerTurn, rand, red, squareHeight, squareWidth, startGame, testWin, text, traceDirection, winText, winner;
 
   canvas = document.getElementById("myCanvas");
 
@@ -32,6 +32,8 @@
   orange = 'orange';
 
   bgColor = 'green';
+
+  winText = '';
 
   text = function(text, x, y, color, size, style) {
     if (color == null) color = '#000';
@@ -90,8 +92,9 @@
       ctx.fillStyle = red;
       ctx.beginPath();
       ctx.arc((playerPosition + 0.5) * squareWidth, 0.5 * squareHeight, squareHeight / 2.2, 0, Math.PI * 2, false);
-      return ctx.fill();
+      ctx.fill();
     }
+    return text(winText, canvas.width / 2 - 50, 30);
   };
 
   playMove = function(position) {
@@ -102,15 +105,51 @@
         y--;
       } else {
         grid[position][y] = playerTurn ? 'red' : 'black';
-        testWin();
-        playerTurn = !playerTurn;
+        testWin(position, y);
         return;
       }
     }
   };
 
-  testWin = function() {
-    return false;
+  testWin = function(x, y) {
+    var diag1, diag2, leftRight, myColor, upDown;
+    myColor = grid[x][y];
+    upDown = 1 + traceDirection(x, y, 0, 1, myColor) + traceDirection(x, y, 0, -1, myColor);
+    leftRight = 1 + traceDirection(x, y, 1, 0, myColor) + traceDirection(x, y, -1, 0, myColor);
+    diag1 = 1 + traceDirection(x, y, 1, 1, myColor) + traceDirection(x, y, -1, -1, myColor);
+    diag2 = 1 + traceDirection(x, y, 1, -1, myColor) + traceDirection(x, y, -1, 1, myColor);
+    console.log(upDown, leftRight, diag1, diag2);
+    if (upDown >= 4 || leftRight >= 4 || diag1 >= 4 || diag2 >= 4) {
+      if (playerTurn) {
+        winText = "YOU WIN!!!!!!!!!";
+      } else {
+        winText = "COMPUTER WINS!!!!!!!!!";
+      }
+      return setTimeout(startGame, 3000);
+    } else if (catGame()) {
+      winText = "EVERYONE/NOONE WINS!!!!!!";
+      return setTimeout(startGame, 3000);
+    } else {
+      return playerTurn = !playerTurn;
+    }
+  };
+
+  catGame = function() {
+    var cat, i;
+    cat = true;
+    for (i = 1; 1 <= boardWidth ? i <= boardWidth : i >= boardWidth; 1 <= boardWidth ? i++ : i--) {
+      if (!grid[i][1]) cat = false;
+    }
+    return cat;
+  };
+
+  traceDirection = function(x, y, dx, dy, color) {
+    var _ref, _ref2;
+    if ((1 <= (_ref = x + dx) && _ref <= boardWidth) && (1 <= (_ref2 = y + dy) && _ref2 <= boardHeight) && color === grid[x + dx][y + dy]) {
+      return 1 + traceDirection(x + dx, y + dy, dx, dy, color);
+    } else {
+      return 0;
+    }
   };
 
   Key = {
@@ -157,10 +196,8 @@
 
   computerRound = function(canvas) {
     var decision;
-    console.log('start of computer round');
     drawGrid();
     decision = rand(boardWidth) + 1;
-    console.log('decision made');
     playMove(decision);
     return playerRound(canvas);
   };
@@ -185,6 +222,7 @@
     canvas = document.getElementById(canvasId);
     ctx = canvas.getContext("2d");
     canvas.tabIndex = 1;
+    setTimeout(winText = '', 3000);
     makeEmptyGrid();
     playerTurn = true;
     return playerRound(canvas);

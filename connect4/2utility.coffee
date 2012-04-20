@@ -8,8 +8,6 @@ text = (text, x, y, color = '#000', size = 16, style = 'sans-serif')->
 rand = (max, min = 0) ->
   Math.floor(Math.random()*(max - min) + min)
 
-#drawBackground = ->
-
 makeEmptyGrid = ->
   for i in [1..boardWidth]
     grid[i] = []
@@ -41,10 +39,7 @@ drawGrid = ->
     ctx.arc((playerPosition+0.5)*squareWidth,0.5*squareHeight, squareHeight/2.2, 0, Math.PI * 2, false)
     ctx.fill()
 
-#
-#  text("health: #{health}", 10, 30)
-#  text("score: #{score}", 10, 50)
-#  text("target: #{answer}", canvas.width - 150, 30)
+  text(winText, canvas.width/2 - 50, 30)
 
 playMove = (position) ->
   y = boardHeight
@@ -53,13 +48,42 @@ playMove = (position) ->
       y--
     else #if square is open
       grid[position][y] = if playerTurn then 'red' else 'black'
-      testWin()
-      playerTurn = !playerTurn
+      testWin(position, y)
       return
 
-testWin = ->
-  false #this obviously must change
-  #should also test for pending cat's game
+testWin = (x, y) ->
+  myColor = grid[x][y]
+  upDown = 1 + traceDirection(x, y, 0, 1, myColor) + traceDirection(x, y, 0, -1, myColor)
+  leftRight = 1 + traceDirection(x, y, 1, 0, myColor) + traceDirection(x, y, -1, 0, myColor)
+  diag1 = 1 + traceDirection(x, y, 1, 1, myColor) + traceDirection(x, y, -1, -1, myColor)
+  diag2 = 1 + traceDirection(x, y, 1, -1, myColor) + traceDirection(x, y, -1, 1, myColor)
+  console.log(upDown, leftRight, diag1, diag2)
+  if upDown >= 4 or leftRight >= 4 or diag1 >= 4 or diag2 >= 4
+    if playerTurn
+      winText = "YOU WIN!!!!!!!!!"
+    else
+      winText = "COMPUTER WINS!!!!!!!!!"
+    setTimeout(startGame, 3000)
+  else if catGame()
+    winText =  "EVERYONE/NOONE WINS!!!!!!"
+    setTimeout(startGame, 3000)
+  else
+    playerTurn = !playerTurn
+
+
+catGame = ->
+  cat = true
+  for i in [1..boardWidth]
+    cat = false unless grid[i][1]
+  cat
+
+
+traceDirection = (x, y, dx, dy, color) ->
+  if 1 <= x + dx <= boardWidth && 1 <= y + dy <= boardHeight &&
+      color == grid[x+dx][y+dy]
+    return 1 + traceDirection(x + dx, y+ dy, dx, dy, color)
+  else
+    return 0
 
 Key =
   _pressed: {},

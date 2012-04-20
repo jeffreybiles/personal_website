@@ -28,6 +28,7 @@ startGame = ->
   canvas = document.getElementById(canvasId)
   ctx = canvas.getContext("2d")
   canvas.tabIndex = 1
+  setTimeout( winText = '', 3000)
 
   makeEmptyGrid()
 
