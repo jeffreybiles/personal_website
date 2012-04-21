@@ -13,7 +13,7 @@ playerRound = (canvas) ->
 
 computerRound = (canvas) ->
   drawGrid()
-  decision = rand(boardWidth) + 1 #decideMove()
+  decision = decideMove()
   playMove(decision)
   playerRound(canvas)
 

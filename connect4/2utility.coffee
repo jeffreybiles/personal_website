@@ -52,13 +52,7 @@ playMove = (position) ->
       return
 
 testWin = (x, y) ->
-  myColor = grid[x][y]
-  upDown = 1 + traceDirection(x, y, 0, 1, myColor) + traceDirection(x, y, 0, -1, myColor)
-  leftRight = 1 + traceDirection(x, y, 1, 0, myColor) + traceDirection(x, y, -1, 0, myColor)
-  diag1 = 1 + traceDirection(x, y, 1, 1, myColor) + traceDirection(x, y, -1, -1, myColor)
-  diag2 = 1 + traceDirection(x, y, 1, -1, myColor) + traceDirection(x, y, -1, 1, myColor)
-  console.log(upDown, leftRight, diag1, diag2)
-  if upDown >= 4 or leftRight >= 4 or diag1 >= 4 or diag2 >= 4
+  if isWin(x, y)
     if playerTurn
       winText = "YOU WIN!!!!!!!!!"
     else
@@ -70,6 +64,17 @@ testWin = (x, y) ->
   else
     playerTurn = !playerTurn
 
+isWin = (x, y) ->
+  [upDown, leftRight, diag1, diag2] = scores(x, y)
+  return upDown >= 4 or leftRight >= 4 or diag1 >= 4 or diag2 >= 4
+
+scores = (x, y) ->
+  myColor = grid[x][y]
+  upDown = 1 + traceDirection(x, y, 0, 1, myColor) + traceDirection(x, y, 0, -1, myColor)
+  leftRight = 1 + traceDirection(x, y, 1, 0, myColor) + traceDirection(x, y, -1, 0, myColor)
+  diag1 = 1 + traceDirection(x, y, 1, 1, myColor) + traceDirection(x, y, -1, -1, myColor)
+  diag2 = 1 + traceDirection(x, y, 1, -1, myColor) + traceDirection(x, y, -1, 1, myColor)
+  return [upDown, leftRight, diag1, diag2]
 
 catGame = ->
   cat = true
@@ -116,8 +121,43 @@ Key =
   onKeyup: (event) ->
     delete this._pressed[event.keyCode]
 
+decideMove = ->
+  if AI == 'random'
+    return rand(boardWidth) + 1
+  else if AI == 'easy'
+    return lookAhead(2)
+  else if AI == 'normal'
+    return lookAhead(4)
+  else if AI == 'hard'
+    return lookAhead(8)
+  else if AI == 'terminator'
+    return lookAhead(12)
+
+alphaBeta = (grid, depth, alpha, beta, color) ->
+  if depth == 0 then return heuristic(color, grid)
+
+  if player == 'black'
+
+  else
+#lookAhead = (steps) ->
+#  Math.max(simulatePlayerMove())
 
 
-
-
-
+heuristic = (color, grid) ->
+  total = 0
+  for i in [1..boardWidth]
+    for j in [1..boardHeight]
+      gridColor = grid[i][j]
+      if gridColor
+        scoresArray = scores(i, j)
+        #if win:
+        if scoresArray.some((length)-> length >= 4)
+          if gridColor == 'black' then return Number.POSITIVE_INFINITY else return Number.NEGATIVE_INFINITY
+        else
+          squareScore = sum(scoresArray)
+          console.log(squareScore)
+          if gridColor == 'black'
+            total += squareScore
+          else if gridColor == 'red'
+            total -= squareScore
+  return total

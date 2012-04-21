@@ -17,3 +17,5 @@ black = 'black'
 orange = 'orange'
 bgColor = 'green'
 winText = ''
+
+AI = 'random'
