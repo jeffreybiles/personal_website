@@ -2,7 +2,6 @@ canvas = document.getElementById("myCanvas")
 canvasId = "myCanvas"
 ctx = canvas.getContext("2d")
 
-
 decel = 0.96
 spikeSize = 10
 nucleusRad = 15
