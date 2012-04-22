@@ -1,5 +1,7 @@
 (function() {
-  var Circle, Key, accelerationConstant, canvas, canvasId, chargeFactory, charges, ctx, drawBackground, level, mainLoop, otherSpeed, player, playerAcceleration, rand, startGame;
+  var Circle, Enemy, Key, Nucleus, Player, accelerationConstant, angleChangeRate, canvas, canvasId, checkAllCollisions, checkAtomsCollision, checkOneCollision, collision, ctx, decel, drawBackground, electronCollision, electronRad, enemies, enemyFactory, filterEnemies, hitSpeed, level, mainLoop, maxVelocity, nucleusRad, otherSpeed, player, playerAcceleration, radChangeRate, radMax, rand, spikeSize, startGame,
+    __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
   canvas = document.getElementById("myCanvas");
 
@@ -7,26 +9,42 @@
 
   ctx = canvas.getContext("2d");
 
+  decel = 0.96;
+
+  spikeSize = 10;
+
+  nucleusRad = 15;
+
+  electronRad = 7;
+
+  radChangeRate = 2;
+
+  radMax = 100;
+
+  angleChangeRate = 15;
+
+  hitSpeed = 15;
+
   otherSpeed = 1;
 
   level = 1;
 
-  accelerationConstant = 0.00005;
+  accelerationConstant = 0.0001;
 
-  playerAcceleration = 0.05;
+  playerAcceleration = 0.20;
+
+  maxVelocity = 1;
 
   player = '';
 
-  charges = [];
+  enemies = [];
 
   rand = function(max) {
     return Math.ceil(Math.random() * max);
   };
 
   drawBackground = function() {
-    var color;
-    color = player.charge > 0 ? '#CCA981' : '#95ACB4';
-    ctx.fillStyle = color;
+    ctx.fillStyle = '#CCA981';
     return ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
 
@@ -54,78 +72,23 @@
 
   Circle = (function() {
 
-    function Circle(x, y, charge, isPlayer) {
-      this.x = x;
-      this.y = y;
-      this.charge = charge;
-      this.isPlayer = isPlayer != null ? isPlayer : false;
-      this.radius = Math.abs(this.charge) * 5;
-      if (this.isPlayer) {
-        this.color = this.charge > 0 ? '#A8652D' : '#1B6565';
-        this.dx = this.dy = 0;
-      } else {
-        this.color = this.charge > 0 ? '#9A692C' : '#325F66';
-        this.dx = Math.random() * otherSpeed;
-        this.dy = Math.random() * otherSpeed;
-      }
-    }
+    function Circle() {}
 
     Circle.prototype.move = function() {
-      this.x += this.dx;
-      this.y += this.dy;
-      if (this.y < 0) {
-        this.y = 0;
-        this.dy *= -1;
-      }
-      if (this.y > canvas.height) {
-        this.y = canvas.height;
-        this.dy *= -1;
-      }
-      if (this.x < 0) {
-        this.x = 0;
-        this.dx *= -1;
-      }
-      if (this.x > canvas.width) {
-        this.x = canvas.width;
-        return this.dx *= -1;
-      }
-    };
-
-    Circle.prototype.update = function() {
-      var charge, distanceSquared, distanceX, distanceY, influenceX, influenceY, _i, _len;
-      if (Key.isDown(Key.UP) || Key.isDown(Key.W)) this.dy -= playerAcceleration;
-      if (Key.isDown(Key.DOWN) || Key.isDown(Key.S)) this.dy += playerAcceleration;
-      if (Key.isDown(Key.LEFT) || Key.isDown(Key.A)) this.dx -= playerAcceleration;
-      if (Key.isDown(Key.RIGHT) || Key.isDown(Key.D)) {
-        this.dx += playerAcceleration;
-      }
-      if (Key.isDown(Key.SPACE)) {
-        this.charge *= -1;
-        this.color = this.charge > 0 ? '#A8652D' : '#1B6565';
-      }
-      influenceX = 0;
-      influenceY = 0;
-      for (_i = 0, _len = charges.length; _i < _len; _i++) {
-        charge = charges[_i];
-        distanceX = this.x - charge.x;
-        distanceY = this.y - charge.y;
-        distanceSquared = Math.max(distanceX ^ 2 + distanceY ^ 2, 5);
-        influenceX += charge.charge * distanceX / distanceSquared;
-        influenceY += charge.charge * distanceY / distanceSquared;
-      }
-      this.dx += influenceX * this.charge * accelerationConstant;
-      this.dy += influenceY * this.charge * accelerationConstant;
-      if (this.x >= canvas.width) {
-        console.log(this.x, this.y, this.dx, this.dy, canvas.width, level);
-        level += 1;
-        return startGame();
+      var _ref, _ref2;
+      this.dx *= decel;
+      this.dy *= decel;
+      if ((0 < (_ref = this.y) && _ref < canvas.height) && (0 < (_ref2 = this.x) && _ref2 < canvas.width)) {
+        return this.draw();
+      } else {
+        return this.stillAlive = false;
       }
     };
 
     Circle.prototype.draw = function() {
       ctx.fillStyle = this.color;
       ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+      ctx.arc(this.x, this.y, nucleusRad, 0, Math.PI * 2, false);
       return ctx.fill();
     };
 
@@ -133,31 +96,196 @@
 
   })();
 
-  chargeFactory = function(number) {
+  Nucleus = (function(_super) {
+
+    __extends(Nucleus, _super);
+
+    function Nucleus(x, y, radius, isPlayer, color, nucleusColor) {
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+      this.isPlayer = isPlayer;
+      this.color = color != null ? color : 'black';
+      this.nucleusColor = nucleusColor != null ? nucleusColor : '#A8652D';
+      this.angle = 0;
+      this.dx = 0;
+      this.dy = 0;
+      this.stillAlive = true;
+    }
+
+    Nucleus.prototype.move = function() {
+      this.angle += angleChangeRate / (30 + this.radius);
+      this.x += this.dx;
+      this.y += this.dy;
+      this.electronX = this.x + Math.cos(this.angle) * this.radius;
+      this.electronY = this.y + Math.sin(this.angle) * this.radius;
+      return Nucleus.__super__.move.apply(this, arguments);
+    };
+
+    Nucleus.prototype.draw = function() {
+      ctx.fillStyle = this.nucleusColor;
+      ctx.beginPath();
+      ctx.arc(this.electronX, this.electronY, electronRad, 0, Math.PI * 2, false);
+      ctx.fill();
+      return Nucleus.__super__.draw.apply(this, arguments);
+    };
+
+    return Nucleus;
+
+  })(Circle);
+
+  Player = (function(_super) {
+
+    __extends(Player, _super);
+
+    function Player(x, y, radius) {
+      Player.__super__.constructor.call(this, x, y, radius, true);
+    }
+
+    Player.prototype.update = function() {
+      if (Key.isDown(Key.UP) || Key.isDown(Key.W)) this.dy -= playerAcceleration;
+      if (Key.isDown(Key.DOWN) || Key.isDown(Key.S)) this.dy += playerAcceleration;
+      if (Key.isDown(Key.LEFT) || Key.isDown(Key.A)) this.dx -= playerAcceleration;
+      if (Key.isDown(Key.RIGHT) || Key.isDown(Key.D)) {
+        this.dx += playerAcceleration;
+      }
+      if (Key.isDown(Key.SPACE)) {
+        if (this.radius < radMax) return this.radius += radChangeRate;
+      } else if (this.radius > nucleusRad + electronRad + 1) {
+        return this.radius -= radChangeRate;
+      }
+    };
+
+    return Player;
+
+  })(Nucleus);
+
+  Enemy = (function(_super) {
+
+    __extends(Enemy, _super);
+
+    function Enemy(x, y, radius) {
+      this.outward = true;
+      Enemy.__super__.constructor.call(this, x, y, radius, false, '#777777', '#333333');
+    }
+
+    Enemy.prototype.update = function() {
+      this.dx += (player.x - this.x) * 0.0007;
+      this.dy += (player.y - this.y) * 0.0007;
+      if (Math.random() < 0.05) this.outward = !this.outward;
+      if (this.outward) {
+        if (this.radius < radMax) return this.radius += radChangeRate;
+      } else {
+        if (this.radius > nucleusRad + electronRad + 1) {
+          return this.radius -= radChangeRate;
+        }
+      }
+    };
+
+    return Enemy;
+
+  })(Nucleus);
+
+  enemyFactory = function(number) {
     var i, _results;
-    charges = [];
+    enemies = [];
     _results = [];
     for (i = 1; 1 <= number ? i <= number : i >= number; 1 <= number ? i++ : i--) {
-      _results.push(charges.push(new Circle(rand(canvas.width - 50) + 50, rand(canvas.height), rand(10) - 5)));
+      _results.push(enemies.push(new Enemy(rand(canvas.width), rand(canvas.height), 20)));
+    }
+    return _results;
+  };
+
+  collision = function(hitter, hittee, modifiers) {
+    if (modifiers == null) modifiers = 1;
+    hittee.dx = Math.cos(hitter.angle + Math.PI / 2) * hitSpeed * modifiers;
+    return hittee.dy = Math.sin(hitter.angle + Math.PI / 2) * hitSpeed * modifiers;
+  };
+
+  electronCollision = function(atom1, atom2) {
+    collision(atom1, atom2, 0.3);
+    return collision(atom2, atom1, 0.3);
+  };
+
+  checkOneCollision = function(x1, y1, x2, y2, radius) {
+    var distance;
+    distance = Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2);
+    if (distance < Math.pow(radius, 2)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  checkAtomsCollision = function(atom1, atom2) {
+    if (checkOneCollision(atom1.x, atom1.y, atom2.electronX, atom2.electronY, nucleusRad + electronRad)) {
+      collision(atom2, atom1);
+    }
+    if (checkOneCollision(atom1.electronX, atom1.electronY, atom2.x, atom2.y, nucleusRad + electronRad)) {
+      collision(atom1, atom2);
+    }
+    if (checkOneCollision(atom1.electronX, atom1.electronY, atom2.electronX, atom2.electronY, electronRad + electronRad)) {
+      return electronCollision(atom1, atom2);
+    }
+  };
+
+  checkAllCollisions = function() {
+    var enemy, i, j;
+    i = 0;
+    while (i < enemies.length) {
+      enemy = enemies[i];
+      checkAtomsCollision(enemy, player);
+      j = i + 1;
+      while (j < enemies.length) {
+        checkAtomsCollision(enemy, enemies[j]);
+        j++;
+      }
+      i++;
+    }
+    return filterEnemies();
+  };
+
+  filterEnemies = function() {
+    var i, _results;
+    i = 0;
+    _results = [];
+    while (i < enemies.length) {
+      if (enemies[i].stillAlive) {
+        _results.push(i++);
+      } else {
+        _results.push(enemies.splice(i, 1));
+      }
     }
     return _results;
   };
 
   mainLoop = function(canvas) {
-    var charge, _i, _j, _len, _len2;
+    var enemy, _i, _j, _k, _len, _len2, _len3;
     drawBackground();
     player.update();
     player.move();
-    for (_i = 0, _len = charges.length; _i < _len; _i++) {
-      charge = charges[_i];
-      charge.move();
-    }
     player.draw();
-    for (_j = 0, _len2 = charges.length; _j < _len2; _j++) {
-      charge = charges[_j];
-      charge.draw();
+    for (_i = 0, _len = enemies.length; _i < _len; _i++) {
+      enemy = enemies[_i];
+      enemy.update();
     }
-    if (canvas.id === canvasId) return setTimeout(mainLoop, 1000 / 60, canvas);
+    for (_j = 0, _len2 = enemies.length; _j < _len2; _j++) {
+      enemy = enemies[_j];
+      enemy.move();
+    }
+    for (_k = 0, _len3 = enemies.length; _k < _len3; _k++) {
+      enemy = enemies[_k];
+      enemy.draw();
+    }
+    checkAllCollisions();
+    if (enemies.length === 0) {
+      level++;
+      return startGame();
+    } else if (!player.stillAlive) {
+      return startGame();
+    } else if (canvas.id === canvasId) {
+      return setTimeout(mainLoop, 1000 / 30, canvas);
+    }
   };
 
   window.addEventListener('keyup', (function(event) {
@@ -180,8 +308,10 @@
     canvas = document.getElementById(canvasId);
     ctx = canvas.getContext("2d");
     canvas.tabIndex = 1;
-    player = new Circle(20, canvas.height / 2, 2, true);
-    chargeFactory(level * 4);
+    console.log("about to create a player");
+    player = new Player(canvas.width / 2, canvas.height / 2, 20, true);
+    console.log("createde a player");
+    enemyFactory(level * 4);
     return mainLoop(canvas);
   };
 

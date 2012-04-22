@@ -2,8 +2,7 @@ rand = (max) ->
   Math.ceil(Math.random()*max)
 
 drawBackground = ->
-  color = if player.charge > 0 then '#CCA981' else '#95ACB4'
-  ctx.fillStyle = color
+  ctx.fillStyle = '#CCA981'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
 

@@ -2,11 +2,18 @@ mainLoop = (canvas) ->
   drawBackground()
   player.update()
   player.move()
-  charge.move() for charge in charges
   player.draw()
-  charge.draw() for charge in charges
-  if canvas.id == canvasId
-    setTimeout(mainLoop, 1000/60, canvas)
+  enemy.update() for enemy in enemies
+  enemy.move() for enemy in enemies
+  enemy.draw() for enemy in enemies
+  checkAllCollisions()
+  if enemies.length == 0
+    level++
+    startGame()
+  else if !player.stillAlive
+    startGame()
+  else if canvas.id == canvasId
+    setTimeout(mainLoop, 1000/30, canvas)
 
 window.addEventListener 'keyup', ((event) -> Key.onKeyup(event); event.preventDefault(); return false), false
 window.addEventListener 'keydown', ((event) -> Key.onKeydown(event); event.preventDefault(); return false), false
@@ -18,9 +25,11 @@ startGame = ->
   canvas = document.getElementById(canvasId)
   ctx = canvas.getContext("2d")
   canvas.tabIndex = 1
+  console.log("about to create a player")
 
-  player = new Circle(20, canvas.height/2, 2, true)
-  chargeFactory(level*4)
+  player = new Player(canvas.width/2, canvas.height/2, 20, true)
+  console.log("createde a player")
+  enemyFactory(level*4)
   mainLoop(canvas)
 
 
