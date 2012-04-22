@@ -133,14 +133,34 @@ decideMove = ->
   else if AI == 'terminator'
     return lookAhead(12)
 
+testMove = (board, position, color) ->
+  y = boardHeight
+  while y > 0 #tests every square starting from the bottom
+    if board[position][y] #if the square is taken
+      y--
+    else #if square is open
+      return board[position][y] = color
+
 alphaBeta = (grid, depth, alpha, beta, color) ->
-  if depth == 0 then return heuristic(color, grid)
-
-  if player == 'black'
-
+  if depth == 0
+    return heuristic(color, grid)
+  if color == 'black'
+    for i in [1..boardWidth]
+      unless grid[i][1] #unless top is filled
+        newGrid = testMove(grid, i, 'black')
+        alpha = max(alpha, alphaBeta(newGrid, depth - 1, alpha, beta, 'red'))
+        if beta <= alpha
+          break
   else
-#lookAhead = (steps) ->
-#  Math.max(simulatePlayerMove())
+    for i in [1..boardWidth]
+      unless grid[i][1]
+        newGrid = testMove(grid, i, 'red')
+        beta = min(beta, alphaBeta(newGrid, depth - 1, alpha, beta, 'black'))
+        if beta <= alpha
+          break
+
+lookAhead = (steps) ->
+  alphaBeta(grid, steps, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 'black')
 
 
 heuristic = (color, grid) ->

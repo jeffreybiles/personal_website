@@ -50,6 +50,7 @@
             <br>
             <h5>Javascript games</h5>
             <ul>
+                <li><a href="boundaries"><b>Boundaries</b></a></li>
                 <li><a href="numbernommers">Number Nommers</a></li>
                 <li><a href="numbernommers2"><b>Number Nommers 2</b></a></li>
                 <li><a href="/theme/variation/lightseeker.php"><b>LightSeeker</b></a></li>

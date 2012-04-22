@@ -8,7 +8,7 @@ squareHeight = canvas.height / (boardHeight + 2)
 squareWidth = canvas.width / (boardWidth + 2)
 
 playerPosition = 1
-gameMode = 'normal'
+AI = 'normal'
 playerTurn = true
 grid = []
 winner = null
