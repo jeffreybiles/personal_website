@@ -1,5 +1,5 @@
 (function() {
-  var AI, Key, alphaBeta, bgColor, black, boardHeight, boardWidth, canvas, canvasId, catGame, computerRound, ctx, decideMove, drawGrid, grid, heuristic, isWin, lookAhead, mainLoop, makeEmptyGrid, orange, playMove, playerPosition, playerRound, playerTurn, rand, red, scores, squareHeight, squareWidth, startGame, testMove, testWin, text, traceDirection, winText, winner;
+  var AI, Key, bgColor, black, boardHeight, boardWidth, canvas, canvasId, catGame, computerRound, ctx, drawGrid, grid, isWin, makeEmptyGrid, orange, playMove, playerPosition, playerRound, playerTurn, rand, red, scores, squareHeight, squareWidth, startGame, testWin, text, traceDirection, winText, winner;
 
   canvas = document.getElementById("myCanvas");
 
@@ -116,13 +116,13 @@
   testWin = function(x, y) {
     if (isWin(x, y)) {
       if (playerTurn) {
-        winText = "YOU WIN!!!!!!!!!";
+        winText = "YOUR THRALL WINS!!!!!!!!! (but you don't)";
       } else {
-        winText = "COMPUTER WINS!!!!!!!!!";
+        winText = "COMPUTER WINS!!!!!!!!! (but you don't)";
       }
       return setTimeout(startGame, 3000);
     } else if (catGame()) {
-      winText = "EVERYONE/NOONE WINS!!!!!!";
+      winText = "THE CAT WINS!!!!!! (that's you!)";
       return setTimeout(startGame, 3000);
     } else {
       return playerTurn = !playerTurn;
@@ -191,110 +191,6 @@
     }
   };
 
-  decideMove = function() {
-    if (AI === 'random') {
-      return rand(boardWidth) + 1;
-    } else if (AI === 'easy') {
-      return lookAhead(2);
-    } else if (AI === 'normal') {
-      return lookAhead(4);
-    } else if (AI === 'hard') {
-      return lookAhead(8);
-    } else if (AI === 'terminator') {
-      return lookAhead(12);
-    }
-  };
-
-  testMove = function(board, position, color) {
-    var y;
-    y = boardHeight;
-    while (y > 0) {
-      if (board[position][y]) {
-        y--;
-      } else {
-        return board[position][y] = color;
-      }
-    }
-  };
-
-  alphaBeta = function(grid, depth, alpha, beta, color) {
-    var i, newGrid, _results, _results2;
-    if (depth === 0) return heuristic(color, grid);
-    if (color === 'black') {
-      _results = [];
-      for (i = 1; 1 <= boardWidth ? i <= boardWidth : i >= boardWidth; 1 <= boardWidth ? i++ : i--) {
-        if (!grid[i][1]) {
-          newGrid = testMove(grid, i, 'black');
-          alpha = max(alpha, alphaBeta(newGrid, depth - 1, alpha, beta, 'red'));
-          if (beta <= alpha) {
-            break;
-          } else {
-            _results.push(void 0);
-          }
-        } else {
-          _results.push(void 0);
-        }
-      }
-      return _results;
-    } else {
-      _results2 = [];
-      for (i = 1; 1 <= boardWidth ? i <= boardWidth : i >= boardWidth; 1 <= boardWidth ? i++ : i--) {
-        if (!grid[i][1]) {
-          newGrid = testMove(grid, i, 'red');
-          beta = min(beta, alphaBeta(newGrid, depth - 1, alpha, beta, 'black'));
-          if (beta <= alpha) {
-            break;
-          } else {
-            _results2.push(void 0);
-          }
-        } else {
-          _results2.push(void 0);
-        }
-      }
-      return _results2;
-    }
-  };
-
-  lookAhead = function(steps) {
-    return alphaBeta(grid, steps, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 'black');
-  };
-
-  heuristic = function(color, grid) {
-    var gridColor, i, j, scoresArray, squareScore, total;
-    total = 0;
-    for (i = 1; 1 <= boardWidth ? i <= boardWidth : i >= boardWidth; 1 <= boardWidth ? i++ : i--) {
-      for (j = 1; 1 <= boardHeight ? j <= boardHeight : j >= boardHeight; 1 <= boardHeight ? j++ : j--) {
-        gridColor = grid[i][j];
-        if (gridColor) {
-          scoresArray = scores(i, j);
-          if (scoresArray.some(function(length) {
-            return length >= 4;
-          })) {
-            if (gridColor === 'black') {
-              return Number.POSITIVE_INFINITY;
-            } else {
-              return Number.NEGATIVE_INFINITY;
-            }
-          } else {
-            squareScore = sum(scoresArray);
-            console.log(squareScore);
-            if (gridColor === 'black') {
-              total += squareScore;
-            } else if (gridColor === 'red') {
-              total -= squareScore;
-            }
-          }
-        }
-      }
-    }
-    return total;
-  };
-
-  mainLoop = function(canvas) {
-    drawGrid();
-    if (canvasId === canvas.id) setTimeout(mainLoop, 1000 / 60, canvas);
-  };
-
   playerRound = function(canvas) {
     drawGrid();
     if (playerTurn) {
@@ -307,7 +203,7 @@
   computerRound = function(canvas) {
     var decision;
     drawGrid();
-    decision = decideMove();
+    decision = rand(boardWidth) + 1;
     playMove(decision);
     return playerRound(canvas);
   };

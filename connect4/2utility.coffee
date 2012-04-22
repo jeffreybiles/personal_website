@@ -54,12 +54,12 @@ playMove = (position) ->
 testWin = (x, y) ->
   if isWin(x, y)
     if playerTurn
-      winText = "YOU WIN!!!!!!!!!"
+      winText = "YOUR THRALL WINS!!!!!!!!! (but you don't)"
     else
-      winText = "COMPUTER WINS!!!!!!!!!"
+      winText = "COMPUTER WINS!!!!!!!!! (but you don't)"
     setTimeout(startGame, 3000)
   else if catGame()
-    winText =  "EVERYONE/NOONE WINS!!!!!!"
+    winText =  "THE CAT WINS!!!!!! (that's you!)"
     setTimeout(startGame, 3000)
   else
     playerTurn = !playerTurn
@@ -81,7 +81,6 @@ catGame = ->
   for i in [1..boardWidth]
     cat = false unless grid[i][1]
   cat
-
 
 traceDirection = (x, y, dx, dy, color) ->
   if 1 <= x + dx <= boardWidth && 1 <= y + dy <= boardHeight &&
@@ -120,64 +119,3 @@ Key =
 
   onKeyup: (event) ->
     delete this._pressed[event.keyCode]
-
-decideMove = ->
-  if AI == 'random'
-    return rand(boardWidth) + 1
-  else if AI == 'easy'
-    return lookAhead(2)
-  else if AI == 'normal'
-    return lookAhead(4)
-  else if AI == 'hard'
-    return lookAhead(8)
-  else if AI == 'terminator'
-    return lookAhead(12)
-
-testMove = (board, position, color) ->
-  y = boardHeight
-  while y > 0 #tests every square starting from the bottom
-    if board[position][y] #if the square is taken
-      y--
-    else #if square is open
-      return board[position][y] = color
-
-alphaBeta = (grid, depth, alpha, beta, color) ->
-  if depth == 0
-    return heuristic(color, grid)
-  if color == 'black'
-    for i in [1..boardWidth]
-      unless grid[i][1] #unless top is filled
-        newGrid = testMove(grid, i, 'black')
-        alpha = max(alpha, alphaBeta(newGrid, depth - 1, alpha, beta, 'red'))
-        if beta <= alpha
-          break
-  else
-    for i in [1..boardWidth]
-      unless grid[i][1]
-        newGrid = testMove(grid, i, 'red')
-        beta = min(beta, alphaBeta(newGrid, depth - 1, alpha, beta, 'black'))
-        if beta <= alpha
-          break
-
-lookAhead = (steps) ->
-  alphaBeta(grid, steps, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 'black')
-
-
-heuristic = (color, grid) ->
-  total = 0
-  for i in [1..boardWidth]
-    for j in [1..boardHeight]
-      gridColor = grid[i][j]
-      if gridColor
-        scoresArray = scores(i, j)
-        #if win:
-        if scoresArray.some((length)-> length >= 4)
-          if gridColor == 'black' then return Number.POSITIVE_INFINITY else return Number.NEGATIVE_INFINITY
-        else
-          squareScore = sum(scoresArray)
-          console.log(squareScore)
-          if gridColor == 'black'
-            total += squareScore
-          else if gridColor == 'red'
-            total -= squareScore
-  return total

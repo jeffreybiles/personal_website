@@ -8,7 +8,7 @@
 <?php include("../navbar.php") ?>
 <div class="container">
     <div id="game">
-        <!--    ->  Click for justice, arrows for truth -> Click for God, arrows for family  -> Click for charbitosh, arrows for camphenine-->
+        You are the cat.  The red player is under your thrall, but neither they nor the the computer should win.  Victory is for you alone.
         <div id="holdsMyGame">
             <canvas id="myCanvas" width=800 height=600></canvas>
         </div>

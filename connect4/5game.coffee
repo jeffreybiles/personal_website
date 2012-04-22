@@ -1,9 +1,3 @@
-mainLoop = (canvas) ->
-  drawGrid()
-  if canvasId == canvas.id
-    setTimeout(mainLoop, 1000/60, canvas)
-  return
-
 playerRound = (canvas) ->
   drawGrid()
   if playerTurn
@@ -13,7 +7,7 @@ playerRound = (canvas) ->
 
 computerRound = (canvas) ->
   drawGrid()
-  decision = decideMove()
+  decision = rand(boardWidth) + 1
   playMove(decision)
   playerRound(canvas)
 
