@@ -1,5 +1,5 @@
 (function() {
-  var Circle, Enemy, Key, Nucleus, Player, accelerationConstant, angleChangeRate, canvas, canvasId, checkAllCollisions, checkAtomsCollision, checkOneCollision, collision, ctx, decel, drawBackground, electronCollision, electronRad, enemies, enemyFactory, filterEnemies, hitSpeed, level, mainLoop, maxVelocity, nucleusRad, numEnemies, otherSpeed, player, playerAcceleration, radChangeRate, radMax, rand, spikeSize, startGame,
+  var Circle, Enemy, Key, Nucleus, Player, accelerationConstant, angleChangeRate, canvas, canvasId, checkAllCollisions, checkAtomsCollision, checkOneCollision, collision, ctx, decel, drawBackground, electronCollision, electronRad, enemies, enemyFactory, filterEnemies, hitSpeed, level, loadAndPlaySound, mainLoop, maxVelocity, nucleusRad, numEnemies, otherSpeed, player, playerAcceleration, radChangeRate, radMax, rand, spikeSize, startGame,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
@@ -52,6 +52,14 @@
     return ctx.fillRect(0, 0, canvas.width, canvas.height);
   };
 
+  loadAndPlaySound = function(fileName) {
+    var sound;
+    sound = document.createElement('audio');
+    sound.setAttribute('src', "" + fileName);
+    sound.load();
+    return sound.play();
+  };
+
   Key = {
     _pressed: {},
     LEFT: 37 || 65,
@@ -85,7 +93,8 @@
       if ((0 < (_ref = this.y) && _ref < canvas.height) && (0 < (_ref2 = this.x) && _ref2 < canvas.width)) {
         return this.draw();
       } else {
-        return this.stillAlive = false;
+        this.stillAlive = false;
+        return loadAndPlaySound('defeat.ogg');
       }
     };
 
@@ -174,8 +183,8 @@
     }
 
     Enemy.prototype.update = function() {
-      this.dx += (player.x - this.x) * 0.0001 * (1.1 - enemies.length / numEnemies());
-      this.dy += (player.y - this.y) * 0.0001 * (1.1 - enemies.length / numEnemies());
+      this.dx += (player.x - this.x) * 0.00035 * (1.2 - enemies.length / numEnemies());
+      this.dy += (player.y - this.y) * 0.00035 * (1.2 - enemies.length / numEnemies());
       if (Math.random() < 0.05) this.outward = !this.outward;
       if (this.outward) {
         if (this.radius < radMax) return this.radius += radChangeRate;
@@ -194,7 +203,7 @@
     var i, _results;
     enemies = [];
     _results = [];
-    for (i = 0; 0 <= number ? i <= number : i >= number; 0 <= number ? i++ : i--) {
+    for (i = 1; 1 <= number ? i <= number : i >= number; 1 <= number ? i++ : i--) {
       _results.push(enemies.push(new Enemy(rand(canvas.width), rand(canvas.height), 20)));
     }
     return _results;
@@ -203,7 +212,8 @@
   collision = function(hitter, hittee, modifiers) {
     if (modifiers == null) modifiers = 1;
     hittee.dx = Math.cos(hitter.angle + Math.PI / 2) * hitSpeed * modifiers;
-    return hittee.dy = Math.sin(hitter.angle + Math.PI / 2) * hitSpeed * modifiers;
+    hittee.dy = Math.sin(hitter.angle + Math.PI / 2) * hitSpeed * modifiers;
+    return loadAndPlaySound('hit.ogg');
   };
 
   electronCollision = function(atom1, atom2) {

@@ -8,6 +8,11 @@ drawBackground = ->
   ctx.fillStyle = '#CCA981'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
 
+loadAndPlaySound = (fileName) ->
+  sound = document.createElement('audio')
+  sound.setAttribute('src', "#{fileName}")
+  sound.load()
+  sound.play()
 
 Key =
   _pressed: {},

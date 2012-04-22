@@ -32,6 +32,5 @@ startGame = ->
   console.log(numEnemies(), enemies.length)
   mainLoop(canvas)
 
-
 level = 1
 startGame()
