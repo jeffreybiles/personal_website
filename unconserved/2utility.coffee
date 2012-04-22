@@ -1,6 +1,9 @@
 rand = (max) ->
   Math.ceil(Math.random()*max)
 
+numEnemies = ->
+  return Math.floor(Math.pow(level, 1.8))
+
 drawBackground = ->
   ctx.fillStyle = '#CCA981'
   ctx.fillRect(0, 0, canvas.width, canvas.height)

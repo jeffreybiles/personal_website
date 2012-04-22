@@ -1,5 +1,5 @@
 (function() {
-  var Circle, Enemy, Key, Nucleus, Player, accelerationConstant, angleChangeRate, canvas, canvasId, checkAllCollisions, checkAtomsCollision, checkOneCollision, collision, ctx, decel, drawBackground, electronCollision, electronRad, enemies, enemyFactory, filterEnemies, hitSpeed, level, mainLoop, maxVelocity, nucleusRad, otherSpeed, player, playerAcceleration, radChangeRate, radMax, rand, spikeSize, startGame,
+  var Circle, Enemy, Key, Nucleus, Player, accelerationConstant, angleChangeRate, canvas, canvasId, checkAllCollisions, checkAtomsCollision, checkOneCollision, collision, ctx, decel, drawBackground, electronCollision, electronRad, enemies, enemyFactory, filterEnemies, hitSpeed, level, mainLoop, maxVelocity, nucleusRad, numEnemies, otherSpeed, player, playerAcceleration, radChangeRate, radMax, rand, spikeSize, startGame,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
@@ -41,6 +41,10 @@
 
   rand = function(max) {
     return Math.ceil(Math.random() * max);
+  };
+
+  numEnemies = function() {
+    return Math.floor(Math.pow(level, 1.8));
   };
 
   drawBackground = function() {
@@ -170,8 +174,8 @@
     }
 
     Enemy.prototype.update = function() {
-      this.dx += (player.x - this.x) * 0.0007;
-      this.dy += (player.y - this.y) * 0.0007;
+      this.dx += (player.x - this.x) * 0.0001 * (1.1 - enemies.length / numEnemies());
+      this.dy += (player.y - this.y) * 0.0001 * (1.1 - enemies.length / numEnemies());
       if (Math.random() < 0.05) this.outward = !this.outward;
       if (this.outward) {
         if (this.radius < radMax) return this.radius += radChangeRate;
@@ -190,7 +194,7 @@
     var i, _results;
     enemies = [];
     _results = [];
-    for (i = 1; 1 <= number ? i <= number : i >= number; 1 <= number ? i++ : i--) {
+    for (i = 0; 0 <= number ? i <= number : i >= number; 0 <= number ? i++ : i--) {
       _results.push(enemies.push(new Enemy(rand(canvas.width), rand(canvas.height), 20)));
     }
     return _results;
@@ -280,8 +284,9 @@
     checkAllCollisions();
     if (enemies.length === 0) {
       level++;
-      return startGame();
-    } else if (!player.stillAlive) {
+      startGame();
+    }
+    if (!player.stillAlive) {
       return startGame();
     } else if (canvas.id === canvasId) {
       return setTimeout(mainLoop, 1000 / 30, canvas);
@@ -308,10 +313,10 @@
     canvas = document.getElementById(canvasId);
     ctx = canvas.getContext("2d");
     canvas.tabIndex = 1;
-    console.log("about to create a player");
     player = new Player(canvas.width / 2, canvas.height / 2, 20, true);
-    console.log("createde a player");
-    enemyFactory(level * 4);
+    console.log("created a player");
+    enemyFactory(numEnemies());
+    console.log(numEnemies(), enemies.length);
     return mainLoop(canvas);
   };
 

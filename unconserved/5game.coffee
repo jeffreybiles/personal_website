@@ -10,7 +10,7 @@ mainLoop = (canvas) ->
   if enemies.length == 0
     level++
     startGame()
-  else if !player.stillAlive
+  if !player.stillAlive
     startGame()
   else if canvas.id == canvasId
     setTimeout(mainLoop, 1000/30, canvas)
@@ -25,11 +25,11 @@ startGame = ->
   canvas = document.getElementById(canvasId)
   ctx = canvas.getContext("2d")
   canvas.tabIndex = 1
-  console.log("about to create a player")
 
   player = new Player(canvas.width/2, canvas.height/2, 20, true)
-  console.log("createde a player")
-  enemyFactory(level*4)
+  console.log("created a player")
+  enemyFactory(numEnemies())
+  console.log(numEnemies(), enemies.length)
   mainLoop(canvas)
 
 

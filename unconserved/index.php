@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
-    <title>Unconserved</title>
+    <title>Boundaries</title>
     <?php include('../header.php') ?>
 </head>
 <body>
@@ -9,7 +9,7 @@
 <?php include("../navbar.php") ?>
 <div class="container">
     <div id="game">
-        Enter to start, space to break physics
+        Arrows, space.  Beyond this world lies nothingness.
         <div id="holdsMyGame">
             <canvas id="myCanvas" width=800 height=600></canvas>
         </div>

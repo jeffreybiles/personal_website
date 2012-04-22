@@ -58,8 +58,8 @@ class Enemy extends Nucleus
     super(x, y, radius, false, '#777777', '#333333')
 
   update: ->
-    @dx += (player.x - @x) * 0.0007
-    @dy += (player.y - @y) * 0.0007
+    @dx += (player.x - @x) * 0.0001 * (1.1 - enemies.length/numEnemies())
+    @dy += (player.y - @y) * 0.0001 * (1.1 - enemies.length/numEnemies())
     if Math.random() < 0.05
       @outward = !@outward
     if @outward
