@@ -43,7 +43,7 @@
         </div>
 
         <div class="span2">
-            <h3>Shiny things for your squirrel mind</h3>
+            <?php include('squirrel.php') ?>
         </div>
         <div class="span1"><p></p></div>
     </div>

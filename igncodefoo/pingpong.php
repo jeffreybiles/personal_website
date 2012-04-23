@@ -11,7 +11,23 @@
         <div class="span1"><p></p></div>
 
         <div class="span2">
-            <p></p>
+
+            <h3>The morality of bus-ponging, as explicated by 20th century philosopher L. Ron Hubbard</h3>
+
+            <blockquote>
+            Buses, not being theta-beings in the way that is commonly understood to the enlightened,
+            are of little moral consequence.  However, we must take note of what effect the act of bus-ponging has upon
+            the theta-being who undergoes such an exercise.
+            <br><p></p><br>
+            Although little is as effective in clearing undesirable body-thetans from yourself as my Thetan Hand Technique,
+            bus-ponging can be a suitable substitute for when you are in possession of a bus and lots of ping-pong but not
+            a hyperactive imagination.
+            <br><p></p><br>
+            However, using this technique alone is not enough if one hopes to reach Cleared Theta Clear
+            </blockquote>
+
+            <p>Please note that the views of L. Ron Hubbard do not necessarily represent the views of the author, IGN, or L. Ron Hubbard.</p>
+
         </div>
 
         <div class="span6">
@@ -21,8 +37,7 @@
             <h2>First, let's get all the children out of the bus.</h2>
             <p>Children complicate things.  First, they mess up the calculations since their irregular body shape and
             difficult-to-measure density make calculating their volume difficult.  We would have to plunge each of them in
-            a bath and find how much liquid they displaced.  They would probably be splashing.  We would all get wet.
-            <br>
+            a bath and find how much liquid they displaced.  There would probably be splashing.  We would all get wet.
             <i>I hear it's cold in San Francisco.</i>
 
             <h3>Now, about this bus</h3>
@@ -105,7 +120,7 @@
         </div>
 
         <div class="span2">
-            <p></p>
+            <?php include('squirrel.php') ?>
         </div>
         <div class="span1"><p></p></div>
 
