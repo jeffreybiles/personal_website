@@ -36,7 +36,7 @@
                         <li>Python</li>
                         <li>OpenGL</li>
                         <li>SQL (ActiveRecord)</li>
-                        <li>Ajax-style javascript</li>
+                        <li>Ajax-style javascript (backbone.js, jQuery)</li>
                     </ul>
                 </li>
                 <li>Exposure: Bash, Php, Java, Scala, Smalltalk, Erlang, Haskell, and many more.

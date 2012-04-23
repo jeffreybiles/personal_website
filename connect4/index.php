@@ -8,7 +8,8 @@
 <?php include("../navbar.php") ?>
 <div class="container">
     <div id="game">
-        You are the cat.  The red player is under your thrall, but neither they nor the the computer should win.  Victory is for you alone.
+        You are the cat.  The red player is under your thrall, but neither they nor the the computer should win.
+        Victory is for you alone, for you are the cat.
         <div id="holdsMyGame">
             <canvas id="myCanvas" width=800 height=600></canvas>
         </div>
