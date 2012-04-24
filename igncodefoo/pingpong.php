@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
-    <title>Fluid!</title>
+    <title>Bus Pong</title>
     <?php include('../header.php') ?>
 </head>
 <body>
@@ -20,13 +20,13 @@
             the theta-being who undergoes such an exercise.
             <br><p></p><br>
             Although little is as effective in clearing undesirable body-thetans from yourself as my Thetan Hand Technique,
-            bus-ponging can be a suitable substitute for when you are in possession of a bus and lots of ping-pong but not
-            a hyperactive imagination.
+            bus-ponging can be a suitable substitute for when you are in possession of a bus and lots of ping-pong balls
+            yet do not have a hyperactive imagination readily on hand.
             <br><p></p><br>
             However, using this technique alone is not enough if one hopes to reach Cleared Theta Clear
             </blockquote>
 
-            <p>Please note that the views of L. Ron Hubbard do not necessarily represent the views of the author, IGN, or L. Ron Hubbard.</p>
+            <p>Please note that the statements of L. Ron Hubbard do not necessarily represent the views of the author, IGN, or L. Ron Hubbard.</p>
 
         </div>
 

@@ -37,7 +37,7 @@
                 sidebar columns of 320px*(2/12) = 53px.  Now imagine you had a picture on one of those sidebars of width 80px.  Trouble!
                 Responsive layouts, on the other hand, will collapse sidebars into the main column when space is limited.
                 Now, both my sidebar columns and my main column enjoy 320px width on the small screen.
-            <p>As a side note, it appears the geniuses at Twitter either don't know the difference between fluid and responsive layout
+            <p>As a side note, it appears the fine people at Twitter either don't know the difference between fluid and responsive layout
                 OR they have recognized that once you put in the work, a responsive layout has all the pros of a fluid layout with
                 fewer of the cons.  My metaphorical money's on the latter.
         </div>
