@@ -13,3 +13,7 @@ numLarge = 4
 numScary = 4
 
 rectangles = []
+
+heartHeight = 15
+letterHeight = 15
+heartColor = '#456789'

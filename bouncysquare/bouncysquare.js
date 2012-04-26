@@ -1,5 +1,5 @@
 (function() {
-  var Rectangle, canvas, canvasId, ctx, drawBackground, health, largeBox, mainLoop, maxSpeed, mediumBox, numLarge, numMedium, numScary, numSmall, rectangleFactory, rectangles, scaryRedThing, score, smallBox, startGame, timer,
+  var Rectangle, canvas, canvasId, ctx, drawBackground, drawHeart, drawScoreNumber, health, heartColor, heartHeight, largeBox, letterHeight, mainLoop, maxSpeed, mediumBox, numLarge, numMedium, numScary, numSmall, rectangleFactory, rectangles, scaryRedThing, score, smallBox, startGame, timer,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
@@ -27,11 +27,40 @@
 
   rectangles = [];
 
+  heartHeight = 15;
+
+  letterHeight = 15;
+
+  heartColor = '#456789';
+
   drawBackground = function() {
-    var color;
+    var color, i, startY, x, _results;
     color = 200;
     ctx.fillStyle = "rgb(" + color + ", " + color + ", " + color + ")";
-    return ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    x = 5;
+    startY = (letterHeight + 1) * 5;
+    for (i = 1; 1 <= health ? i <= health : i >= health; 1 <= health ? i++ : i--) {
+      drawHeart(x, startY + i * (heartHeight + 5));
+    }
+    startY = letterHeight;
+    _results = [];
+    for (i = 0; i <= 3; i++) {
+      _results.push(drawScoreNumber(x, startY + letterHeight * i, score * Math.pow(10, i) / 1000));
+    }
+    return _results;
+  };
+
+  drawHeart = function(x, y) {
+    ctx.fillStyle = heartColor;
+    return ctx.fillRect(x, y, heartHeight, heartHeight);
+  };
+
+  drawScoreNumber = function(x, y, number) {
+    ctx.fillStyle = 'black';
+    ctx.font = "bold " + letterHeight + "px helvetica sans-serif";
+    ctx.textBaseline = 'middle';
+    return ctx.fillText(number, x, y);
   };
 
   Rectangle = (function() {
@@ -126,14 +155,12 @@
 
   })(Rectangle);
 
-  rectangleFactory = function(type, number, x, y) {
-    var i, newRectangle, _results;
-    if (x == null) x = null;
-    if (y == null) y = null;
+  rectangleFactory = function(type, number) {
+    var i, newRectangle, x, y, _results;
     _results = [];
     for (i = 1; 1 <= number ? i <= number : i >= number; 1 <= number ? i++ : i--) {
-      x || (x = Math.random() * canvas.width);
-      y || (y = Math.random() * canvas.height);
+      x = Math.random() * canvas.width;
+      y = Math.random() * canvas.height;
       newRectangle = (function() {
         switch (type) {
           case 'small':
