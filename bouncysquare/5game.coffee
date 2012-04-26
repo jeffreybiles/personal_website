@@ -1,5 +1,8 @@
 mainLoop = (canvas) ->
-
+  drawBackground()
+  rectangle.move() for rectangle in rectangles
+  rectangle.draw() for rectangle in rectangles
+  #now splice out any dead rectangles
 
   if canvas.id == canvasId
     setTimeout(mainLoop, 1000/60, canvas)
@@ -27,5 +30,6 @@ startGame = ->
   #and go!
   mainLoop(canvas)
 
+#put in jQuery click events!  These are crucial to the game!
 
 startGame()

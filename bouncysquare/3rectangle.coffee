@@ -49,14 +49,16 @@ class scaryRedThing extends Rectangle
 
 rectangleFactory = (type, number) ->
   for i in [1..number]
+    x = Math.random()*canvas.width
+    y = Math.random()*canvas.height
     newRectangle = switch type
       when 'small'
-        new smallBox()
+        new smallBox(x, y)
       when 'medium'
-        new mediumBox()
+        new mediumBox(x, y)
       when 'large'
-        new largeBox()
+        new largeBox(x, y)
       when 'scary'
-        new scaryRedThing()
+        new scaryRedThing(x, y)
 
     rectangles.push(newRectangle)
