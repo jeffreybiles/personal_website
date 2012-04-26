@@ -1,3 +1,11 @@
+@mixin rounded {
+  $radius: 10px;
+
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+}
+
 #game {
   width: 800;
   text-align: center;
@@ -12,4 +20,12 @@ body {
 
 .center {
   text-align: center;
+}
+
+.row-fluid .info-column {
+  @include rounded;
+  background-color: '#000000';
+  color: '#989922';
+  //border-radius();
+  //border: red 10px solid;
 }

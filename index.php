@@ -7,7 +7,7 @@
 <body>
 <?php include("navbar.php") ?>
 
-<div class="container">
+<div class="container-fluid">
   <div class="hero-unit">
     <p><span style="font-weight: normal;">Do you want knowledge? &nbsp;Knowledge about me?</span></p>
         <h2>I once killed a triceratops with my own bare hands</h2>
@@ -17,7 +17,7 @@
         <p>Those are the projects I do for love.  <em>I'll do yours for money</em>.</p>
         <h3><em>My email address is: me at jeffreybiles dot com.</em></h3>
     </div>
-    <div class="row">
+    <div class="row-fluid">
         <div class="span4">
             <h3>Technical skills</h3>
             <h5>Names in parentheses are the preferred dialects</h5>
