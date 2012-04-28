@@ -1,5 +1,5 @@
 (function() {
-  var Rectangle, canvas, canvasId, ctx, drawBackground, drawHeart, drawScoreNumber, health, heartColor, heartHeight, largeBox, letterHeight, mainLoop, maxSpeed, mediumBox, numLarge, numMedium, numScary, numSmall, rectangleFactory, rectangles, scaryRedThing, score, smallBox, startGame, timer,
+  var Rectangle, canvas, canvasId, ctx, currentMousePos, drawBackground, drawGameOverScreen, drawHeart, drawScoreNumber, drawTimer, gameOver, gameState, getMousePos, health, heartColor, heartHeight, largeBox, letterHeight, mainLoop, maxHealth, maxSpeed, maxTimer, mediumBox, numLarge, numMedium, numScary, numSmall, rectangleFactory, rectangles, scaryRedThing, score, smallBox, startGame, timer,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
@@ -9,13 +9,19 @@
 
   ctx = canvas.getContext("2d");
 
+  currentMousePos = [0, 0];
+
   score = 0;
+
+  maxHealth = 3;
 
   health = 3;
 
   maxSpeed = 2;
 
-  timer = 30;
+  maxTimer = 60;
+
+  timer = 60;
 
   numSmall = 4;
 
@@ -33,22 +39,33 @@
 
   heartColor = '#456789';
 
+  gameState = 'play';
+
   drawBackground = function() {
-    var color, i, startY, x, _results;
-    color = 200;
+    var color, i, startY, x;
+    color = Math.round(256 * timer / maxTimer);
+    console.log(color);
     ctx.fillStyle = "rgb(" + color + ", " + color + ", " + color + ")";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     x = 5;
-    startY = (letterHeight + 1) * 5;
-    for (i = 1; 1 <= health ? i <= health : i >= health; 1 <= health ? i++ : i--) {
-      drawHeart(x, startY + i * (heartHeight + 5));
+    startY = (letterHeight + 1) * 4;
+    if (health > 0) {
+      for (i = 1; 1 <= health ? i <= health : i >= health; 1 <= health ? i++ : i--) {
+        drawHeart(x, startY + i * (heartHeight + 5));
+      }
     }
     startY = letterHeight;
-    _results = [];
     for (i = 0; i <= 3; i++) {
-      _results.push(drawScoreNumber(x, startY + letterHeight * i, score * Math.pow(10, i) / 1000));
+      drawScoreNumber(x, startY + letterHeight * i, (score * Math.pow(10, i) / 1000) % 10);
     }
-    return _results;
+    return drawTimer(canvas.width - 50, 10);
+  };
+
+  drawTimer = function(x, y) {
+    ctx.fillStyle = 'black';
+    ctx.font = "bold " + letterHeight + "px helvetica sans-serif";
+    ctx.textBaseline = 'middle';
+    return ctx.fillText(Math.round(timer), x, y);
   };
 
   drawHeart = function(x, y) {
@@ -60,7 +77,14 @@
     ctx.fillStyle = 'black';
     ctx.font = "bold " + letterHeight + "px helvetica sans-serif";
     ctx.textBaseline = 'middle';
-    return ctx.fillText(number, x, y);
+    return ctx.fillText(Math.floor(number), x, y);
+  };
+
+  drawGameOverScreen = function() {
+    ctx.fillStyle = 'black';
+    ctx.font = "bold " + (letterHeight * 2) + "px helvetica sans-serif";
+    ctx.textBaseline = 'middle';
+    return ctx.fillText('GAME OVER', 10, 150);
   };
 
   Rectangle = (function() {
@@ -77,7 +101,7 @@
       if (dy == null) dy = null;
       this.dx = dx || Math.random() * maxSpeed;
       this.dy = dy || Math.random() * maxSpeed;
-      this.alive = true;
+      this.stillAlive = true;
     }
 
     Rectangle.prototype.draw = function() {
@@ -86,7 +110,7 @@
     };
 
     Rectangle.prototype.isInRange = function(clickX, clickY) {
-      return (this.x < clickX && clickX < this.x + this.width) && (this.y < clickY && clickY < this.y + height);
+      return (this.x < clickX && clickX < this.x + this.width) && (this.y < clickY && clickY < this.y + this.height);
     };
 
     Rectangle.prototype.onClick = function() {
@@ -95,12 +119,28 @@
       } else {
         health -= 1;
       }
-      return this.alive = false;
+      return this.stillAlive = false;
     };
 
     Rectangle.prototype.move = function() {
       this.x += this.dx;
-      return this.y += this.dx;
+      this.y += this.dy;
+      if (this.x <= 0) {
+        this.x = 0;
+        this.dx = Math.random() * maxSpeed;
+      }
+      if (this.y <= 0) {
+        this.y = 0;
+        this.dy = Math.random() * maxSpeed;
+      }
+      if (this.x >= canvas.width - this.width) {
+        this.x = canvas.width - this.width;
+        this.dx = -Math.random() * maxSpeed;
+      }
+      if (this.y >= canvas.height - this.height) {
+        this.y = canvas.height - this.height;
+        return this.dy = -Math.random() * maxSpeed;
+      }
     };
 
     return Rectangle;
@@ -112,7 +152,7 @@
     __extends(smallBox, _super);
 
     function smallBox(x, y) {
-      smallBox.__super__.constructor.call(this, 16, 16, 'black', 1, x, y, 'small');
+      smallBox.__super__.constructor.call(this, 16, 16, 'black', 3, x, y, 'small');
     }
 
     return smallBox;
@@ -136,7 +176,7 @@
     __extends(largeBox, _super);
 
     function largeBox(x, y) {
-      largeBox.__super__.constructor.call(this, 36, 36, 'black', 3, x, y, 'large');
+      largeBox.__super__.constructor.call(this, 36, 36, 'black', 1, x, y, 'large');
     }
 
     return largeBox;
@@ -178,8 +218,25 @@
     return _results;
   };
 
+  getMousePos = function(event) {
+    var x, y;
+    x = currentMousePos.x;
+    y = currentMousePos.y;
+    x -= canvas.offsetLeft;
+    y -= canvas.offsetTop;
+    if (gameState === 'play') {
+      rectangles.forEach(function(rectangle) {
+        if (rectangle.isInRange(x, y)) return rectangle.onClick();
+      });
+    }
+    if (gameState === 'gameOver') {
+      gameState = 'play';
+      return startGame();
+    }
+  };
+
   mainLoop = function(canvas) {
-    var rectangle, _i, _j, _len, _len2;
+    var currentBox, i, rectangle, type, _i, _j, _len, _len2;
     drawBackground();
     for (_i = 0, _len = rectangles.length; _i < _len; _i++) {
       rectangle = rectangles[_i];
@@ -189,25 +246,52 @@
       rectangle = rectangles[_j];
       rectangle.draw();
     }
-    if (canvas.id === canvasId) return setTimeout(mainLoop, 1000 / 60, canvas);
+    i = 0;
+    while (i < rectangles.length) {
+      currentBox = rectangles[i];
+      if (currentBox.stillAlive) {
+        i++;
+      } else {
+        type = currentBox.type;
+        rectangles.splice(i, 1);
+        rectangleFactory(type, 1);
+      }
+    }
+    timer -= 1 / 60;
+    if (health <= 0 || timer <= 0) {
+      gameState = 'gameOver';
+      return gameOver();
+    } else {
+      return setTimeout(mainLoop, 1000 / 60, canvas);
+    }
+  };
+
+  gameOver = function() {
+    return drawGameOverScreen();
   };
 
   startGame = function() {
-    var oldCanvas;
-    canvasId = Math.random().toString();
-    oldCanvas = $('#holdsMyGame canvas').remove();
-    $('#holdsMyGame').html("<canvas id='" + canvasId + "' width=" + oldCanvas[0].width + " height=" + oldCanvas[0].height + "></canvas>");
-    canvas = document.getElementById(canvasId);
-    ctx = canvas.getContext("2d");
-    canvas.tabIndex = 1;
-    timer = 30;
+    timer = maxTimer;
     score = 0;
+    health = maxHealth;
+    rectangles = [];
     rectangleFactory('small', numSmall);
     rectangleFactory('medium', numMedium);
     rectangleFactory('large', numLarge);
     rectangleFactory('scary', numScary);
     return mainLoop(canvas);
   };
+
+  jQuery(function($) {
+    return $(document).mousemove(function(event) {
+      return currentMousePos = {
+        x: event.pageX,
+        y: event.pageY
+      };
+    });
+  });
+
+  $(document).mousedown(getMousePos);
 
   startGame();
 

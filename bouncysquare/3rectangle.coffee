@@ -2,7 +2,7 @@ class Rectangle
   constructor: (@height, @width, @color, @points, @x, @y, @type, dx = null, dy = null) ->
     @dx = dx || Math.random()*maxSpeed
     @dy = dy || Math.random()*maxSpeed
-    @alive = true
+    @stillAlive = true
   #because javascript runs asynchronously, we cannot simply destroy the rectangle immediately after being hit.
   #Instead, we must wait and later run through the list to check which ones are no longer alive
   #Of course, "immediate" is relative.  It will seem immediate enough to the player.
@@ -14,7 +14,7 @@ class Rectangle
   #returns true if click in inside the rectangle
   isInRange: (clickX, clickY) ->
     @x < clickX < @x + @width &&
-      @y < clickY < @y + height
+      @y < clickY < @y + @height
 
   onClick: ->
     if @points > 0
@@ -24,16 +24,28 @@ class Rectangle
     #because javascript runs asynchronously, we cannot simply destroy the rectangle immediately after being hit.
     #Instead, we must wait and later run through the list to check which ones are no longer alive
     #Of course, "immediate" is relative.  It will seem immediate enough to the player.
-    @alive = false
+    @stillAlive = false
 
   move: ->
     @x += @dx
-    @y += @dx
-    #should there be bouncing off the edges?
+    @y += @dy
+    #bouncing
+    if @x <= 0
+      @x=0
+      @dx = Math.random()*maxSpeed
+    if @y <= 0
+      @y=0
+      @dy = Math.random()*maxSpeed
+    if @x >= canvas.width - @width
+      @x = canvas.width - @width
+      @dx = -Math.random()*maxSpeed
+    if @y >= canvas.height - @height
+      @y = canvas.height - @height
+      @dy = -Math.random()*maxSpeed
 
 class smallBox extends Rectangle
   constructor: (x, y) ->
-    super 16, 16, 'black', 1, x, y, 'small'
+    super 16, 16, 'black', 3, x, y, 'small'
 
 class mediumBox extends Rectangle
   constructor: (x, y) ->
@@ -41,7 +53,7 @@ class mediumBox extends Rectangle
 
 class largeBox extends Rectangle
   constructor: (x, y) ->
-    super 36, 36, 'black', 3, x, y, 'large'
+    super 36, 36, 'black', 1, x, y, 'large'
 
 class scaryRedThing extends Rectangle
   constructor: (x, y) ->

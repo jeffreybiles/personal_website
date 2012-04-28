@@ -2,24 +2,37 @@ mainLoop = (canvas) ->
   drawBackground()
   rectangle.move() for rectangle in rectangles
   rectangle.draw() for rectangle in rectangles
-  #now splice out any dead rectangles
 
-  if canvas.id == canvasId
+  #now splice out any dead rectangles
+  i = 0
+  while i < rectangles.length
+    currentBox = rectangles[i]
+    if currentBox.stillAlive
+      i++
+    else
+      type = currentBox.type
+      rectangles.splice(i, 1)
+      rectangleFactory(type, 1)
+
+  #count down
+  timer -= 1/60
+
+  if health <= 0 || timer <= 0
+    gameState = 'gameOver'
+    gameOver()
+  else
     setTimeout(mainLoop, 1000/60, canvas)
 
+gameOver = ->
+  drawGameOverScreen()
 
 startGame = ->
-  #This is a hack to keep there from being multiple canvases floating around
-  canvasId = Math.random().toString()
-  oldCanvas = $('#holdsMyGame canvas').remove()
-  $('#holdsMyGame').html("<canvas id='#{canvasId}' width=#{oldCanvas[0].width} height=#{oldCanvas[0].height}></canvas>")
-  canvas = document.getElementById(canvasId)
-  ctx = canvas.getContext("2d")
-  canvas.tabIndex = 1
 
   #reset some important variables
-  timer = 30
+  timer = maxTimer
   score = 0
+  health = maxHealth
+  rectangles = []
 
   #make yourself some rectangles
   rectangleFactory('small', numSmall)
@@ -31,5 +44,15 @@ startGame = ->
   mainLoop(canvas)
 
 #put in jQuery click events!  These are crucial to the game!
+
+jQuery ($) ->
+
+  $(document).mousemove (event) ->
+    currentMousePos = {
+      x: event.pageX,
+      y: event.pageY
+    }
+
+$(document).mousedown(getMousePos)
 
 startGame()
