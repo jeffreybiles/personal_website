@@ -50,6 +50,7 @@
             <br>
             <h5>Javascript games</h5>
             <ul>
+                <li><a href="cat4">Cat 4</a></li>
                 <li><a href="boundaries"><b>Boundaries</b></a></li>
                 <li><a href="numbernommers">Number Nommers</a></li>
                 <li><a href="numbernommers2"><b>Number Nommers 2</b></a></li>

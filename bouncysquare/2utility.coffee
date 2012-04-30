@@ -35,8 +35,20 @@ drawScoreNumber = (x, y, number) ->
   ctx.fillText(Math.floor(number), x, y)
 
 drawGameOverScreen = ->
-  ctx.fillStyle = 'black'
+  ctx.fillStyle = 'white'
   ctx.font = "bold #{letterHeight*2}px helvetica sans-serif"
   ctx.textBaseline = 'middle'
-  ctx.fillText('GAME OVER', 10, 150)
+  ctx.fillText('GAME OVER', 25, 150)
 
+changeBasedOnScore = ->
+  if score >= 40
+    speedMultiplier = 3
+  else if score >= 30
+    speedMultiplier = 2.5
+    maxTimer = 10
+  else if score >= 20
+    speedMultiplier = 2
+    maxTimer = 20
+  else if score >= 10
+    speedMultiplier = 1.5
+    maxTimer = 30

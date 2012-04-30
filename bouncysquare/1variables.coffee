@@ -9,6 +9,7 @@ health = 3
 maxSpeed = 2
 maxTimer = 60
 timer = 60
+speedMultiplier = 1
 
 numSmall = 4
 numMedium = 4

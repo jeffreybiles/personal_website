@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
-    <title>Connect4</title>
+    <title>Cat4</title>
     <?php include('../header.php') ?>
 </head>
 <body>

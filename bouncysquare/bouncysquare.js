@@ -1,5 +1,5 @@
 (function() {
-  var Rectangle, canvas, canvasId, ctx, currentMousePos, drawBackground, drawGameOverScreen, drawHeart, drawScoreNumber, drawTimer, gameOver, gameState, getMousePos, health, heartColor, heartHeight, largeBox, letterHeight, mainLoop, maxHealth, maxSpeed, maxTimer, mediumBox, numLarge, numMedium, numScary, numSmall, rectangleFactory, rectangles, scaryRedThing, score, smallBox, startGame, timer,
+  var Rectangle, canvas, canvasId, changeBasedOnScore, ctx, currentMousePos, drawBackground, drawGameOverScreen, drawHeart, drawScoreNumber, drawTimer, gameOver, gameState, getMousePos, health, heartColor, heartHeight, largeBox, letterHeight, mainLoop, maxHealth, maxSpeed, maxTimer, mediumBox, numLarge, numMedium, numScary, numSmall, rectangleFactory, rectangles, scaryRedThing, score, smallBox, speedMultiplier, startGame, timer,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
@@ -22,6 +22,8 @@
   maxTimer = 60;
 
   timer = 60;
+
+  speedMultiplier = 1;
 
   numSmall = 4;
 
@@ -81,15 +83,28 @@
   };
 
   drawGameOverScreen = function() {
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = 'white';
     ctx.font = "bold " + (letterHeight * 2) + "px helvetica sans-serif";
     ctx.textBaseline = 'middle';
     return ctx.fillText('GAME OVER', 10, 150);
   };
 
+  changeBasedOnScore = function() {
+    if (score >= 30) {
+      speedMultiplier = 4;
+      return maxTimer = 10;
+    } else if (score >= 20) {
+      speedMultiplier = 3;
+      return maxTimer = 20;
+    } else if (score >= 10) {
+      speedMultiplier = 2;
+      return maxTimer = 30;
+    }
+  };
+
   Rectangle = (function() {
 
-    function Rectangle(height, width, color, points, x, y, type, dx, dy) {
+    function Rectangle(height, width, color, points, x, y, type, speed) {
       this.height = height;
       this.width = width;
       this.color = color;
@@ -97,10 +112,10 @@
       this.x = x;
       this.y = y;
       this.type = type;
-      if (dx == null) dx = null;
-      if (dy == null) dy = null;
-      this.dx = dx || Math.random() * maxSpeed;
-      this.dy = dy || Math.random() * maxSpeed;
+      this.speed = speed;
+      this.angle = Math.random() * 2 * Math.PI;
+      this.dx = Math.cos(this.angle) * this.speed;
+      this.dy = Math.sin(this.angle) * this.speed;
       this.stillAlive = true;
     }
 
@@ -116,6 +131,8 @@
     Rectangle.prototype.onClick = function() {
       if (this.points > 0) {
         score += this.points;
+        timer = maxTimer;
+        changeBasedOnScore();
       } else {
         health -= 1;
       }
@@ -127,19 +144,19 @@
       this.y += this.dy;
       if (this.x <= 0) {
         this.x = 0;
-        this.dx = Math.random() * maxSpeed;
+        this.dx *= -1;
       }
       if (this.y <= 0) {
         this.y = 0;
-        this.dy = Math.random() * maxSpeed;
+        this.dy *= -1;
       }
       if (this.x >= canvas.width - this.width) {
         this.x = canvas.width - this.width;
-        this.dx = -Math.random() * maxSpeed;
+        this.dx *= -1;
       }
       if (this.y >= canvas.height - this.height) {
         this.y = canvas.height - this.height;
-        return this.dy = -Math.random() * maxSpeed;
+        return this.dy *= -1;
       }
     };
 
@@ -152,7 +169,7 @@
     __extends(smallBox, _super);
 
     function smallBox(x, y) {
-      smallBox.__super__.constructor.call(this, 16, 16, 'black', 3, x, y, 'small');
+      smallBox.__super__.constructor.call(this, 16, 16, 'black', 3, x, y, 'small', 2 * speedMultiplier);
     }
 
     return smallBox;
@@ -164,7 +181,7 @@
     __extends(mediumBox, _super);
 
     function mediumBox(x, y) {
-      mediumBox.__super__.constructor.call(this, 24, 24, 'black', 2, x, y, 'medium');
+      mediumBox.__super__.constructor.call(this, 24, 24, 'black', 2, x, y, 'medium', 1.5 * speedMultiplier);
     }
 
     return mediumBox;
@@ -176,7 +193,7 @@
     __extends(largeBox, _super);
 
     function largeBox(x, y) {
-      largeBox.__super__.constructor.call(this, 36, 36, 'black', 1, x, y, 'large');
+      largeBox.__super__.constructor.call(this, 36, 36, 'black', 1, x, y, 'large', 1 * speedMultiplier);
     }
 
     return largeBox;
@@ -188,7 +205,7 @@
     __extends(scaryRedThing, _super);
 
     function scaryRedThing(x, y) {
-      scaryRedThing.__super__.constructor.call(this, 10, 100, 'red', -1, x, y, 'scary');
+      scaryRedThing.__super__.constructor.call(this, 10, 100, 'red', -1, x, y, 'scary', 1.5 * speedMultiplier);
     }
 
     return scaryRedThing;
@@ -271,7 +288,9 @@
   };
 
   startGame = function() {
+    maxTimer = 60;
     timer = maxTimer;
+    speedMultiplier = 1;
     score = 0;
     health = maxHealth;
     rectangles = [];

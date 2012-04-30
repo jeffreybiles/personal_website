@@ -29,7 +29,9 @@ gameOver = ->
 startGame = ->
 
   #reset some important variables
+  maxTimer = 60
   timer = maxTimer
+  speedMultiplier = 1
   score = 0
   health = maxHealth
   rectangles = []
