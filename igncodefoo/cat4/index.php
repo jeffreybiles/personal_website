@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
-    <title>Connect4</title>
-    <?php include('../header.php') ?>
+    <title>Cat4</title>
+    <?php include('../../header.php') ?>
 </head>
 <body>
-<?php include("../navbar.php") ?>
+<?php include("../../navbar.php") ?>
 <div class="container">
     <div id="game">
         You are the cat.  The red player is under your thrall, but neither they nor the the computer should win.
