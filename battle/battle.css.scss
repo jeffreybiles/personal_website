@@ -1,0 +1,93 @@
+/*+init {*/
+*
+{
+	position: relative;
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+}
+H1, H2, H3, H4, H5, H6, TH
+{
+	font-weight: inherit;
+	=font-weight: expression(this.__FW?this.__FW:(new Function('t','return (t.__FW=t.parentNode.currentStyle.fontWeight)'))(this));
+}
+ADDRESS, CITE, DFN, VAR
+{
+	font-style: inherit;
+	=font-style: expression(this.__FS?this.__FS:(new Function('t','return (t.__FS=t.parentNode.currentStyle.fontStyle)'))(this));
+}
+CAPTION, CODE, KBD, PRE, SAMP, TT, INPUT, TEXTAREA, SELECT, BUTTON
+{
+	font-family: inherit;
+	=font-family: expression(this.__FF?this.__FF:(new Function('t','return (t.__FF=t.parentNode.currentStyle.fontFamily)'))(this));
+}
+TABLE
+{
+	border-spacing: 0;
+}
+TH
+{
+	text-align: left;
+}
+HTML, BODY, THEAD, TBODY, TFOOT, TR, TH, TD, BR
+{
+	position: static;
+}
+INPUT[type=hidden]
+{
+	display: none !important;
+}
+FIELDSET, A IMG
+{
+	border: 0;
+}
+BODY
+{
+	font-size: 100%;
+	font-family: sans-serif;
+	line-height: 1.5;
+}
+/*+}*/
+#options
+{
+	/*+placement:displace 0px 0px;*/
+	position: absolute;
+	margin-left: 0px;
+	margin-top: 0px;
+}
+#battleScreen
+{
+	height: 200px;
+	width: 300px;
+	background-color: #E58F8F;
+	position: relative;
+}
+#hero .hp
+{
+	/*+placement:displace 113px 158px;*/
+	position: absolute;
+	margin-left: 113px;
+	margin-top: 158px;
+}
+#enemy .hp
+{
+	/*+placement:displace 12px 8px;*/
+	position: absolute;
+	margin-left: 12px;
+	margin-top: 8px;
+}
+#hero .portrait
+{
+	/*+placement:shift 7px 92px;*/
+	position: relative;
+	left: 7px;
+	top: 92px;
+	position: absolute;
+}
+#enemy .portrait
+{
+	/*+placement:shift 191px 8px;*/
+	left: 191px;
+	top: 8px;
+	position: absolute;
+}
