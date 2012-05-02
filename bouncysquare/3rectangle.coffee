@@ -14,8 +14,8 @@ class Rectangle
 
   #returns true if click in inside the rectangle
   isInRange: (clickX, clickY) ->
-    @x < clickX < @x + @width &&
-      @y < clickY < @y + @height
+    @x - imprecision < clickX < @x + @width + imprecision &&
+      @y - imprecision < clickY < @y + @height + imprecision
 
   onClick: ->
     if @points > 0
@@ -48,19 +48,23 @@ class Rectangle
 
 class smallBox extends Rectangle
   constructor: (x, y) ->
-    super 16, 16, 'black', 3, x, y, 'small', 2*speedMultiplier
+    size = canvas.width*0.05
+    super size, size, 'black', 3, x, y, 'small', 1.4*speedMultiplier
 
 class mediumBox extends Rectangle
   constructor: (x, y) ->
-    super 24, 24, 'black', 2, x, y, 'medium', 1.5*speedMultiplier
+    size = canvas.width*0.075
+    super size, size, 'black', 2, x, y, 'medium', 1.25*speedMultiplier
 
 class largeBox extends Rectangle
   constructor: (x, y) ->
-    super 36, 36, 'black', 1, x, y, 'large', 1*speedMultiplier
+    size = canvas.width*0.1
+    super size, size, 'black', 1, x, y, 'large', 1*speedMultiplier
 
 class scaryRedThing extends Rectangle
   constructor: (x, y) ->
-    super 10, 100, 'red', -1, x, y, 'scary', 1.5*speedMultiplier
+    size = canvas.width*0.04
+    super size, size*8, 'red', -1, x, y, 'scary', 1.25*speedMultiplier
 
 rectangleFactory = (type, number) ->
   for i in [1..number]

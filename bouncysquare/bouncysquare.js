@@ -1,5 +1,5 @@
 (function() {
-  var Rectangle, canvas, canvasId, changeBasedOnScore, ctx, currentMousePos, drawBackground, drawGameOverScreen, drawHeart, drawScoreNumber, drawTimer, gameOver, gameState, getMousePos, health, heartColor, heartHeight, largeBox, letterHeight, mainLoop, maxHealth, maxSpeed, maxTimer, mediumBox, numLarge, numMedium, numScary, numSmall, rectangleFactory, rectangles, scaryRedThing, score, smallBox, speedMultiplier, startGame, timer,
+  var Rectangle, canvas, canvasId, changeBasedOnScore, ctx, currentMousePos, drawBackground, drawGameOverScreen, drawHeart, drawScoreNumber, drawTimer, gameOver, gameState, getMousePos, health, heartColor, heartHeight, imprecision, largeBox, letterHeight, mainLoop, maxHealth, maxSpeed, maxTimer, mediumBox, numLarge, numMedium, numScary, numSmall, rectangleFactory, rectangles, resize, scaryRedThing, score, smallBox, speedMultiplier, startGame, timer,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
@@ -25,6 +25,8 @@
 
   speedMultiplier = 1;
 
+  imprecision = 2;
+
   numSmall = 4;
 
   numMedium = 4;
@@ -46,7 +48,6 @@
   drawBackground = function() {
     var color, i, startY, x;
     color = Math.round(256 * timer / maxTimer);
-    console.log(color);
     ctx.fillStyle = "rgb(" + color + ", " + color + ", " + color + ")";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     x = 5;
@@ -86,20 +87,47 @@
     ctx.fillStyle = 'white';
     ctx.font = "bold " + (letterHeight * 2) + "px helvetica sans-serif";
     ctx.textBaseline = 'middle';
-    return ctx.fillText('GAME OVER', 10, 150);
+    return ctx.fillText('GAME OVER', 25, 150);
   };
 
   changeBasedOnScore = function() {
-    if (score >= 30) {
-      speedMultiplier = 4;
+    if (score >= 40) {
+      return speedMultiplier = 3 * canvas.width / 320;
+    } else if (score >= 30) {
+      speedMultiplier = 2.5 * canvas.width / 320;
       return maxTimer = 10;
     } else if (score >= 20) {
-      speedMultiplier = 3;
+      speedMultiplier = 2 * canvas.width / 320;
       return maxTimer = 20;
     } else if (score >= 10) {
-      speedMultiplier = 2;
+      speedMultiplier = 1.5 * canvas.width / 320;
       return maxTimer = 30;
     }
+  };
+
+  resize = function(canvas) {
+    var winH, winW;
+    if (canvas == null) canvas = canvas;
+    if (document.body && document.body.offsetWidth) {
+      winW = document.body.offsetWidth;
+      winH = document.body.offsetHeight;
+    }
+    if (document.compatMode === 'CSS1Compat' && document.documentElement && document.documentElement.offsetWidth) {
+      winW = document.documentElement.offsetWidth;
+      winH = document.documentElement.offsetHeight;
+    }
+    if (window.innerWidth && window.innerHeight) {
+      winW = window.innerWidth;
+      winH = window.innerHeight;
+    }
+    if (winW > winH) {
+      winW = winH;
+    } else {
+      winH = winW;
+    }
+    canvas.width = winW;
+    canvas.height = winH;
+    return canvas;
   };
 
   Rectangle = (function() {
@@ -125,7 +153,7 @@
     };
 
     Rectangle.prototype.isInRange = function(clickX, clickY) {
-      return (this.x < clickX && clickX < this.x + this.width) && (this.y < clickY && clickY < this.y + this.height);
+      return (this.x - imprecision < clickX && clickX < this.x + this.width + imprecision) && (this.y - imprecision < clickY && clickY < this.y + this.height + imprecision);
     };
 
     Rectangle.prototype.onClick = function() {
@@ -169,7 +197,9 @@
     __extends(smallBox, _super);
 
     function smallBox(x, y) {
-      smallBox.__super__.constructor.call(this, 16, 16, 'black', 3, x, y, 'small', 2 * speedMultiplier);
+      var size;
+      size = canvas.width * 0.05;
+      smallBox.__super__.constructor.call(this, size, size, 'black', 3, x, y, 'small', 1.6 * speedMultiplier);
     }
 
     return smallBox;
@@ -181,7 +211,9 @@
     __extends(mediumBox, _super);
 
     function mediumBox(x, y) {
-      mediumBox.__super__.constructor.call(this, 24, 24, 'black', 2, x, y, 'medium', 1.5 * speedMultiplier);
+      var size;
+      size = canvas.width * 0.075;
+      mediumBox.__super__.constructor.call(this, size, size, 'black', 2, x, y, 'medium', 1.3 * speedMultiplier);
     }
 
     return mediumBox;
@@ -193,7 +225,9 @@
     __extends(largeBox, _super);
 
     function largeBox(x, y) {
-      largeBox.__super__.constructor.call(this, 36, 36, 'black', 1, x, y, 'large', 1 * speedMultiplier);
+      var size;
+      size = canvas.width * 0.1;
+      largeBox.__super__.constructor.call(this, size, size, 'black', 1, x, y, 'large', 1 * speedMultiplier);
     }
 
     return largeBox;
@@ -205,7 +239,9 @@
     __extends(scaryRedThing, _super);
 
     function scaryRedThing(x, y) {
-      scaryRedThing.__super__.constructor.call(this, 10, 100, 'red', -1, x, y, 'scary', 1.5 * speedMultiplier);
+      var size;
+      size = canvas.width * 0.04;
+      scaryRedThing.__super__.constructor.call(this, size, size * 8, 'red', -1, x, y, 'scary', 1.3 * speedMultiplier);
     }
 
     return scaryRedThing;
@@ -311,6 +347,10 @@
   });
 
   $(document).mousedown(getMousePos);
+
+  canvas = resize(canvas);
+
+  speedMultiplier *= canvas.width / 320;
 
   startGame();
 

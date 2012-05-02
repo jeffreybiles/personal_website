@@ -56,5 +56,6 @@ jQuery ($) ->
     }
 
 $(document).mousedown(getMousePos)
-
+canvas = resize(canvas)
+speedMultiplier *= canvas.width/320
 startGame()
