@@ -1,3 +1,4 @@
+
 json =
   hero:
     id: 4
@@ -32,18 +33,19 @@ enemyAttacks = enemy['attacks']
 $('#hero .hp').text(hero.hp)
 $('#enemy .hp').text(enemy.hp)
 $('#hero .portrait img').attr('src', hero.image_url)
-console.log(hero.image_url)
-$('#enemy .portrait img').attr('src', "http://avatarmaker.eu/free-avatars/avatars/games_225/super_mario_259/super_mario_panic_avatar_100x100_25831.gif")
-$('#attacks').html('<ul></ul>')
+$('#enemy .portrait img').attr('src', enemy.image_url)
 
+$('#attacks').html('<ul></ul>')
 for attackIndex in heroAttacks
   attack = attacks[attackIndex]
-  $('#attacks').append("<li class='#{attack.name} attack' data-power='#{attack.power}'>#{attack.name}</li>")
+  $('#attacks').append("<li class='#{attack.name} attack' data-power='#{attack.power}' data-name='#{attack.name}'>#{attack.name}</li>")
   $("#attacks .#{attack.name}").click(->
     enemy.hp -= $(this).data('power')
     #TODO: start an animation here!
     $('#enemy .hp').text(enemy.hp)
     $('#attacks').slideUp()
+    $('#message').text("#{hero.name} hits #{enemy.name} with #{$(this).data('name')}").slideDown()
+    console.log($('#message').text())
     #TODO: make enemy take turn, then slide attacks back down
   )
 

@@ -21,6 +21,7 @@
             </div>
 
         </div>
+        <div id="message"></div>
         <div id="options">
             <div id="attacks">
                 Attacks

@@ -47,20 +47,20 @@
 
   $('#hero .portrait img').attr('src', hero.image_url);
 
-  console.log(hero.image_url);
-
-  $('#enemy .portrait img').attr('src', "http://avatarmaker.eu/free-avatars/avatars/games_225/super_mario_259/super_mario_panic_avatar_100x100_25831.gif");
+  $('#enemy .portrait img').attr('src', enemy.image_url);
 
   $('#attacks').html('<ul></ul>');
 
   for (_i = 0, _len = heroAttacks.length; _i < _len; _i++) {
     attackIndex = heroAttacks[_i];
     attack = attacks[attackIndex];
-    $('#attacks').append("<li class='" + attack.name + " attack' data-power='" + attack.power + "'>" + attack.name + "</li>");
+    $('#attacks').append("<li class='" + attack.name + " attack' data-power='" + attack.power + "' data-name='" + attack.name + "'>" + attack.name + "</li>");
     $("#attacks ." + attack.name).click(function() {
       enemy.hp -= $(this).data('power');
       $('#enemy .hp').text(enemy.hp);
-      return $('#attacks').slideUp();
+      $('#attacks').slideUp();
+      $('#message').text("" + hero.name + " hits " + enemy.name + " with " + ($(this).data('name'))).slideDown();
+      return console.log($('#message').text());
     });
   }
 
