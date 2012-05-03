@@ -25,7 +25,7 @@
 
   speedMultiplier = 1;
 
-  imprecision = 2;
+  imprecision = 4;
 
   numSmall = 4;
 
@@ -85,24 +85,14 @@
 
   drawGameOverScreen = function() {
     ctx.fillStyle = 'white';
-    ctx.font = "bold " + (letterHeight * 2) + "px helvetica sans-serif";
+    ctx.font = "bold " + (Math.floor(letterHeight * 2 * canvas.width / 320)) + "px helvetica sans-serif";
     ctx.textBaseline = 'middle';
     return ctx.fillText('GAME OVER', 25, 150);
   };
 
   changeBasedOnScore = function() {
-    if (score >= 40) {
-      return speedMultiplier = 3 * canvas.width / 320;
-    } else if (score >= 30) {
-      speedMultiplier = 2.5 * canvas.width / 320;
-      return maxTimer = 10;
-    } else if (score >= 20) {
-      speedMultiplier = 2 * canvas.width / 320;
-      return maxTimer = 20;
-    } else if (score >= 10) {
-      speedMultiplier = 1.5 * canvas.width / 320;
-      return maxTimer = 30;
-    }
+    speedMultiplier = (1 + score / 50) * canvas.width / 320;
+    return maxTimer = 60 / (1 + score / 20);
   };
 
   resize = function(canvas) {
@@ -199,7 +189,7 @@
     function smallBox(x, y) {
       var size;
       size = canvas.width * 0.05;
-      smallBox.__super__.constructor.call(this, size, size, 'black', 3, x, y, 'small', 1.6 * speedMultiplier);
+      smallBox.__super__.constructor.call(this, size, size, 'black', 3, x, y, 'small', 1.4 * speedMultiplier);
     }
 
     return smallBox;
@@ -213,7 +203,7 @@
     function mediumBox(x, y) {
       var size;
       size = canvas.width * 0.075;
-      mediumBox.__super__.constructor.call(this, size, size, 'black', 2, x, y, 'medium', 1.3 * speedMultiplier);
+      mediumBox.__super__.constructor.call(this, size, size, 'black', 2, x, y, 'medium', 1.25 * speedMultiplier);
     }
 
     return mediumBox;
@@ -241,7 +231,7 @@
     function scaryRedThing(x, y) {
       var size;
       size = canvas.width * 0.04;
-      scaryRedThing.__super__.constructor.call(this, size, size * 8, 'red', -1, x, y, 'scary', 1.3 * speedMultiplier);
+      scaryRedThing.__super__.constructor.call(this, size, size * 8, 'red', -1, x, y, 'scary', 1.25 * speedMultiplier);
     }
 
     return scaryRedThing;

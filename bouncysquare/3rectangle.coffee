@@ -20,7 +20,7 @@ class Rectangle
   onClick: ->
     if @points > 0
       score += @points
-      timer = maxTimer
+      timer = maxTimer if timer < maxTimer
       changeBasedOnScore()
     else
       health -= 1

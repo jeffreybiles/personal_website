@@ -10,7 +10,7 @@ maxSpeed = 2
 maxTimer = 60
 timer = 60
 speedMultiplier = 1
-imprecision = 2
+imprecision = 4
 
 numSmall = 4
 numMedium = 4

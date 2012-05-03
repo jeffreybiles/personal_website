@@ -35,22 +35,13 @@ drawScoreNumber = (x, y, number) ->
 
 drawGameOverScreen = ->
   ctx.fillStyle = 'white'
-  ctx.font = "bold #{letterHeight*2}px helvetica sans-serif"
+  ctx.font = "bold #{Math.floor(letterHeight*2*canvas.width/320)}px helvetica sans-serif"
   ctx.textBaseline = 'middle'
   ctx.fillText('GAME OVER', 25, 150)
 
 changeBasedOnScore = ->
-  if score >= 40
-    speedMultiplier = 3*canvas.width/320
-  else if score >= 30
-    speedMultiplier = 2.5*canvas.width/320
-    maxTimer = 10
-  else if score >= 20
-    speedMultiplier = 2*canvas.width/320
-    maxTimer = 20
-  else if score >= 10
-    speedMultiplier = 1.5*canvas.width/320
-    maxTimer = 30
+  speedMultiplier = (1 + score/50)*canvas.width/320
+  maxTimer = 60 / (1 + score/30)
 
 resize = (canvas = canvas) ->
   #three different methods needed because IE is silly
