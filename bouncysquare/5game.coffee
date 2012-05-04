@@ -18,6 +18,7 @@ mainLoop = (canvas) ->
   timer -= 1/60
 
   if health <= 0 || timer <= 0
+    soundManager.play('gameOver')
     gameState = 'gameOver'
     gameOver()
   else
@@ -27,6 +28,7 @@ gameOver = ->
   drawGameOverScreen()
 
 startGame = ->
+  gameState = 'play'
 
   #reset some important variables
   maxTimer = 60
@@ -57,5 +59,6 @@ jQuery ($) ->
 
 $(document).mousedown(getMousePos)
 canvas = resize(canvas)
+showImageNumber(1)
 speedMultiplier *= canvas.width/320
-startGame()
+#startGame()                                      r

@@ -9,6 +9,8 @@ getMousePos = (event) ->
   if gameState == 'gameOver'
     gameState = 'play'
     startGame()
+  if gameState == 'intro'
+    navigateIntro(x, y)
 
 
 

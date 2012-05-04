@@ -23,4 +23,9 @@ heartHeight = 15
 letterHeight = 15
 heartColor = '#456789'
 
-gameState = 'play'
+gameState = 'intro'
+numIntroSlides = 8
+currentIntroSlide = 1
+introBarHeight = canvas.height * 0.1
+introButtonsStart = 10
+introButtonsWidth = canvas.width * 0.3

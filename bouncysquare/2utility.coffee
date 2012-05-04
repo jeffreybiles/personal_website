@@ -41,7 +41,7 @@ drawGameOverScreen = ->
 
 changeBasedOnScore = ->
   speedMultiplier = (1 + score/50)*canvas.width/320
-  maxTimer = 60 / (1 + score/30)
+  maxTimer = 60 / (1 + score/60)
 
 resize = (canvas = canvas) ->
   #three different methods needed because IE is silly
@@ -61,6 +61,7 @@ resize = (canvas = canvas) ->
   else
     winH = winW
 
+  if winH < 320 then winH = winW = 320
   #assign to canvas
   canvas.width = winW
   canvas.height = winH

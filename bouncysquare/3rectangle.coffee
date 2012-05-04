@@ -19,10 +19,12 @@ class Rectangle
 
   onClick: ->
     if @points > 0
+      soundManager.play('boxHit')
       score += @points
       timer = maxTimer if timer < maxTimer
       changeBasedOnScore()
     else
+      soundManager.play('heartLost')
       health -= 1
     #because javascript runs asynchronously, we cannot simply destroy the rectangle immediately after being hit.
     #Instead, we must wait and later run through the list to check which ones are no longer alive

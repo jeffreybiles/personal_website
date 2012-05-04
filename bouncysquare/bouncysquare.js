@@ -1,7 +1,28 @@
 (function() {
-  var Rectangle, canvas, canvasId, changeBasedOnScore, ctx, currentMousePos, drawBackground, drawGameOverScreen, drawHeart, drawScoreNumber, drawTimer, gameOver, gameState, getMousePos, health, heartColor, heartHeight, imprecision, largeBox, letterHeight, mainLoop, maxHealth, maxSpeed, maxTimer, mediumBox, numLarge, numMedium, numScary, numSmall, rectangleFactory, rectangles, resize, scaryRedThing, score, smallBox, speedMultiplier, startGame, timer,
+  var Rectangle, canvas, canvasId, changeBasedOnScore, ctx, currentIntroSlide, currentMousePos, drawBackground, drawButton, drawButtonCircles, drawGameOverScreen, drawHeart, drawScoreNumber, drawTimer, drawTopBar, gameOver, gameState, getMousePos, health, heartColor, heartHeight, imprecision, introBarHeight, introButtonsStart, introButtonsWidth, largeBox, letterHeight, mainLoop, maxHealth, maxSpeed, maxTimer, mediumBox, navigateIntro, nextSlide, numIntroSlides, numLarge, numMedium, numScary, numSmall, previousSlide, rectangleFactory, rectangles, resize, scaryRedThing, score, showImageNumber, smallBox, speedMultiplier, startGame, timer,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  soundManager.url = 'soundmanagerv297a-20120318/swf';
+
+  soundManager.onready(function() {
+    soundManager.createSound({
+      id: 'boxHit',
+      url: 'sounds/tt_boxhit.wav'
+    });
+    soundManager.createSound({
+      id: 'buttonSelect',
+      url: 'sounds/tt_buttonselect.wav'
+    });
+    soundManager.createSound({
+      id: 'gameOver',
+      url: 'sounds/tt_gameover.wav'
+    });
+    return soundManager.createSound({
+      id: 'heartLost',
+      url: 'sounds/tt_heartlost.wav'
+    });
+  });
 
   canvas = document.getElementById("myCanvas");
 
@@ -43,7 +64,83 @@
 
   heartColor = '#456789';
 
-  gameState = 'play';
+  gameState = 'intro';
+
+  numIntroSlides = 8;
+
+  currentIntroSlide = 1;
+
+  introBarHeight = canvas.height * 0.1;
+
+  introButtonsStart = 10;
+
+  introButtonsWidth = canvas.width * 0.3;
+
+  showImageNumber = function(number) {
+    var myImage;
+    myImage = new Image();
+    myImage.onload = function() {
+      myImage.width = canvas.width;
+      myImage.height = canvas.height * 0.9;
+      ctx.drawImage(myImage, 0, introBarHeight, myImage.width, myImage.height);
+      return drawTopBar();
+    };
+    return myImage.src = "images/tt_introscreen_pic" + number + "_u.gif";
+  };
+
+  drawTopBar = function() {
+    return drawButtonCircles(introButtonsStart, introButtonsWidth);
+  };
+
+  drawButtonCircles = function(start, width) {
+    var radius;
+    radius = Math.min(canvas.height * 0.05, width / 8);
+    drawButton(start + width / 4, radius * 0.8);
+    drawButton(start + width / 2, radius);
+    return drawButton(start + 3 * width / 4, radius * 0.8);
+  };
+
+  nextSlide = function() {
+    if (currentIntroSlide < numIntroSlides) {
+      currentIntroSlide += 1;
+      return showImageNumber(currentIntroSlide);
+    } else {
+      return startGame();
+    }
+  };
+
+  previousSlide = function() {
+    if (currentIntroSlide > 1) {
+      currentIntroSlide -= 1;
+      return showImageNumber(currentIntroSlide);
+    }
+  };
+
+  navigateIntro = function(x, y) {
+    soundManager.play('buttonSelect');
+    if ((0 < y && y < introBarHeight)) {
+      if (x < introButtonsStart + introButtonsWidth / 3) {
+        return previousSlide();
+      } else if (x < introButtonsStart + introButtonsWidth * 2 / 3) {
+        return startGame();
+      } else if (x < introButtonsStart + introButtonsWidth) {
+        return nextSlide();
+      }
+    } else {
+      return nextSlide();
+    }
+  };
+
+  drawButton = function(x, radius, color, url) {
+    if (color == null) color = 'black';
+    if (url == null) url = null;
+    if (url) {} else {
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(x, introBarHeight / 2, radius, 0, Math.PI * 2, false);
+      return ctx.fill();
+    }
+  };
 
   drawBackground = function() {
     var color, i, startY, x;
@@ -92,7 +189,7 @@
 
   changeBasedOnScore = function() {
     speedMultiplier = (1 + score / 50) * canvas.width / 320;
-    return maxTimer = 60 / (1 + score / 20);
+    return maxTimer = 60 / (1 + score / 60);
   };
 
   resize = function(canvas) {
@@ -115,6 +212,7 @@
     } else {
       winH = winW;
     }
+    if (winH < 320) winH = winW = 320;
     canvas.width = winW;
     canvas.height = winH;
     return canvas;
@@ -148,10 +246,12 @@
 
     Rectangle.prototype.onClick = function() {
       if (this.points > 0) {
+        soundManager.play('boxHit');
         score += this.points;
-        timer = maxTimer;
+        if (timer < maxTimer) timer = maxTimer;
         changeBasedOnScore();
       } else {
+        soundManager.play('heartLost');
         health -= 1;
       }
       return this.stillAlive = false;
@@ -274,8 +374,9 @@
     }
     if (gameState === 'gameOver') {
       gameState = 'play';
-      return startGame();
+      startGame();
     }
+    if (gameState === 'intro') return navigateIntro(x, y);
   };
 
   mainLoop = function(canvas) {
@@ -302,6 +403,7 @@
     }
     timer -= 1 / 60;
     if (health <= 0 || timer <= 0) {
+      soundManager.play('gameOver');
       gameState = 'gameOver';
       return gameOver();
     } else {
@@ -314,6 +416,7 @@
   };
 
   startGame = function() {
+    gameState = 'play';
     maxTimer = 60;
     timer = maxTimer;
     speedMultiplier = 1;
@@ -340,8 +443,8 @@
 
   canvas = resize(canvas);
 
-  speedMultiplier *= canvas.width / 320;
+  showImageNumber(1);
 
-  startGame();
+  speedMultiplier *= canvas.width / 320;
 
 }).call(this);
