@@ -34,10 +34,13 @@ drawScoreNumber = (x, y, number) ->
   ctx.fillText(Math.floor(number), x, y)
 
 drawGameOverScreen = ->
+  ctx.fillStyle = 'black'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
   ctx.fillStyle = 'white'
   ctx.font = "bold #{Math.floor(letterHeight*2*canvas.width/320)}px helvetica sans-serif"
-  ctx.textBaseline = 'middle'
-  ctx.fillText('GAME OVER', 25, 150)
+  ctx.fillText('GAME OVER', 2*canvas.width/9, introBarHeight)
+  drawButtonImage('center-left', 'center', 'Home')
+  drawButtonImage('center-right', 'center', 'Replay')
 
 changeBasedOnScore = ->
   speedMultiplier = (1 + score/50)*canvas.width/320

@@ -1,22 +1,23 @@
 showImageNumber = (number) ->
+  ctx.fillStyle = 'white'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
   myImage = new Image()
   myImage.onload = ->
     myImage.width = canvas.width
-    myImage.height = canvas.height*0.9
+    myImage.height = canvas.height - introBarHeight
     ctx.drawImage(myImage, 0, introBarHeight, myImage.width, myImage.height)
     drawTopBar()
   myImage.src = "images/tt_introscreen_pic#{number}_u.gif"
 
 
 drawTopBar = ->
-  drawButtonCircles(introButtonsStart, introButtonsWidth)
+  drawButtons()
   #call to high score here
 
-drawButtonCircles = (start, width)->
-  radius = Math.min(canvas.height*0.05, width/8)
-  drawButton(start+width/4, radius*0.8)
-  drawButton(start+width/2, radius)
-  drawButton(start+3*width/4, radius*0.8)
+drawButtons = () ->
+  drawButtonImage('left', 0, 'Back') if currentIntroSlide > 1
+  drawButtonImage('right', 0, 'Forward')
+  drawButtonImage('center', 0, 'Play')
 
 nextSlide = ->
   if currentIntroSlide < numIntroSlides
@@ -25,30 +26,25 @@ nextSlide = ->
   else
     startGame()
 
+drawButtonImage = (x, y, filename) ->
+  myImage = new Image()
+  myImage.onload = ->
+    oldHeight = myImage.height
+    myImage.height = introBarHeight
+    myImage.width *= myImage.height/oldHeight
+
+    if x == 'left' then x = 0
+    if x == 'right' then x = canvas.width - myImage.width
+    if x == 'center' then x = canvas.width/2 - myImage.width/2
+    if x == 'center-left' then x = canvas.width/2 - myImage.width*3/2
+    if x == 'center-right' then x =canvas.width/2 + myImage.width/2
+    if y == 'center' then y = canvas.height/2 - myImage.height/2
+
+    ctx.drawImage(myImage, x, y, myImage.width, myImage.height)
+  myImage.src = "images/tt_#{filename}.gif"
+
 previousSlide = ->
   if currentIntroSlide > 1
     currentIntroSlide -= 1
     showImageNumber(currentIntroSlide)
 
-navigateIntro = (x, y) ->
-  soundManager.play('buttonSelect')
-  if 0 < y < introBarHeight
-    if x < introButtonsStart + introButtonsWidth/3
-      previousSlide()
-    else if x < introButtonsStart + introButtonsWidth*2/3
-      startGame()
-    else if x < introButtonsStart + introButtonsWidth
-      nextSlide()
-  else
-    nextSlide()
-
-
-
-drawButton = (x, radius, color = 'black', url= null) ->
-  if url
-
-  else
-    ctx.fillStyle = color;
-    ctx.beginPath()
-    ctx.arc(x, introBarHeight/2, radius, 0, Math.PI * 2, false);
-    ctx.fill()

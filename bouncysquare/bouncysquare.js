@@ -1,5 +1,5 @@
 (function() {
-  var Rectangle, canvas, canvasId, changeBasedOnScore, ctx, currentIntroSlide, currentMousePos, drawBackground, drawButton, drawButtonCircles, drawGameOverScreen, drawHeart, drawScoreNumber, drawTimer, drawTopBar, gameOver, gameState, getMousePos, health, heartColor, heartHeight, imprecision, introBarHeight, introButtonsStart, introButtonsWidth, largeBox, letterHeight, mainLoop, maxHealth, maxSpeed, maxTimer, mediumBox, navigateIntro, nextSlide, numIntroSlides, numLarge, numMedium, numScary, numSmall, previousSlide, rectangleFactory, rectangles, resize, scaryRedThing, score, showImageNumber, smallBox, speedMultiplier, startGame, timer,
+  var Rectangle, canvas, canvasId, changeBasedOnScore, ctx, currentIntroSlide, currentMousePos, drawBackground, drawButtonImage, drawButtons, drawGameOverScreen, drawHeart, drawScoreNumber, drawTimer, drawTopBar, gameOver, gameState, getMousePos, health, heartColor, heartHeight, imprecision, introBarHeight, introButtonsStart, introButtonsWidth, largeBox, letterHeight, mainLoop, maxHealth, maxSpeed, maxTimer, mediumBox, navigateGameOver, navigateIntro, nextSlide, numIntroSlides, numLarge, numMedium, numScary, numSmall, previousSlide, rectangleFactory, rectangles, resize, scaryRedThing, score, showImageNumber, smallBox, speedMultiplier, startGame, timer,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
@@ -70,18 +70,20 @@
 
   currentIntroSlide = 1;
 
-  introBarHeight = canvas.height * 0.1;
+  introBarHeight = canvas.height * 0.3;
 
   introButtonsStart = 10;
 
-  introButtonsWidth = canvas.width * 0.3;
+  introButtonsWidth = canvas.width * 0.7;
 
   showImageNumber = function(number) {
     var myImage;
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     myImage = new Image();
     myImage.onload = function() {
       myImage.width = canvas.width;
-      myImage.height = canvas.height * 0.9;
+      myImage.height = canvas.height - introBarHeight;
       ctx.drawImage(myImage, 0, introBarHeight, myImage.width, myImage.height);
       return drawTopBar();
     };
@@ -89,15 +91,13 @@
   };
 
   drawTopBar = function() {
-    return drawButtonCircles(introButtonsStart, introButtonsWidth);
+    return drawButtons();
   };
 
-  drawButtonCircles = function(start, width) {
-    var radius;
-    radius = Math.min(canvas.height * 0.05, width / 8);
-    drawButton(start + width / 4, radius * 0.8);
-    drawButton(start + width / 2, radius);
-    return drawButton(start + 3 * width / 4, radius * 0.8);
+  drawButtons = function() {
+    if (currentIntroSlide > 1) drawButtonImage('left', 0, 'Back');
+    drawButtonImage('right', 0, 'Forward');
+    return drawButtonImage('center', 0, 'Play');
   };
 
   nextSlide = function() {
@@ -109,36 +109,29 @@
     }
   };
 
+  drawButtonImage = function(x, y, filename) {
+    var myImage;
+    myImage = new Image();
+    myImage.onload = function() {
+      var oldHeight;
+      oldHeight = myImage.height;
+      myImage.height = introBarHeight;
+      myImage.width *= myImage.height / oldHeight;
+      if (x === 'left') x = 0;
+      if (x === 'right') x = canvas.width - myImage.width;
+      if (x === 'center') x = canvas.width / 2 - myImage.width / 2;
+      if (x === 'center-left') x = canvas.width / 2 - myImage.width * 3 / 2;
+      if (x === 'center-right') x = canvas.width / 2 + myImage.width / 2;
+      if (y === 'center') y = canvas.height / 2 - myImage.height / 2;
+      return ctx.drawImage(myImage, x, y, myImage.width, myImage.height);
+    };
+    return myImage.src = "images/tt_" + filename + ".gif";
+  };
+
   previousSlide = function() {
     if (currentIntroSlide > 1) {
       currentIntroSlide -= 1;
       return showImageNumber(currentIntroSlide);
-    }
-  };
-
-  navigateIntro = function(x, y) {
-    soundManager.play('buttonSelect');
-    if ((0 < y && y < introBarHeight)) {
-      if (x < introButtonsStart + introButtonsWidth / 3) {
-        return previousSlide();
-      } else if (x < introButtonsStart + introButtonsWidth * 2 / 3) {
-        return startGame();
-      } else if (x < introButtonsStart + introButtonsWidth) {
-        return nextSlide();
-      }
-    } else {
-      return nextSlide();
-    }
-  };
-
-  drawButton = function(x, radius, color, url) {
-    if (color == null) color = 'black';
-    if (url == null) url = null;
-    if (url) {} else {
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.arc(x, introBarHeight / 2, radius, 0, Math.PI * 2, false);
-      return ctx.fill();
     }
   };
 
@@ -181,10 +174,13 @@
   };
 
   drawGameOverScreen = function() {
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'white';
     ctx.font = "bold " + (Math.floor(letterHeight * 2 * canvas.width / 320)) + "px helvetica sans-serif";
-    ctx.textBaseline = 'middle';
-    return ctx.fillText('GAME OVER', 25, 150);
+    ctx.fillText('GAME OVER', 2 * canvas.width / 9, introBarHeight);
+    drawButtonImage('center-left', 'center', 'Home');
+    return drawButtonImage('center-right', 'center', 'Replay');
   };
 
   changeBasedOnScore = function() {
@@ -372,11 +368,35 @@
         if (rectangle.isInRange(x, y)) return rectangle.onClick();
       });
     }
-    if (gameState === 'gameOver') {
-      gameState = 'play';
-      startGame();
-    }
+    if (gameState === 'gameOver') navigateGameOver(x, y);
     if (gameState === 'intro') return navigateIntro(x, y);
+  };
+
+  navigateIntro = function(x, y) {
+    if (x < canvas.width / 4) {
+      soundManager.play('buttonSelect');
+      return previousSlide();
+    } else if (x > 3 * canvas.width / 4) {
+      soundManager.play('buttonSelect');
+      return nextSlide();
+    } else if (y < introBarHeight) {
+      soundManager.play('buttonSelect');
+      return startGame();
+    }
+  };
+
+  navigateGameOver = function(x, y) {
+    if ((canvas.height * 2 / 5 < y && y < canvas.width * 3 / 5)) {
+      if ((canvas.width / 3 < x && x < canvas.width / 2)) {
+        console.log(x, y, 'hitting the intro button!');
+        gameState = 'intro';
+        currentIntroSlide = 1;
+        return showImageNumber(currentIntroSlide);
+      } else if ((canvas.width / 2 < x && x < canvas.width * 2 / 3)) {
+        gameState = 'play';
+        return startGame();
+      }
+    }
   };
 
   mainLoop = function(canvas) {
