@@ -1,1 +1,482 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('(7(){l J,K,E,d,F,O,1a,1Y,1i,1M,1E,1h,2a,8,11,1U,k,17,1x,1P,1N,1Z,z,U,1O,v,t,1H,2k,B,b,1L,1c,r,19,1R,2x=3j.q.3d,1G=7(P,Z){14(l 1t 3c Z){6(2x.1e(Z,1t))P[1t]=Z[1t]}7 1X(){4.2M=P}1X.q=Z.q;P.q=1v 1X;P.1k=Z.q;9 P};O=0.1;1x=0.3g;1i=1.5;1h=2.5;t=1;v=5;1a=e;8=1I.2z("2m");11="2m";k=8.2C("2d");U=f;z=\'1p\';B="";1M=[];2a=[];b=[];2k=[];17={x:-1,y:-1};1R=7(u,w){l 1D,1y;6(u.a){1D=u.a}g 6(u.m){1D=u.m/2}g{9 f}6(w.a){1y=w.a}g 6(w.m){1y=w.m/2}g{9 f}6(1Z(u,w)<1D+1y){9 e}g{9 f}};1Z=7(u,w){l o,p;6(u.x===w.x&&u.y===w.y){9 2G}g{o=u.x-w.x;p=u.y-w.y;9 c.2K(c.20(o,2)+c.20(p,2))}};d={1u:{},2b:37||2e,A:2e,2f:38,W:2H,2j:39,D:2T,2h:2U,S:2V,H:7(1r){9 4.1u[1r]},2w:7(j){9 4.1u[j.1r]=e},2u:7(j){9 2Z 4.1u[j.1r]}};1L=7(2g,1f){6(1f==h)1f=0;9 c.1o(c.V()*(2g-1f)+1f)};19=7(19,x,y,G,1z,1F){6(G==h)G=\'#2S\';6(1z==h)1z=18;6(1F==h)1F=\'2X-31\';k.L=G;k.30="2Q "+1z+"32 "+1F;k.2I=\'2F\';k.2J(19,x,y)};1E=7(){l Y,21,C,15;Y=0;14(C=0,15=b.M;C<15;C++){21=b[C];6(21.1m)Y+=1}9 Y};1N=7(){l G,1W;6(v<=0)U=e;G=2N;k.L="2L("+G+","+G+","+G+")";k.3A(0,0,8.m,8.s);1W=1E();6(1W===0){t+=1;r(z)}g{19(1E(),10,3s)}};1O=7(j){6(!(z===\'1C\'||z===\'1V\')){9 1c()}};1c=7(){l x,y;x=17.x;y=17.y;x-=8.3q;y-=8.33;9 b.1A(1v K(x,y))};1U=7(1S,1Q){6(1R(1S,1Q)&&1Q.1b){6(1S.1n&&v>0){v-=2t;6(v<0){9 e}g{9 f}}g{9 e}}g{9 f}};1P=7(2i,1g){l 1T,i,23;i=2i;1T=h;23=1g[i];i++;2A(1T===h&&i<1g.M){6(1U(23,1g[i])){9 i}g{i++}}9 h};E=(7(){7 E(x,y,a){4.x=x;4.y=y;4.a=a;4.o=0;4.p=0;4.X=e;4.1b=e;4.1a=e;9}E.q.2q=7(){l n;4.x+=4.o;4.y+=4.p;n=5;6(4.3y){6(4.x<0)4.x+=8.m;6(4.x>8.m)4.x-=8.m;6(4.y<0)4.y+=8.s;6(4.y>8.s)4.y-=8.s}g 6(4.3x||4.X){6(4.X){6(4.x<n||4.x>8.m-n)4.o*=-1;6(4.y<n||4.y>8.s-n)4.p*=-1}6(4.x<n)4.x=n;6(4.x>8.m-n)4.x=8.m-n;6(4.y<n)4.y=n;6(4.y>8.s-n)4.y=8.s-n}};E.q.I=7(L,1j){l a,x,y;6(L==h)L=\'3w\';6(1j==h)1j=f;x=4.x;y=4.y;a=4.a;k.L=L;k.3m();k.2l(x,y,a,0,c.2c*2,f);6(1j){k.2l(x-3l*2,y-3b*2,a,0,c.2c*2,f)}6(!4.3a)k.36()};E.q.28=7(){4.x+=4.o;4.y+=4.p};9 E})();F=(7(R){1G(F,R);7 F(x,y,a,v){4.x=x!=h?x:8.m/2;4.y=y!=h?y:8.s/2;4.a=a!=h?a:10;4.v=v!=h?v:2s;4.X=e;4.1b=e;4.o=0;4.p=0;4.1n=e}F.q.28=7(){6(d.H(d.2f)||d.H(d.W))4.p-=O;6(d.H(d.2h)||d.H(d.S))4.p+=O;6(d.H(d.2b)||d.H(d.A))4.o-=O;6(d.H(d.2j)||d.H(d.D))4.o+=O;4.p*=1x;4.o*=1x};F.q.I=7(){9 F.1k.I.1e(4,\'#3f\')};9 F})(E);J=(7(R){1G(J,R);7 J(x,y,a){4.x=x;4.y=y;4.a=a!=h?a:13;4.o=c.V()*1i;4.p=c.V()*1i;4.X=e;4.1b=e;4.1m=e}J.q.I=7(){J.1k.I.1e(4,"#3p")};9 J})(E);1Y=7(Y){l i,1s,12;14(i=1,12=c.1o(Y);1<=12?i<=12:i>=12;1<=12?i++:i--){1s=1v J(10,1L(8.s));b.1A(1s);1M.1A(1s)}};K=(7(R){1G(K,R);7 K(2B,2n,a){l Q,N,1B,1K;6(a==h)a=3;1B=2B-B.x;1K=2n-B.y;Q=c.3i(1K/1B);6(1B>0){N=1}g{N=-1}4.o=1h*c.2E(Q)*N;4.p=1h*c.2D(Q)*N;4.x=c.1o(B.x+(B.a+a+2)*c.2E(Q)*N);4.y=c.1o(B.y+(B.a+a+2)*c.2D(Q)*N);4.X=e;4.a=a;4.1b=e}K.q.I=7(){9 K.1k.I.1e(4,\'#35\')};9 K})(E);1H=7(8){l T,i,27,24,25,C,16,1d,15,26,29;1a=e;1N();14(C=0,15=b.M;C<15;C++){27=b[C];27.I()}14(16=0,26=b.M;16<26;16++){25=b[16];25.2q()}14(1d=0,29=b.M;1d<29;1d++){24=b[1d];24.28()}i=0;2A(i<b.M){T=1P(i,b);6(T&&!(b[T].1m&&b[i].1m)){6(!b[T].1n){b.2p(T,1)}6(!b[i].1n)b.2p(i,1)}g{i++}}6(z===\'1C\'&&c.V()>0.3v)1c();6(z===\'1J\'&&c.V()>0.3z)1c();6(11===8.2r){6(1a&&U===f){3u(1H,3t/2t,8)}g 6(U===f){r(z)}g{t=1;U=f;r(z)}}};22.2y(\'3o\',(7(j){d.2u(j);j.2v();9 f}),f);22.2y(\'3n\',(7(j){d.2w(j);j.2v();9 f}),f);r=7(1w){l 1q;6(1w==h)1w=\'1p\';11=c.V().2P();1q=$(\'#2o 8\').2Y();$(\'#2o\').2R("<8 2r=\'"+11+"\' m="+1q[0].m+" s="+1q[0].s+"></8>");8=1I.2z(11);k=8.2C("2d");8.2O=1;z=1w;b.M=0;B=1v F();b.1A(B);1Y(t+c.20(t,1.5));v=2s+10*t;1H(8)};3r(7($){$(\'#1V\').1l(7(){t=1;r(\'1V\')});$(\'#1p\').1l(7(){t=1;r(\'1p\')});$(\'#1C\').1l(7(){t=1;r(\'1C\')});$(\'#1J\').1l(7(){t=1;r(\'1J\')});9 $(1I).34(7(j){9 17={x:j.3e,y:j.3k}})});$(1I).3h(1O);r();22.2W={r:r}}).1e(4);',62,223,'||||this||if|function|canvas|return|radius|projectiles|Math|Key|true|false|else|null||event|ctx|var|width|margin|dx|dy|prototype|startGame|height|level|object1|health|object2|||gameMode||player|_i||Circle|Player|color|isDown|draw|Asteroid|Bullet|fillStyle|length|multiplier|acc|child|angle|_super||collidedWith|gameOver|random||bounce|num|parent||canvasId|_ref||for|_len|_j|currentMousePos||text|alive|danger|shootBullet|_k|call|min|allObjects|bulletSpeed|asteroidSpeed|shadow|__super__|click|asteroid|isPlayer|floor|normal|oldCanvas|keyCode|newAsteroid|key|_pressed|new|mode|decel|dist2|size|push|xdistance|followingOrders|dist1|asteroidsLeft|style|__extends|mainLoop|document|devilMadeMe|ydistance|rand|asteroids|drawBackground|getMousePos|detectCollisions|otherObj|withinRadius|thisObj|collisions|collided|pacifist|numAsteroids|ctor|asteroidFactory|findDistance|pow|projectile|window|thisObject|thing2|thingy|_len2|thing|update|_len3|bullets|LEFT|PI||65|UP|max|DOWN|index|RIGHT|newProjectiles|arc|myCanvas|yclick|holdsMyGame|splice|move|id|100|60|onKeyup|preventDefault|onKeydown|__hasProp|addEventListener|getElementById|while|xclick|getContext|sin|cos|bottom|2000|87|textBaseline|fillText|sqrt|rgb|constructor|128|tabIndex|toString|bold|html|000|68|40|83|api|sans|remove|delete|font|serif|px|offsetTop|mousemove|2B241D|fill||||invisible|shadowY|in|hasOwnProperty|pageX|B5A18F|99|mousedown|atan|Object|pageY|shadowX|beginPath|keydown|keyup|614E3D|offsetLeft|jQuery|590|1000|setTimeout|97|white|stay|loop|92|fillRect'.split('|')))
+(function() {
+  var Asteroid, Bullet, Circle, Key, Player, acc, alive, asteroidFactory, asteroidSpeed, asteroids, asteroidsLeft, bulletSpeed, bullets, canvas, canvasId, collided, ctx, currentMousePos, decel, detectCollisions, drawBackground, findDistance, firstTime, gameMode, gameOver, getMousePos, health, lastTime, level, mainLoop, newProjectiles, player, projectiles, rand, shootBullet, startGame, text, vendors, withinRadius, x,
+    __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  acc = 0.1;
+
+  decel = 0.99;
+
+  asteroidSpeed = 1.5;
+
+  bulletSpeed = 2.5;
+
+  level = 1;
+
+  health = 5;
+
+  alive = true;
+
+  canvas = document.getElementById("myCanvas");
+
+  canvasId = "myCanvas";
+
+  ctx = canvas.getContext("2d");
+
+  gameOver = false;
+
+  gameMode = 'normal';
+
+  player = "";
+
+  asteroids = [];
+
+  bullets = [];
+
+  projectiles = [];
+
+  newProjectiles = [];
+
+  currentMousePos = {
+    x: -1,
+    y: -1
+  };
+
+  firstTime = true;
+
+  lastTime = 0;
+
+  vendors = ['ms', 'moz', 'webkit', 'o'];
+
+  x = 0;
+
+  while (x < vendors.length && !window.requestAnimationFrame) {
+    window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+    window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+    ++x;
+  }
+
+  if (!window.requestAnimationFrame) {
+    window.requestAnimationFrame = function(callback, element) {
+      var currTime, id, timeToCall;
+      currTime = new Date().getTime();
+      timeToCall = Math.max(0, 16 - (currTime - lastTime));
+      id = window.setTimeout((function() {
+        return callback(currTime + timeToCall);
+      }), timeToCall);
+      lastTime = currTime + timeToCall;
+      return id;
+    };
+  }
+
+  if (!window.cancelAnimationFrame) {
+    window.cancelAnimationFrame = function(id) {
+      return clearTimeout(id);
+    };
+  }
+
+  withinRadius = function(object1, object2) {
+    var dist1, dist2;
+    if (object1.radius) {
+      dist1 = object1.radius;
+    } else if (object1.width) {
+      dist1 = object1.width / 2;
+    } else {
+      return false;
+    }
+    if (object2.radius) {
+      dist2 = object2.radius;
+    } else if (object2.width) {
+      dist2 = object2.width / 2;
+    } else {
+      return false;
+    }
+    if (findDistance(object1, object2) < dist1 + dist2) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  findDistance = function(object1, object2) {
+    var dx, dy;
+    if (object1.x === object2.x && object1.y === object2.y) {
+      return 2000;
+    } else {
+      dx = object1.x - object2.x;
+      dy = object1.y - object2.y;
+      return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    }
+  };
+
+  Key = {
+    _pressed: {},
+    LEFT: 37 || 65,
+    A: 65,
+    UP: 38,
+    W: 87,
+    RIGHT: 39,
+    D: 68,
+    DOWN: 40,
+    S: 83,
+    isDown: function(keyCode) {
+      return this._pressed[keyCode];
+    },
+    onKeydown: function(event) {
+      return this._pressed[event.keyCode] = true;
+    },
+    onKeyup: function(event) {
+      return delete this._pressed[event.keyCode];
+    }
+  };
+
+  rand = function(max, min) {
+    if (min == null) min = 0;
+    return Math.floor(Math.random() * (max - min) + min);
+  };
+
+  text = function(text, x, y, color, size, style) {
+    if (color == null) color = '#000';
+    if (size == null) size = 18;
+    if (style == null) style = 'sans-serif';
+    ctx.fillStyle = color;
+    ctx.font = "bold " + size + "px " + style;
+    ctx.textBaseline = 'bottom';
+    ctx.fillText(text, x, y);
+  };
+
+  asteroidsLeft = function() {
+    var num, projectile, _i, _len;
+    num = 0;
+    for (_i = 0, _len = projectiles.length; _i < _len; _i++) {
+      projectile = projectiles[_i];
+      if (projectile.asteroid) num += 1;
+    }
+    return num;
+  };
+
+  drawBackground = function() {
+    var color, numAsteroids;
+    if (health <= 0) startGame(gameMode);
+    color = 128;
+    ctx.fillStyle = "rgb(" + color + "," + color + "," + color + ")";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    numAsteroids = asteroidsLeft();
+    if (numAsteroids === 0) {
+      level += 1;
+      startGame(gameMode);
+    } else {
+      text(asteroidsLeft(), 10, 590);
+    }
+  };
+
+  getMousePos = function(event) {
+    if (!(gameMode === 'followingOrders' || gameMode === 'pacifist')) {
+      return shootBullet();
+    }
+  };
+
+  shootBullet = function() {
+    var y;
+    x = currentMousePos.x;
+    y = currentMousePos.y;
+    x -= canvas.offsetLeft;
+    y -= canvas.offsetTop;
+    return projectiles.push(new Bullet(x, y));
+  };
+
+  collided = function(thisObj, otherObj) {
+    if (withinRadius(thisObj, otherObj) && otherObj.danger) {
+      if (thisObj.isPlayer && health > 0) {
+        health -= 60;
+        if (health < 0) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  };
+
+  detectCollisions = function(index, allObjects) {
+    var collisions, i, thisObject;
+    i = index;
+    collisions = null;
+    thisObject = allObjects[i];
+    i++;
+    while (collisions === null && i < allObjects.length) {
+      if (collided(thisObject, allObjects[i])) {
+        return i;
+      } else {
+        i++;
+      }
+    }
+    return null;
+  };
+
+  Circle = (function() {
+
+    function Circle(x, y, radius) {
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+      this.dx = 0;
+      this.dy = 0;
+      this.bounce = true;
+      this.danger = true;
+      this.alive = true;
+      return;
+    }
+
+    Circle.prototype.move = function() {
+      var margin;
+      this.x += this.dx;
+      this.y += this.dy;
+      margin = 5;
+      if (this.loop) {
+        if (this.x < 0) this.x += canvas.width;
+        if (this.x > canvas.width) this.x -= canvas.width;
+        if (this.y < 0) this.y += canvas.height;
+        if (this.y > canvas.height) this.y -= canvas.height;
+      } else if (this.stay || this.bounce) {
+        if (this.bounce) {
+          if (this.x < margin || this.x > canvas.width - margin) this.dx *= -1;
+          if (this.y < margin || this.y > canvas.height - margin) this.dy *= -1;
+        }
+        if (this.x < margin) this.x = margin;
+        if (this.x > canvas.width - margin) this.x = canvas.width - margin;
+        if (this.y < margin) this.y = margin;
+        if (this.y > canvas.height - margin) this.y = canvas.height - margin;
+      }
+    };
+
+    Circle.prototype.draw = function(fillStyle, shadow) {
+      var radius, y;
+      if (fillStyle == null) fillStyle = 'white';
+      if (shadow == null) shadow = false;
+      x = this.x;
+      y = this.y;
+      radius = this.radius;
+      ctx.fillStyle = fillStyle;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+      if (shadow) {
+        ctx.arc(x - shadowX * 2, y - shadowY * 2, radius, 0, Math.PI * 2, false);
+      }
+      if (!this.invisible) ctx.fill();
+    };
+
+    Circle.prototype.update = function() {
+      this.x += this.dx;
+      this.y += this.dy;
+    };
+
+    return Circle;
+
+  })();
+
+  Asteroid = (function(_super) {
+
+    __extends(Asteroid, _super);
+
+    function Asteroid(x, y, radius) {
+      this.x = x;
+      this.y = y;
+      this.radius = radius != null ? radius : 13;
+      this.dx = Math.random() * asteroidSpeed;
+      this.dy = Math.random() * asteroidSpeed;
+      this.bounce = true;
+      this.danger = true;
+      this.asteroid = true;
+    }
+
+    Asteroid.prototype.draw = function() {
+      Asteroid.__super__.draw.call(this, "#614E3D");
+    };
+
+    return Asteroid;
+
+  })(Circle);
+
+  asteroidFactory = function(num) {
+    var i, newAsteroid, _ref;
+    for (i = 1, _ref = Math.floor(num); 1 <= _ref ? i <= _ref : i >= _ref; 1 <= _ref ? i++ : i--) {
+      newAsteroid = new Asteroid(10, rand(canvas.height));
+      projectiles.push(newAsteroid);
+      asteroids.push(newAsteroid);
+    }
+  };
+
+  Bullet = (function(_super) {
+
+    __extends(Bullet, _super);
+
+    function Bullet(xclick, yclick, radius) {
+      var angle, multiplier, xdistance, ydistance;
+      if (radius == null) radius = 3;
+      xdistance = xclick - player.x;
+      ydistance = yclick - player.y;
+      angle = Math.atan(ydistance / xdistance);
+      if (xdistance > 0) {
+        multiplier = 1;
+      } else {
+        multiplier = -1;
+      }
+      this.dx = bulletSpeed * Math.cos(angle) * multiplier;
+      this.dy = bulletSpeed * Math.sin(angle) * multiplier;
+      this.x = Math.floor(player.x + (player.radius + radius + 2) * Math.cos(angle) * multiplier);
+      this.y = Math.floor(player.y + (player.radius + radius + 2) * Math.sin(angle) * multiplier);
+      this.bounce = true;
+      this.radius = radius;
+      this.danger = true;
+    }
+
+    Bullet.prototype.draw = function() {
+      return Bullet.__super__.draw.call(this, '#2B241D');
+    };
+
+    return Bullet;
+
+  })(Circle);
+
+  Player = (function(_super) {
+
+    __extends(Player, _super);
+
+    function Player(x, y, radius, health) {
+      this.x = x != null ? x : canvas.width / 2;
+      this.y = y != null ? y : canvas.height / 2;
+      this.radius = radius != null ? radius : 10;
+      this.health = health != null ? health : 100;
+      this.bounce = true;
+      this.danger = true;
+      this.dx = 0;
+      this.dy = 0;
+      this.isPlayer = true;
+    }
+
+    Player.prototype.update = function() {
+      if (Key.isDown(Key.UP) || Key.isDown(Key.W)) this.dy -= acc;
+      if (Key.isDown(Key.DOWN) || Key.isDown(Key.S)) this.dy += acc;
+      if (Key.isDown(Key.LEFT) || Key.isDown(Key.A)) this.dx -= acc;
+      if (Key.isDown(Key.RIGHT) || Key.isDown(Key.D)) this.dx += acc;
+      this.dy *= decel;
+      this.dx *= decel;
+    };
+
+    Player.prototype.draw = function() {
+      return Player.__super__.draw.call(this, '#B5A18F');
+    };
+
+    return Player;
+
+  })(Circle);
+
+  mainLoop = function(canvas) {
+    var collidedWith, i, thing, thing2, thingy, _i, _j, _k, _len, _len2, _len3;
+    if (alive) {
+      window.requestAnimationFrame(mainLoop, canvas);
+    } else {
+      startGame(gameMode);
+    }
+    alive = true;
+    drawBackground();
+    for (_i = 0, _len = projectiles.length; _i < _len; _i++) {
+      thing = projectiles[_i];
+      thing.draw();
+    }
+    for (_j = 0, _len2 = projectiles.length; _j < _len2; _j++) {
+      thingy = projectiles[_j];
+      thingy.move();
+    }
+    for (_k = 0, _len3 = projectiles.length; _k < _len3; _k++) {
+      thing2 = projectiles[_k];
+      thing2.update();
+    }
+    i = 0;
+    while (i < projectiles.length) {
+      collidedWith = detectCollisions(i, projectiles);
+      if (collidedWith && !(projectiles[collidedWith].asteroid && projectiles[i].asteroid)) {
+        if (!projectiles[collidedWith].isPlayer) {
+          projectiles.splice(collidedWith, 1);
+        }
+        if (!projectiles[i].isPlayer) projectiles.splice(i, 1);
+      } else {
+        i++;
+      }
+    }
+    if (gameMode === 'followingOrders' && Math.random() > 0.97) shootBullet();
+    if (gameMode === 'devilMadeMe' && Math.random() > 0.92) shootBullet();
+  };
+
+  window.addEventListener('keyup', (function(event) {
+    Key.onKeyup(event);
+    event.preventDefault();
+    return false;
+  }), false);
+
+  window.addEventListener('keydown', (function(event) {
+    Key.onKeydown(event);
+    event.preventDefault();
+    return false;
+  }), false);
+
+  startGame = function(mode) {
+    var oldCanvas;
+    if (mode == null) mode = 'normal';
+    canvasId = Math.random().toString();
+    oldCanvas = $('#holdsMyGame canvas').remove();
+    $('#holdsMyGame').html("<canvas id='" + canvasId + "' width=" + oldCanvas[0].width + " height=" + oldCanvas[0].height + "></canvas>");
+    canvas = document.getElementById(canvasId);
+    ctx = canvas.getContext("2d");
+    canvas.tabIndex = 1;
+    gameMode = mode;
+    projectiles.length = 0;
+    player = new Player();
+    projectiles.push(player);
+    asteroidFactory(level + Math.pow(level, 1.5));
+    health = 100 + 10 * level;
+    if (firstTime) {
+      firstTime = false;
+      mainLoop(canvas);
+    }
+  };
+
+  jQuery(function($) {
+    $('#pacifist').click(function() {
+      level = 1;
+      startGame('pacifist');
+    });
+    $('#normal').click(function() {
+      level = 1;
+      startGame('normal');
+    });
+    $('#followingOrders').click(function() {
+      level = 1;
+      startGame('followingOrders');
+    });
+    $('#devilMadeMe').click(function() {
+      level = 1;
+      startGame('devilMadeMe');
+    });
+    return $(document).mousemove(function(event) {
+      return currentMousePos = {
+        x: event.pageX,
+        y: event.pageY
+      };
+    });
+  });
+
+  $(document).mousedown(getMousePos);
+
+  startGame();
+
+  window.api = {
+    startGame: startGame
+  };
+
+}).call(this);

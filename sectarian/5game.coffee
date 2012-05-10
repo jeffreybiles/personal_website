@@ -3,6 +3,10 @@
 ##= require ./player
 
 mainLoop = (canvas) ->
+  if alive
+    window.requestAnimationFrame(mainLoop, canvas)
+  else
+    startGame(gameMode)
   alive = true
   drawBackground()
   thing.draw() for thing in projectiles
@@ -24,15 +28,6 @@ mainLoop = (canvas) ->
           currentAsteroids = asteroidsLeft()
     else i++
   spliceBullets();
-  if canvasId == canvas.id
-    if alive && gameOver == false
-      setTimeout(mainLoop, 1000/60, canvas)
-    else if gameOver == false
-      startGame(gameMode)
-    else
-      level = 1
-      gameOver = false
-      startGame(gameMode)
   return
 
 spliceBullets = ->
@@ -61,7 +56,12 @@ startGame = (mode = gameMode) ->
   asteroidFactory(level + Math.pow(level, 1.6))
   currentAsteroids = asteroidsLeft()
   maxAsteroids = asteroidsLeft()
-  mainLoop(canvas)
+  console.log('about to start')
+
+  if firstTime
+    console.log('hello from starting')
+    firstTime = false
+    mainLoop(mode)
   return
 
 jQuery ($) ->
@@ -98,7 +98,6 @@ jQuery ($) ->
     tatChance = 0.6
     bounceChance = 0.4
     instability = 0.03
-    startGame('reality')
     return
 
   $(document).mousemove (event) ->

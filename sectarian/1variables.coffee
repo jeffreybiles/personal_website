@@ -24,3 +24,5 @@ seeking = 0.2
 tatChance = 0.3
 bounceChance = 0.2
 instability = 0.01
+
+firstTime = true

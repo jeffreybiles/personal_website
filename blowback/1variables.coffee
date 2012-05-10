@@ -16,3 +16,5 @@ bullets = []
 projectiles = []
 newProjectiles = []
 currentMousePos = {x: -1, y: -1}
+
+firstTime = true

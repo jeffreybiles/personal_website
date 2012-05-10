@@ -1,4 +1,8 @@
 mainLoop = (canvas) ->
+  if alive
+    window.requestAnimationFrame(mainLoop, canvas)
+  else
+    startGame(gameMode)
   alive = true
   drawBackground()
   thing.draw() for thing in projectiles
@@ -16,15 +20,6 @@ mainLoop = (canvas) ->
     shootBullet()
   if gameMode == 'devilMadeMe' && Math.random() > 0.92
     shootBullet()
-  if canvasId == canvas.id
-    if alive && gameOver == false
-      setTimeout(mainLoop, 1000/60, canvas)
-    else if gameOver == false
-      startGame(gameMode)
-    else
-      level = 1
-      gameOver = false
-      startGame(gameMode)
   return
 
 window.addEventListener 'keyup', ((event) -> Key.onKeyup(event); event.preventDefault(); return false), false
@@ -43,7 +38,9 @@ startGame = (mode = 'normal') ->
   projectiles.push(player)
   asteroidFactory(level + Math.pow(level, 1.5))
   health = 100 + 10*level
-  mainLoop(canvas)
+  if firstTime
+    firstTime = false
+    mainLoop(canvas)
   return
 
 jQuery ($) ->
