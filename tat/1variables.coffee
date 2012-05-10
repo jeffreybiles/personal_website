@@ -21,3 +21,5 @@ myBulletSpeed = 4
 theirBulletSpeed = 3.5
 chanceShoot = 0.01
 tatChance = 1
+
+firstTime = true

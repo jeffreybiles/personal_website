@@ -1,4 +1,9 @@
 mainLoop = (canvas) ->
+  if alive
+    window.requestAnimationFrame(mainLoop, canvas)
+  else
+    startGame(gameMode)
+
   alive = true
   drawBackground()
   thing.draw() for thing in projectiles
@@ -14,15 +19,6 @@ mainLoop = (canvas) ->
         projectiles.splice(i, 1)
       else i++
     else i++
-  if canvasId == canvas.id
-    if alive && gameOver == false
-      setTimeout(mainLoop, 1000/60, canvas)
-    else if gameOver == false
-      startGame(gameMode)
-    else
-      level = 1
-      gameOver = false
-      startGame(gameMode)
   return
 
 window.addEventListener 'keyup', ((event) -> Key.onKeyup(event); event.preventDefault(); return false), false
@@ -42,7 +38,9 @@ startGame = (mode = gameMode) ->
 #  asteroids.push(player)
   asteroidFactory(level + Math.pow(level, 1.5))
   health = 100 + 10*level
-  mainLoop(canvas)
+  if firstTime
+    firstTime = false
+    mainLoop(canvas)
   return
 
 jQuery ($) ->

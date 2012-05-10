@@ -24,26 +24,6 @@ findDistance = (object1, object2) ->
     dy = object1.y - object2.y
     return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))
 
-
-#bounding = (margin = 5) ->
-#  if this.loop
-#    if this.x < 0 then this.x += canvas.width
-#    if this.x > canvas.width then this.x -= canvas.width
-#    if this.y < 0 then this.y += canvas.height
-#    if this.y > canvas.height then this.y -= canvas.height
-#  else if this.stay || this.bounce
-#    if this.bounce
-#      if this.x < margin || this.x > canvas.width - margin
-#        this.dx *= -1
-#      if this.y < margin || this.y > canvas.height - margin
-#        this.dy *= -1
-#    if this.x < margin then this.x = margin
-#    if this.x > canvas.width - margin then this.x = canvas.width - margin
-#    if this.y < margin then this.y = margin
-#    if this.y > canvas.height - margin then this.y = canvas.height - margin
-#  return
-
-
 Key =
   _pressed: {},
 
@@ -80,7 +60,7 @@ asteroidsLeft = ->
   num
 
 drawBackground = () ->
-  if health <= 0 then gameOver = true
+  if health <= 0 then startGame(gameMode)
   color = 128
   ctx.fillStyle = "rgb(#{color},#{color},#{color})"
   ctx.fillRect(0,0,canvas.width,canvas.height)
