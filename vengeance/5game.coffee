@@ -3,6 +3,10 @@
 ##= require ./player
 
 mainLoop = (canvas) ->
+  if alive
+    window.requestAnimationFrame(mainLoop, canvas)
+  else
+    startGame(gameMode)
   alive = true
   drawBackground()
   thing.draw() for thing in projectiles
@@ -23,15 +27,6 @@ mainLoop = (canvas) ->
           currentAsteroids = asteroidsLeft()
     else i++
   spliceBullets();
-  if canvasId == canvas.id
-    if alive && gameOver == false
-      setTimeout(mainLoop, 1000/60, canvas)
-    else if gameOver == false
-      startGame(gameMode)
-    else
-      level = 1
-      gameOver = false
-      startGame(gameMode)
   return
 
 spliceBullets = ->
@@ -46,6 +41,7 @@ window.addEventListener 'keyup', ((event) -> Key.onKeyup(event); event.preventDe
 window.addEventListener 'keydown', ((event) -> Key.onKeydown(event); event.preventDefault(); return false), false
 
 startGame = (mode = gameMode) ->
+  console.log("starting the game!")
   canvasId = Math.random().toString()
   oldCanvas = $('#holdsMyGame canvas').remove()
   $('#holdsMyGame').html("<canvas id='#{canvasId}' width=#{oldCanvas[0].width} height=#{oldCanvas[0].height}></canvas>")
@@ -60,8 +56,12 @@ startGame = (mode = gameMode) ->
   health = 100 + 10*level
   currentAsteroids = asteroidsLeft()
   maxAsteroids = asteroidsLeft()
-  mainLoop(canvas)
+  console.log("About to call main loop")
+  if first
+    first = false
+    mainLoop(canvas)
   return
+
 
 jQuery ($) ->
   $('#normal').click ->
@@ -107,6 +107,7 @@ jQuery ($) ->
     dedicated = false
     startGame()
 
+console.log("About to start the game!")
 $(document).mousedown(getMousePos)
 startGame(gameMode)
 

@@ -23,3 +23,5 @@ myBulletSpeed = 3.5
 theirBulletSpeed = 1.5
 chanceShoot = 0.01
 seeking = 0.3
+
+first = true

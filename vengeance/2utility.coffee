@@ -84,7 +84,7 @@ asteroidsLeft = ->
   num
 
 drawBackground = ->
-  if health <= 0 then gameOver = true
+  if health <= 0 then startGame()
   color = 128
   ctx.fillStyle = "rgb(#{color},#{color},#{color})"
   ctx.fillRect(0,0,canvas.width,canvas.height)

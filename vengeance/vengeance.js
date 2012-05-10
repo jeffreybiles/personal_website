@@ -1,1 +1,590 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('(b(){p N,K,O,n,U,1t,1x,1Y,2f,1O,1r,d,1s,1j,2x,z,1A,1w,1H,16,2o,27,2j,2E,G,1l,2b,I,E,1M,1N,1g,h,e,Z,23,R,29,2p,C,2L,11,14,1e,2n,2B=3w.w.3x||b(2I){19(p i=0,l=7.L;i<l;i++){a(i 2K 7&&7[i]===2I)c i}c-1},2G=3u.w.3r,20=b(1h,1i){19(p 1I 2K 1i){a(2G.1q(1i,1I))1h[1I]=1i[1I]}b 2i(){7.3y=1h}2i.w=1i.w;1h.w=1d 2i;1h.1y=1i.w;c 1h};1t=0.6;1H=0.9;1O=1.5;1Y=0.3G;I=2l;1x=m;d=1V.2Y("2D");1s="2D";z=d.32("2d");1l=j;G=\'1Q\';h="";e=[];1w={x:-1,y:-1};2E=j;16=j;1A=2;1N=2;E=1;1g=3.5;14=1.5;1j=0.2W;R=0.3;2n=b(J,H){p 1P,1R;a(J.f){1P=J.f}k a(J.r){1P=J.r/2}k{c j}a(H.f){1R=H.f}k a(H.r){1R=H.r/2}k{c j}a(2j(J,H)<1P+1R){c m}k{c j}};2j=b(J,H){p u,q;a(J.x===H.x&&J.y===H.y){c 3A}k{u=J.x-H.x;q=J.y-H.y;c g.3B(g.2g(u,2)+g.2g(q,2))}};1e=b(){c 1-1A/1N};n={1T:{},2O:37||2F,A:2F,34:38,W:3q,31:39,D:3H,36:40,S:3b,V:b(1L){c 7.1T[1L]},2Q:b(B){c 7.1T[B.1L]=m},2R:b(B){c 3g 7.1T[B.1L]}};Z=b(2N,1B){a(1B==o)1B=0;c g.1S(g.P()*(2N-1B)+1B)};11=b(11,x,y,T,1U,22){a(T==o)T=\'#3c\';a(1U==o)1U=18;a(22==o)22=\'3f-3p\';z.1b=T;z.3h="3n "+1U+"3o "+22;z.3I=\'3l\';z.3i(11,x,y)};1r=b(){p 1p,2a,t,Y;1p=0;19(t=0,Y=e.L;t<Y;t++){2a=e[t];a(2a.s)1p+=1}c 1p};27=b(){p T,1W;a(I<=0)1l=m;T=3j;z.1b="3k("+T+","+T+","+T+")";z.3V(0,0,d.r,d.F);1W=1r();11(G,10,30);a(16){11("16",10,2H)}k{11("44",10,2H)}a(1W===0){E+=1;C(G)}k{11(1W,10,47)}};2b=b(B){c 29()};29=b(){p M,x,y;x=1w.x;y=1w.y;x-=d.4a;y-=d.48;M=1d K(x,y,h);M.1J=m;c e.12(M)};23=b(s){p M;a(G===\'1Q\'){M=1d K(9*h.x/10+Z(h.x/ 5), 9 * h.y/10+Z(h.y/5),s,14)}k a(G===\'2k\'){M=1d K(3*h.x/4+Z(h.x/ 2), 3 * h.y/4+Z(h.y/2),s,14)}k a(G===\'2h\'){M=1d K(h.x/2+Z(h.x),h.y/2+Z(h.y),s,14)}M.1J=j;c e.12(M)};2L=b(){p s,t,Y,Q;Q=[];19(t=0,Y=e.L;t<Y;t++){s=e[t];Q.12(s.s&&g.P()<3N?23(s):3M 0)}c Q};2x=b(2m,2e){a(2n(2m,2e)&&2e.1C){a(2m.33&&I>0){I-=2T;a(I<0){c m}k{c j}}k{c m}}k{c j}};2o=b(2C,1G,1a){p 28,i,2w;a(1a==o)1a=[];i=2C;28=o;2w=1G[i];i++;2q(28===o&&i<1G.L){a((2B.1q(1a,i)<0)&&2x(2w,1G[i])){c i}k{i++}}c o};O=(b(){b O(x,y,f){7.x=x;7.y=y;7.f=f;7.u=0;7.q=0;7.1m=m;7.1C=m;7.1x=m;c}O.w.1F=b(){p v;7.x+=7.u;7.y+=7.q;v=5;a(7.3R){a(7.x<0)7.x+=d.r;a(7.x>d.r)7.x-=d.r;a(7.y<0)7.y+=d.F;a(7.y>d.F)7.y-=d.F}k a(7.3O||7.1m){a(7.1m){a(7.x<v||7.x>d.r-v)7.u*=-1;a(7.y<v||7.y>d.F-v)7.q*=-1}a(7.x<v)7.x=v;a(7.x>d.r-v)7.x=d.r-v;a(7.y<v)7.y=v;a(7.y>d.F-v)7.y=d.F-v}};O.w.15=b(1b,1E){p f,x,y;a(1b==o)1b=\'3T\';a(1E==o)1E=j;x=7.x;y=7.y;f=7.f;z.1b=1b;z.3P();z.2z(x,y,f,0,g.2J*2,j);a(1E){z.2z(x-3Y*2,y-3Z*2,f,0,g.2J*2,j)}a(!7.46)z.45()};O.w.2r=b(){7.x+=7.u;7.y+=7.q};c O})();N=(b(1k){20(N,1k);b N(x,y,f){7.x=x;7.y=y;7.f=f!=o?f:13;7.u=g.P()*1O;7.q=g.P()*1O;7.1m=m;7.1C=m;7.s=m}N.w.15=b(){a(g.P()<1j*1e())23(7);N.1y.15.1q(7,"#3U")};N.w.1F=b(){a(16){7.u+=(h.x-7.x)*0.2A*R*1e()*g.P();7.q+=(h.y-7.y)*0.2A*R*1e()*g.P();7.u*=1Y;7.q*=1Y}k{7.x+=(h.x-7.x)*R*1e()*(0.1X+g.P()*0.1X);7.y+=(h.y-7.y)*R*1e()*(0.1X+g.P()*0.1X)}c N.1y.1F.3L(7,41)};c N})(O);2f=b(1p){p i,25,1n;19(i=1,1n=g.1S(1p);1<=1n?i<=1n:i>=1n;1<=1n?i++:i--){25=1d N(10,Z(d.F));e.12(25)}};K=(b(1k){20(K,1k);b K(2M,2X,X,1z,f){p 1o,1c,1Z,26;a(X==o)X=h;a(1z==o)1z=1g;a(f==o)f=3;1Z=2M-X.x;26=2X-X.y;1o=g.3e(26/1Z);a(1Z>0){1c=1}k{1c=-1}7.u=1z*g.3a(1o)*1c;7.q=1z*g.35(1o)*1c;7.x=g.1S(X.x+(X.f+f+2)*g.3a(1o)*1c);7.y=g.1S(X.y+(X.f+f+2)*g.35(1o)*1c);7.1m=j;7.f=f;7.2S=m;7.1C=m}K.w.15=b(){c K.1y.15.1q(7,\'#43\')};c K})(O);U=(b(1k){20(U,1k);b U(x,y,f,I){7.x=x!=o?x:d.r/2;7.y=y!=o?y:d.F/2;7.f=f!=o?f:10;7.I=I!=o?I:2l;7.1m=m;7.1C=m;7.u=0;7.q=0;7.33=m}U.w.2r=b(){a(n.V(n.34)||n.V(n.W))7.q-=1t;a(n.V(n.36)||n.V(n.S))7.q+=1t;a(n.V(n.2O)||n.V(n.A))7.u-=1t;a(n.V(n.31)||n.V(n.D))7.u+=1t;7.q*=1H;7.u*=1H};U.w.15=b(){c U.1y.15.1q(7,\'#3K\')};c U})(O);1M=b(d){p 17,i,1a,24,2s,2t,t,1v,1D,Y,2c,2u;1x=m;27();19(t=0,Y=e.L;t<Y;t++){24=e[t];24.15()}19(1v=0,2c=e.L;1v<2c;1v++){2t=e[1v];2t.1F()}19(1D=0,2u=e.L;1D<2u;1D++){2s=e[1D];2s.2r()}i=0;1a=[];2q(i<e.L){17=2o(i,e,1a);1a.12(17);a(17){a(!(e[17].s&&e[i].s)){a((e[i].s&&e[17].1J)||(e[17].s&&e[i].1J)){e.2v(17,1);e.2v(i,1);1A=1r()}}}k{i++}}2p();a(1s===d.2Z){a(1x&&1l===j){3W(1M,3S/2T,d)}k a(1l===j){C(G)}k{E=1;1l=j;C(G)}}};2p=b(){p i,1f,Q;i=0;Q=[];2q(i<e.L){1f=e[i];a(1f.2S&&(1f.x<0||1f.x>d.r||1f.y<0||1f.y>d.F)){Q.12(e.2v(i,1))}k{Q.12(i++)}}c Q};2y.2P(\'3Q\',(b(B){n.2R(B);B.2U();c j}),j);2y.2P(\'3J\',(b(B){n.2Q(B);B.2U();c j}),j);C=b(21){p 1K;a(21==o)21=G;1s=g.P().3X();1K=$(\'#2V d\').49();$(\'#2V\').42("<d 2Z=\'"+1s+"\' r="+1K[0].r+" F="+1K[0].F+"></d>");d=1V.2Y(1s);z=d.32("2d");d.3m=1;G=21;e.L=0;h=1d U();e.12(h);2f(E+g.2g(E,1.8));I=2l+10*E;1A=1r();1N=1r();1M(d)};3d(b($){$(\'#1Q\').1u(b(){E=1;1g=3.5;14=1.5;1j=0.2W;R=0.3;C(\'1Q\')});$(\'#2k\').1u(b(){E=1;1g=4;14=3;1j=0.3C;R=0.8;C(\'2k\')});$(\'#2h\').1u(b(){E=1;1g=4;14=1.2;1j=0.1;R=0.4;C(\'2h\')});$(1V).3D(b(B){c 1w={x:B.3E,y:B.3F}});$(\'#16\').1u(b(){E=1;16=m;c C()});c $(\'#3z-3t\').1u(b(){E=1;16=j;c C()})});$(1V).3s(2b);C(G);2y.3v={C:C}}).1q(7);',62,259,'|||||||this|||if|function|return|canvas|projectiles|radius|Math|player||false|else||true|Key|null|var|dy|width|asteroid|_i|dx|margin|prototype|||ctx||event|startGame||level|height|gameMode|object2|health|object1|Bullet|length|thisBullet|Asteroid|Circle|random|_results|seeking||color|Player|isDown||origin|_len|rand||text|push||theirBulletSpeed|draw|dedicated|collidedWith||for|skip|fillStyle|multiplier|new|vengeance|shot|myBulletSpeed|child|parent|chanceShoot|_super|gameOver|bounce|_ref|angle|num|call|asteroidsLeft|canvasId|acc|click|_j|currentMousePos|alive|__super__|bulletSpeed|currentAsteroids|min|danger|_k|shadow|move|allObjects|decel|key|mine|oldCanvas|keyCode|mainLoop|maxAsteroids|asteroidSpeed|dist1|normal|dist2|floor|_pressed|size|document|numAsteroids|05|asteroidDecel|xdistance|__extends|mode|style|revengeBullet|thing|newAsteroid|ydistance|drawBackground|collisions|shootBullet|projectile|getMousePos|_len2||otherObj|asteroidFactory|pow|occupation|ctor|findDistance|feud|100|thisObj|withinRadius|detectCollisions|spliceBullets|while|update|thing2|thingy|_len3|splice|thisObject|collided|window|arc|001|__indexOf|index|myCanvas|friendly|65|__hasProp|50|item|PI|in|tat|xclick|max|LEFT|addEventListener|onKeydown|onKeyup|bullet|60|preventDefault|holdsMyGame|01|yclick|getElementById|id||RIGHT|getContext|isPlayer|UP|sin|DOWN||||cos|83|000|jQuery|atan|sans|delete|font|fillText|128|rgb|bottom|tabIndex|bold|px|serif|87|hasOwnProperty|mousedown|soldier|Object|api|Array|indexOf|constructor|citizen|2000|sqrt|04|mousemove|pageX|pageY|97|68|textBaseline|keydown|B5A18F|apply|void|tatChance|stay|beginPath|keyup|loop|1000|white|614E3D|fillRect|setTimeout|toString|shadowX|shadowY||arguments|html|2B241D|citizens|fill|invisible|590|offsetTop|remove|offsetLeft'.split('|')))
+(function() {
+  var Asteroid, Bullet, Circle, Key, Player, acc, alive, asteroidDecel, asteroidFactory, asteroidSpeed, asteroidsLeft, canvas, canvasId, chanceShoot, collided, ctx, currentAsteroids, currentMousePos, decel, dedicated, detectCollisions, drawBackground, findDistance, first, friendly, gameMode, gameOver, getMousePos, health, lastTime, level, mainLoop, maxAsteroids, myBulletSpeed, player, projectiles, rand, revengeBullet, seeking, shootBullet, spliceBullets, startGame, tat, text, theirBulletSpeed, vendors, vengeance, withinRadius, x,
+    __indexOf = Array.prototype.indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
+    __hasProp = Object.prototype.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+
+  acc = 0.6;
+
+  decel = 0.9;
+
+  asteroidSpeed = 1.5;
+
+  asteroidDecel = 0.97;
+
+  health = 100;
+
+  alive = true;
+
+  canvas = document.getElementById("myCanvas");
+
+  canvasId = "myCanvas";
+
+  ctx = canvas.getContext("2d");
+
+  gameOver = false;
+
+  gameMode = 'normal';
+
+  player = "";
+
+  projectiles = [];
+
+  currentMousePos = {
+    x: -1,
+    y: -1
+  };
+
+  friendly = false;
+
+  dedicated = false;
+
+  currentAsteroids = 2;
+
+  maxAsteroids = 2;
+
+  level = 1;
+
+  myBulletSpeed = 3.5;
+
+  theirBulletSpeed = 1.5;
+
+  chanceShoot = 0.01;
+
+  seeking = 0.3;
+
+  first = true;
+
+  console.log("filling window.requestAnimationFrame");
+
+  lastTime = 0;
+
+  vendors = ['ms', 'moz', 'webkit', 'o'];
+
+  x = 0;
+
+  while (x < vendors.length && !window.requestAnimationFrame) {
+    window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+    window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+    ++x;
+    console.log(vendors[x]);
+  }
+
+  if (!window.requestAnimationFrame) {
+    window.requestAnimationFrame = function(callback, element) {
+      var currTime, id, timeToCall;
+      currTime = new Date().getTime();
+      timeToCall = Math.max(0, 16 - (currTime - lastTime));
+      id = window.setTimeout((function() {
+        return callback(currTime + timeToCall);
+      }), timeToCall);
+      lastTime = currTime + timeToCall;
+      return id;
+    };
+  }
+
+  if (!window.cancelAnimationFrame) {
+    window.cancelAnimationFrame = function(id) {
+      return clearTimeout(id);
+    };
+  }
+
+  withinRadius = function(object1, object2) {
+    var dist1, dist2;
+    if (object1.radius) {
+      dist1 = object1.radius;
+    } else if (object1.width) {
+      dist1 = object1.width / 2;
+    } else {
+      return false;
+    }
+    if (object2.radius) {
+      dist2 = object2.radius;
+    } else if (object2.width) {
+      dist2 = object2.width / 2;
+    } else {
+      return false;
+    }
+    if (findDistance(object1, object2) < dist1 + dist2) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  findDistance = function(object1, object2) {
+    var dx, dy;
+    if (object1.x === object2.x && object1.y === object2.y) {
+      return 2000;
+    } else {
+      dx = object1.x - object2.x;
+      dy = object1.y - object2.y;
+      return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    }
+  };
+
+  vengeance = function() {
+    return 1 - currentAsteroids / maxAsteroids;
+  };
+
+  Key = {
+    _pressed: {},
+    LEFT: 37 || 65,
+    A: 65,
+    UP: 38,
+    W: 87,
+    RIGHT: 39,
+    D: 68,
+    DOWN: 40,
+    S: 83,
+    isDown: function(keyCode) {
+      return this._pressed[keyCode];
+    },
+    onKeydown: function(event) {
+      return this._pressed[event.keyCode] = true;
+    },
+    onKeyup: function(event) {
+      return delete this._pressed[event.keyCode];
+    }
+  };
+
+  rand = function(max, min) {
+    if (min == null) min = 0;
+    return Math.floor(Math.random() * (max - min) + min);
+  };
+
+  text = function(text, x, y, color, size, style) {
+    if (color == null) color = '#000';
+    if (size == null) size = 18;
+    if (style == null) style = 'sans-serif';
+    ctx.fillStyle = color;
+    ctx.font = "bold " + size + "px " + style;
+    ctx.textBaseline = 'bottom';
+    ctx.fillText(text, x, y);
+  };
+
+  asteroidsLeft = function() {
+    var num, projectile, _i, _len;
+    num = 0;
+    for (_i = 0, _len = projectiles.length; _i < _len; _i++) {
+      projectile = projectiles[_i];
+      if (projectile.asteroid) num += 1;
+    }
+    return num;
+  };
+
+  drawBackground = function() {
+    var color, numAsteroids;
+    if (health <= 0) startGame();
+    color = 128;
+    ctx.fillStyle = "rgb(" + color + "," + color + "," + color + ")";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    numAsteroids = asteroidsLeft();
+    text(gameMode, 10, 30);
+    if (dedicated) {
+      text("dedicated", 10, 50);
+    } else {
+      text("citizens", 10, 50);
+    }
+    if (numAsteroids === 0) {
+      level += 1;
+      startGame(gameMode);
+    } else {
+      text(numAsteroids, 10, 590);
+    }
+  };
+
+  getMousePos = function(event) {
+    return shootBullet();
+  };
+
+  shootBullet = function() {
+    var thisBullet, y;
+    x = currentMousePos.x;
+    y = currentMousePos.y;
+    x -= canvas.offsetLeft;
+    y -= canvas.offsetTop;
+    thisBullet = new Bullet(x, y, player);
+    thisBullet.mine = true;
+    return projectiles.push(thisBullet);
+  };
+
+  revengeBullet = function(asteroid) {
+    var thisBullet;
+    if (gameMode === 'normal') {
+      thisBullet = new Bullet(9 * player.x / 10 + rand(player.x / 5), 9 * player.y / 10 + rand(player.y / 5), asteroid, theirBulletSpeed);
+    } else if (gameMode === 'feud') {
+      thisBullet = new Bullet(3 * player.x / 4 + rand(player.x / 2), 3 * player.y / 4 + rand(player.y / 2), asteroid, theirBulletSpeed);
+    } else if (gameMode === 'occupation') {
+      thisBullet = new Bullet(player.x / 2 + rand(player.x), player.y / 2 + rand(player.y), asteroid, theirBulletSpeed);
+    }
+    thisBullet.mine = false;
+    return projectiles.push(thisBullet);
+  };
+
+  tat = function() {
+    var asteroid, _i, _len, _results;
+    _results = [];
+    for (_i = 0, _len = projectiles.length; _i < _len; _i++) {
+      asteroid = projectiles[_i];
+      _results.push(asteroid.asteroid && Math.random() < tatChance ? revengeBullet(asteroid) : void 0);
+    }
+    return _results;
+  };
+
+  collided = function(thisObj, otherObj) {
+    if (withinRadius(thisObj, otherObj) && otherObj.danger) {
+      if (thisObj.isPlayer && health > 0) {
+        health -= 60;
+        if (health < 0) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  };
+
+  detectCollisions = function(index, allObjects, skip) {
+    var collisions, i, thisObject;
+    if (skip == null) skip = [];
+    i = index;
+    collisions = null;
+    thisObject = allObjects[i];
+    i++;
+    while (collisions === null && i < allObjects.length) {
+      if ((__indexOf.call(skip, i) < 0) && collided(thisObject, allObjects[i])) {
+        return i;
+      } else {
+        i++;
+      }
+    }
+    return null;
+  };
+
+  Circle = (function() {
+
+    function Circle(x, y, radius) {
+      this.x = x;
+      this.y = y;
+      this.radius = radius;
+      this.dx = 0;
+      this.dy = 0;
+      this.bounce = true;
+      this.danger = true;
+      this.alive = true;
+      return;
+    }
+
+    Circle.prototype.move = function() {
+      var margin;
+      this.x += this.dx;
+      this.y += this.dy;
+      margin = 5;
+      if (this.loop) {
+        if (this.x < 0) this.x += canvas.width;
+        if (this.x > canvas.width) this.x -= canvas.width;
+        if (this.y < 0) this.y += canvas.height;
+        if (this.y > canvas.height) this.y -= canvas.height;
+      } else if (this.stay || this.bounce) {
+        if (this.bounce) {
+          if (this.x < margin || this.x > canvas.width - margin) this.dx *= -1;
+          if (this.y < margin || this.y > canvas.height - margin) this.dy *= -1;
+        }
+        if (this.x < margin) this.x = margin;
+        if (this.x > canvas.width - margin) this.x = canvas.width - margin;
+        if (this.y < margin) this.y = margin;
+        if (this.y > canvas.height - margin) this.y = canvas.height - margin;
+      }
+    };
+
+    Circle.prototype.draw = function(fillStyle, shadow) {
+      var radius, y;
+      if (fillStyle == null) fillStyle = 'white';
+      if (shadow == null) shadow = false;
+      x = this.x;
+      y = this.y;
+      radius = this.radius;
+      ctx.fillStyle = fillStyle;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+      if (shadow) {
+        ctx.arc(x - shadowX * 2, y - shadowY * 2, radius, 0, Math.PI * 2, false);
+      }
+      if (!this.invisible) ctx.fill();
+    };
+
+    Circle.prototype.update = function() {
+      this.x += this.dx;
+      this.y += this.dy;
+    };
+
+    return Circle;
+
+  })();
+
+  Asteroid = (function(_super) {
+
+    __extends(Asteroid, _super);
+
+    function Asteroid(x, y, radius) {
+      this.x = x;
+      this.y = y;
+      this.radius = radius != null ? radius : 13;
+      this.dx = Math.random() * asteroidSpeed;
+      this.dy = Math.random() * asteroidSpeed;
+      this.bounce = true;
+      this.danger = true;
+      this.asteroid = true;
+    }
+
+    Asteroid.prototype.draw = function() {
+      if (Math.random() < chanceShoot * vengeance()) revengeBullet(this);
+      Asteroid.__super__.draw.call(this, "#614E3D");
+    };
+
+    Asteroid.prototype.move = function() {
+      if (dedicated) {
+        this.dx += (player.x - this.x) * 0.001 * seeking * vengeance() * Math.random();
+        this.dy += (player.y - this.y) * 0.001 * seeking * vengeance() * Math.random();
+        this.dx *= asteroidDecel;
+        this.dy *= asteroidDecel;
+      } else {
+        this.x += (player.x - this.x) * seeking * vengeance() * (0.05 + Math.random() * 0.05);
+        this.y += (player.y - this.y) * seeking * vengeance() * (0.05 + Math.random() * 0.05);
+      }
+      return Asteroid.__super__.move.apply(this, arguments);
+    };
+
+    return Asteroid;
+
+  })(Circle);
+
+  asteroidFactory = function(num) {
+    var i, newAsteroid, _ref;
+    for (i = 1, _ref = Math.floor(num); 1 <= _ref ? i <= _ref : i >= _ref; 1 <= _ref ? i++ : i--) {
+      newAsteroid = new Asteroid(10, rand(canvas.height));
+      projectiles.push(newAsteroid);
+    }
+  };
+
+  Bullet = (function(_super) {
+
+    __extends(Bullet, _super);
+
+    function Bullet(xclick, yclick, origin, bulletSpeed, radius) {
+      var angle, multiplier, xdistance, ydistance;
+      if (origin == null) origin = player;
+      if (bulletSpeed == null) bulletSpeed = myBulletSpeed;
+      if (radius == null) radius = 3;
+      xdistance = xclick - origin.x;
+      ydistance = yclick - origin.y;
+      angle = Math.atan(ydistance / xdistance);
+      if (xdistance > 0) {
+        multiplier = 1;
+      } else {
+        multiplier = -1;
+      }
+      this.dx = bulletSpeed * Math.cos(angle) * multiplier;
+      this.dy = bulletSpeed * Math.sin(angle) * multiplier;
+      this.x = Math.floor(origin.x + (origin.radius + radius + 2) * Math.cos(angle) * multiplier);
+      this.y = Math.floor(origin.y + (origin.radius + radius + 2) * Math.sin(angle) * multiplier);
+      this.bounce = false;
+      this.radius = radius;
+      this.bullet = true;
+      this.danger = true;
+    }
+
+    Bullet.prototype.draw = function() {
+      return Bullet.__super__.draw.call(this, '#2B241D');
+    };
+
+    return Bullet;
+
+  })(Circle);
+
+  Player = (function(_super) {
+
+    __extends(Player, _super);
+
+    function Player(x, y, radius, health) {
+      this.x = x != null ? x : canvas.width / 2;
+      this.y = y != null ? y : canvas.height / 2;
+      this.radius = radius != null ? radius : 10;
+      this.health = health != null ? health : 100;
+      this.bounce = true;
+      this.danger = true;
+      this.dx = 0;
+      this.dy = 0;
+      this.isPlayer = true;
+    }
+
+    Player.prototype.update = function() {
+      if (Key.isDown(Key.UP) || Key.isDown(Key.W)) this.dy -= acc;
+      if (Key.isDown(Key.DOWN) || Key.isDown(Key.S)) this.dy += acc;
+      if (Key.isDown(Key.LEFT) || Key.isDown(Key.A)) this.dx -= acc;
+      if (Key.isDown(Key.RIGHT) || Key.isDown(Key.D)) this.dx += acc;
+      this.dy *= decel;
+      this.dx *= decel;
+    };
+
+    Player.prototype.draw = function() {
+      return Player.__super__.draw.call(this, '#B5A18F');
+    };
+
+    return Player;
+
+  })(Circle);
+
+  mainLoop = function(canvas) {
+    var collidedWith, i, skip, thing, thing2, thingy, _i, _j, _k, _len, _len2, _len3;
+    if (alive) {
+      console.log("bout to call requestAnimationFrame");
+      window.requestAnimationFrame(mainLoop, canvas);
+    } else {
+      startGame(gameMode);
+    }
+    alive = true;
+    drawBackground();
+    for (_i = 0, _len = projectiles.length; _i < _len; _i++) {
+      thing = projectiles[_i];
+      thing.draw();
+    }
+    for (_j = 0, _len2 = projectiles.length; _j < _len2; _j++) {
+      thingy = projectiles[_j];
+      thingy.move();
+    }
+    for (_k = 0, _len3 = projectiles.length; _k < _len3; _k++) {
+      thing2 = projectiles[_k];
+      thing2.update();
+    }
+    i = 0;
+    skip = [];
+    while (i < projectiles.length) {
+      collidedWith = detectCollisions(i, projectiles, skip);
+      skip.push(collidedWith);
+      if (collidedWith) {
+        if (!(projectiles[collidedWith].asteroid && projectiles[i].asteroid)) {
+          if ((projectiles[i].asteroid && projectiles[collidedWith].mine) || (projectiles[collidedWith].asteroid && projectiles[i].mine)) {
+            projectiles.splice(collidedWith, 1);
+            projectiles.splice(i, 1);
+            currentAsteroids = asteroidsLeft();
+          }
+        }
+      } else {
+        i++;
+      }
+    }
+    spliceBullets();
+  };
+
+  spliceBullets = function() {
+    var i, shot, _results;
+    i = 0;
+    _results = [];
+    while (i < projectiles.length) {
+      shot = projectiles[i];
+      if (shot.bullet && (shot.x < 0 || shot.x > canvas.width || shot.y < 0 || shot.y > canvas.height)) {
+        _results.push(projectiles.splice(i, 1));
+      } else {
+        _results.push(i++);
+      }
+    }
+    return _results;
+  };
+
+  window.addEventListener('keyup', (function(event) {
+    Key.onKeyup(event);
+    event.preventDefault();
+    return false;
+  }), false);
+
+  window.addEventListener('keydown', (function(event) {
+    Key.onKeydown(event);
+    event.preventDefault();
+    return false;
+  }), false);
+
+  startGame = function(mode) {
+    var oldCanvas;
+    if (mode == null) mode = gameMode;
+    console.log("starting the game!");
+    canvasId = Math.random().toString();
+    oldCanvas = $('#holdsMyGame canvas').remove();
+    $('#holdsMyGame').html("<canvas id='" + canvasId + "' width=" + oldCanvas[0].width + " height=" + oldCanvas[0].height + "></canvas>");
+    canvas = document.getElementById(canvasId);
+    ctx = canvas.getContext("2d");
+    canvas.tabIndex = 1;
+    gameMode = mode;
+    projectiles.length = 0;
+    player = new Player();
+    projectiles.push(player);
+    asteroidFactory(level + Math.pow(level, 1.8));
+    health = 100 + 10 * level;
+    currentAsteroids = asteroidsLeft();
+    maxAsteroids = asteroidsLeft();
+    console.log("About to call main loop");
+    if (first) {
+      first = false;
+      mainLoop(canvas);
+    }
+  };
+
+  jQuery(function($) {
+    $('#normal').click(function() {
+      level = 1;
+      myBulletSpeed = 3.5;
+      theirBulletSpeed = 1.5;
+      chanceShoot = 0.01;
+      seeking = 0.3;
+      startGame('normal');
+    });
+    $('#feud').click(function() {
+      level = 1;
+      myBulletSpeed = 4;
+      theirBulletSpeed = 3;
+      chanceShoot = 0.04;
+      seeking = 0.8;
+      startGame('feud');
+    });
+    $('#occupation').click(function() {
+      level = 1;
+      myBulletSpeed = 4;
+      theirBulletSpeed = 1.2;
+      chanceShoot = 0.1;
+      seeking = 0.4;
+      startGame('occupation');
+    });
+    $(document).mousemove(function(event) {
+      return currentMousePos = {
+        x: event.pageX,
+        y: event.pageY
+      };
+    });
+    $('#dedicated').click(function() {
+      level = 1;
+      dedicated = true;
+      return startGame();
+    });
+    return $('#citizen-soldier').click(function() {
+      level = 1;
+      dedicated = false;
+      return startGame();
+    });
+  });
+
+  console.log("About to start the game!");
+
+  $(document).mousedown(getMousePos);
+
+  startGame(gameMode);
+
+  window.api = {
+    startGame: startGame
+  };
+
+}).call(this);
