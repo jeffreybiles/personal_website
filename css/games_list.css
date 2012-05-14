@@ -1,0 +1,40 @@
+#games {
+  width: 825px;
+  border: 1px solid black;
+  margin: auto;
+}
+
+#games h2 {
+
+}
+
+#games .game {
+  float: left;
+  width: 800px;
+  height: 200px;
+  margin: 10px;
+  border: 1px solid black;
+}
+
+.game img {
+  float: left;
+  height: 180px;
+  width: 180px;
+  margin: 10px
+
+}
+.game .exposition {
+  width: 720px;
+  margin: 10px;
+}
+.game h3 {
+}
+
+.game li {
+  list-style-type: none;
+}
+
+
+.game p {
+
+}

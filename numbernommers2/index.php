@@ -14,6 +14,7 @@
             <button id="add" >Add</button>
             <button id="subtract">Subtract</button>
         </div>
+        Arrows to move, spacebar to nom.
         <div id="holdsMyGame">
             <canvas id="myCanvas" width=800 height=600></canvas>
         </div>
