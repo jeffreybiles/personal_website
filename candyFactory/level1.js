@@ -20,35 +20,24 @@ alldachocolate = {
 //scripts.
 var alldachocolate_events = function(){
   var elements = get_elements();
-   //switch statement that uses information from elements to determine which script to run
-
-//  first: function (){
-//    var html = '<div id="splash">Welcome to the candy factory!  We need your help to fix the machine that fills our orders.</div>';
-//    $(body).append(html);
-//    $('#splash').click(firstExplanation);
-//  },
-//  firstExplanation: function() {
-//    $('#splash').hide();
-//    var elements = getElements();
-//    //find chocolate sensor and get positioning info of its outgoing connector
-//    var chocolate_sensor_outgoing_connection = jQuery.each(elements, function(i, element) {
-//      if (element.type == 'chocolate sensor') {
-//        return element.connections.first();
-//      }
-//    });
-//    var outgoing = chocolate_sensor_outgoing_connection;
-//    //make message box
-//
-//    //define clickable area
-//    var clickable_area = '<div id="first_hint_clickable_area" class="absolute"></div>';
-//    clickable_area.offset({left: outgoing.x, top: outgoing.y});
-//    clickable_area.height = outgoing.height;
-//    clickable_area.width = outgoing.width;
-//    clickable_area.click(secondExplanation);
-//  },
-//  secondExplanation: function(){
-//
-//  }
+  if (filter_elements(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: ''}}) &&
+      filter_elements(elements, {type: 'lightbulb', connection_criteria: {connected_to: ''}})){
+    console.log("first event!!")                                     ;
+    //highlight the outgoing connector of the chocolate sensor
+    //put up a dialogue box nearby that says "we must tell the machine what to do!  click on the sensor to start laying down wire."
+  } else if (filter_elements(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: 'active'}}) &&
+      filter_elements(elements, {type: 'lightbulb', connection_criteria: {connected_to: ''}})){
+    console.log("the user has selected the chocolate sensor!!");
+    //highlight the incoming connector to the lightbulb.
+    //put up a dialogue box nearby that says "good job!  Now connect it to the lightbulb!"
+  } else if (filter_elements(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: 'any'}}) &&
+      filter_elements(elements, {type: 'lightbulb', connection_criteria: {connected_to: 'any'}})) {
+    console.log("the user has connected the two");
+    //highlight the lever
+    //put up a dialogue box that says to click on the lever
+    //here we do something a little hacky... we set a click event on the lever,
+    // which sets a timer (how long the checking animation takes to play) to a callback which highlights the chalkboard
+  }
 }
 
 //tests
