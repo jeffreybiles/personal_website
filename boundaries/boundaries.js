@@ -1,5 +1,5 @@
 (function() {
-  var Circle, Enemy, Key, Nucleus, Player, accelerationConstant, angleChangeRate, canvas, canvasId, checkAllCollisions, checkAtomsCollision, checkOneCollision, collision, ctx, decel, drawBackground, electronCollision, electronRad, enemies, enemyFactory, filterEnemies, hitSpeed, level, loadAndPlaySound, mainLoop, maxVelocity, nucleusRad, numEnemies, otherSpeed, player, playerAcceleration, radChangeRate, radMax, rand, spikeSize, startGame,
+  var Circle, Enemy, Key, Nucleus, Player, accelerationConstant, angleChangeRate, canvas, canvasId, checkAllCollisions, checkAtomsCollision, checkOneCollision, collision, ctx, decel, drawBackground, electronCollision, electronRad, enemies, enemyFactory, filterEnemies, firstTime, hitSpeed, lastTime, level, loadAndPlaySound, mainLoop, maxVelocity, nucleusRad, numEnemies, otherSpeed, player, playerAcceleration, radChangeRate, radMax, rand, spikeSize, startGame, vendors, x,
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
@@ -38,6 +38,39 @@
   player = '';
 
   enemies = [];
+
+  firstTime = true;
+
+  lastTime = 0;
+
+  vendors = ['ms', 'moz', 'webkit', 'o'];
+
+  x = 0;
+
+  while (x < vendors.length && !window.requestAnimationFrame) {
+    window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+    window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+    ++x;
+  }
+
+  if (!window.requestAnimationFrame) {
+    window.requestAnimationFrame = function(callback, element) {
+      var currTime, id, timeToCall;
+      currTime = new Date().getTime();
+      timeToCall = Math.max(0, 16 - (currTime - lastTime));
+      id = window.setTimeout((function() {
+        return callback(currTime + timeToCall);
+      }), timeToCall);
+      lastTime = currTime + timeToCall;
+      return id;
+    };
+  }
+
+  if (!window.cancelAnimationFrame) {
+    window.cancelAnimationFrame = function(id) {
+      return clearTimeout(id);
+    };
+  }
 
   rand = function(max) {
     return Math.ceil(Math.random() * max);
@@ -183,8 +216,8 @@
     }
 
     Enemy.prototype.update = function() {
-      this.dx += (player.x - this.x) * 0.00035 * (1.2 - enemies.length / numEnemies());
-      this.dy += (player.y - this.y) * 0.00035 * (1.2 - enemies.length / numEnemies());
+      this.dx += (player.x - this.x) * 0.00035 * ((1.2 + level / 10) - enemies.length / numEnemies());
+      this.dy += (player.y - this.y) * 0.00035 * ((1.2 + level / 10) - enemies.length / numEnemies());
       if (Math.random() < 0.05) this.outward = !this.outward;
       if (this.outward) {
         if (this.radius < radMax) return this.radius += radChangeRate;
@@ -275,6 +308,12 @@
 
   mainLoop = function(canvas) {
     var enemy, _i, _j, _k, _len, _len2, _len3;
+    window.requestAnimationFrame(mainLoop, canvas);
+    if (enemies.length === 0) {
+      level++;
+      startGame();
+    }
+    if (!player.stillAlive) startGame();
     drawBackground();
     player.update();
     player.move();
@@ -291,16 +330,7 @@
       enemy = enemies[_k];
       enemy.draw();
     }
-    checkAllCollisions();
-    if (enemies.length === 0) {
-      level++;
-      startGame();
-    }
-    if (!player.stillAlive) {
-      return startGame();
-    } else if (canvas.id === canvasId) {
-      return setTimeout(mainLoop, 1000 / 30, canvas);
-    }
+    return checkAllCollisions();
   };
 
   window.addEventListener('keyup', (function(event) {
@@ -324,10 +354,11 @@
     ctx = canvas.getContext("2d");
     canvas.tabIndex = 1;
     player = new Player(canvas.width / 2, canvas.height / 2, 20, true);
-    console.log("created a player");
     enemyFactory(numEnemies());
-    console.log(numEnemies(), enemies.length);
-    return mainLoop(canvas);
+    if (firstTime) {
+      firstTime === false;
+      return mainLoop(canvas);
+    }
   };
 
   level = 1;

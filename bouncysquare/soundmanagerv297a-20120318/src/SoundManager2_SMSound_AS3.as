@@ -124,7 +124,7 @@ package {
         // Handle FMS bandwidth check callback.
         // @see onBWDone
         // @see http://www.adobe.com/devnet/flashmediaserver/articles/dynamic_stream_switching_04.html
-        // @see http://www.johncblandii.com/index.php/2007/12/fms-a-quick-fix-for-missing-onbwdone-onfcsubscribe-etc.html
+        // @see http://www.johncblandii.com/index_holding.php/2007/12/fms-a-quick-fix-for-missing-onbwdone-onfcsubscribe-etc.html
         this.nc.client = this;
 
         // TODO: security/IO error handling
@@ -405,7 +405,7 @@ package {
 
     // Handle FMS bandwidth check callback.
     // @see http://www.adobe.com/devnet/flashmediaserver/articles/dynamic_stream_switching_04.html
-    // @see http://www.johncblandii.com/index.php/2007/12/fms-a-quick-fix-for-missing-onbwdone-onfcsubscribe-etc.html
+    // @see http://www.johncblandii.com/index_holding.php/2007/12/fms-a-quick-fix-for-missing-onbwdone-onfcsubscribe-etc.html
     public function onBWDone() : void {
       // writeDebug('onBWDone: called and ignored');
     }

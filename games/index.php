@@ -3,77 +3,83 @@
 <head>
     <title>Jeffrey Biles</title>
     <?php include("../header.php"); ?>
+    <link href="../css/games_list.css" rel='stylesheet'>
 </head>
 <body>
 <?php include("../navbar.php") ?>
-
-<div class="container-fluid">
-    <div class="hero-unit">
-        <p><span style="font-weight: normal;">Do you want knowledge? &nbsp;Knowledge about me?</span></p>
-        <h2>I once killed a triceratops with my own bare hands</h2>
-        <p>Everything else in this page is true.</p>
-        <p>I love code. I love psychology and education. I combine these in programming games, which in turn program you :)
-            I'm currently honing my game-creation skills with a series of small javascript projects and a large rails-based game.
-        <p>Those are the projects I do for love.  <em>I'll do yours for money</em>.</p>
-        <h3><em>My email address is: me at jeffreybiles dot com.</em></h3>
+<div id="games">
+    <h2>Games</h2>
+    <div class="line825"></div>
+    <div class="game"><a href="http://tribulate.herokuapp.com">
+        <img src="https://s3.amazonaws.com/jeffreysite/tribulate-cropped.png">
+        <div class="exposition">
+            <h3>Tribulate</h3>
+    </a>
+            <p>My biggest, baddest game.  Baddest in both senses.  View it more as a tech demo, showing that I can
+                do complicated personalized persistence in Rails.
+            <p>It's halfway between a choose-your-own-adventure story and a role-playing game.</p>
+            <p>Requires either login or facebook connection.</p>
+        </div>
     </div>
-    <div class="row-fluid">
-        <div class="span4">
-            <h3>Technical skills</h3>
-            <h5>Names in parentheses are the preferred dialects</h5>
-
+    <div class="game">
+        <img src="https://s3.amazonaws.com/jeffreysite/tat_cropped.png">
+        <div class="exposition">
+            <h3>Theme and Variation (shooting)</h3>
+            <p>You could view it as a treatise on the senselessness of violence.
+            <p>You could also view it as a series of fun twists on the space shooter concept.</p>
             <ul>
-                <li>Significant experience
-                    <ul>
-                        <li>Ruby + Rails</li>
-                        <li>Javascript (coffeescript)</li>
-                        <li>Html + CSS (Haml + Scss)</li>
-                    </ul>
-                </li>
-                <li>Nontrivial experience
-                    <ul>
-                        <li>Scheme (Racket)</li>
-                        <li>Python</li>
-                        <li>OpenGL</li>
-                        <li>SQL (ActiveRecord)</li>
-                        <li>Ajax-style javascript (backbone.js, jQuery)</li>
-                    </ul>
-                </li>
-                <li>Exposure: Bash, Php, Java, Scala, Smalltalk, Erlang, Haskell, and many more.
-                </li>
-            </ul>
-            I use Ubuntu Linux.
-        </div>
-        <div class="span4">
-            <h3>Recent Projects</h3>
-            <a href="http://tribulate.herokuapp.com">Tribulate</a>, a story-based rpg built in rails.
-            <br>
-            <h5>Javascript games</h5>
-            <ul>
-                <li><a href="../cat4">Cat 4</a></li>
-                <li><a href="../boundaries"><b>Boundaries</b></a></li>
-                <li><a href="../numbernommers">Number Nommers</a></li>
-                <li><a href="../numbernommers2"><b>Number Nommers 2</b></a></li>
-                <li><a href="/theme/variation/lightseeker.php"><b>LightSeeker</b></a></li>
-                <li><a href="../blowback">Blowback</a></li>
-                <li><a href="../tat">Tat</a></li>
-                <li><a href="../vengeance">Vengeance</a></li>
-                <li><a href="../sectarian"><b>Sectarian</b></a></li>
-            </ul>
-
-            A <a href="http://tales-of-oakvale.herokuapp.com/">landing page</a>.  Note the AJAX.
-
-        </div>
-        <div class="span4">
-            <h3><em>Education</em></h3>
-            <ul>
-                <li>Hendrix College, 2011</li>
-                <li>Phi Beta Kappa</li>
-                <li>Chemical Physics major, Computer Science minor</li>
-                <li>99th percentile GRE</li>
-                <li>86th percentile Computer Science GRE</li>
-                <li>1st place in Hendrix Business Plan Competition</li>
-                <li>Eagle Scout</li>
+                <li><a href="http://jeffreybiles.com/blowback">Blowback</a></li>
+                <li><a href="http://jeffreybiles.com/tat">Tat</a></li>
+                <li><a href="http://jeffreybiles.com/vengeance">Vengeance</a></li>
+                <li><a href="http://jeffreybiles.com/sectarian">Sectarian</a></li>
             </ul>
         </div>
     </div>
+    <div class="game">
+        <a href="http://jeffreybiles.com/numbernommers2">
+        <img src="https://s3.amazonaws.com/jeffreysite/numbernommers2_cropped.png">
+        <div class="exposition">
+            <h3>Number Nommers 2</h3>
+        </a>
+            <p>If I were trapped on a desert island and could only blatantly rip off one 80's educational game...
+            <p>You can also play the first (less complicated) iteration:
+            <a href="http://jeffreybiles.com/numbernommers">Number Nommers 1</a> </p>
+        </div>
+    </div>
+    <div class="game">
+        <a href="http://jeffreybiles.com/lightseeker">
+            <img src="https://s3.amazonaws.com/jeffreysite/lightseeker_cropped.png">
+            <div class="exposition">
+                <h3>LightSeeker</h3>
+        </a>
+        <p>Follow the Light.  If you cannot see the light, look to the shadows.</p>
+        <p>Spook mode and hard mode both highly recommended.</p>
+        </div>
+    </div>
+    <div class="game">
+        <a href="http://jeffreybiles.com/boundaries">
+            <img src="https://s3.amazonaws.com/jeffreysite/boundaries_cropped.png">
+            <div class="exposition">
+                <h3>Boundaries</h3>
+        </a>
+        <p>Atomic* gladiators. Now with contradictory and outdated physics.
+        <p>*No atoms were harmed in the making of this game.
+        <p>Originally made for Ludum Dare 23, scored in the top 10% for innovation and fun, and the top 20% for humor.
+            I'm not really sure how that last part happened.</p>
+        </div>
+    </div>
+    <div class="game">
+        <a href="http://jeffreybiles.com/cat4">
+            <img src="https://s3.amazonaws.com/jeffreysite/cat4_cropped.png">
+            <div class="exposition">
+                <h3>Cat 4</h3>
+        </a>
+        <p>It's like connect 4, but this time you <b>want</b> the cat to win.
+        </div>
+    </div>
+    <div class="line825"></div>
+</div>
+
+
+</body>
+</html>

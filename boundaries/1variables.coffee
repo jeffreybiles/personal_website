@@ -19,3 +19,5 @@ maxVelocity = 1
 
 player = ''
 enemies = []
+
+firstTime = true
