@@ -1,6 +1,7 @@
 
 <div id="navbar">
-    <a href="/"><button type="button" class="css3button">Home</button></a>
-    <a href="/games"><button type="button" class="css3button">Games</button></a>
-    <a href="/resume"><button type="button" class="css3button">Resume</button></a>
+    <a href="/">Home</a>
+    <a href="/games">Games</a>
+    <a href="http://blog.jeffreybiles.com">Blog</a>
+    <a href="/resume">Resume</a>
 </div>
