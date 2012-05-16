@@ -7,6 +7,7 @@
 </head>
 <body>
 <?php include("../navbar.php") ?>
+
 <div id="games">
     <h2>Games</h2>
     <div class="line825"></div>
