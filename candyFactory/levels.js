@@ -136,7 +136,7 @@ var winnowing = {
 }
 var gniwonniw = {
   levelname: 'Gniwonniw',
-  //combine all three for the first time
+  //combine all three for the first time.  The solution is the same as the last one, but with a 'not' at the end
   levelid: 12,
   orderText: "I want something that is mint or chocolate, and I want it as a bar.",
   hint: "We've got the same tools as last time, but we want the exact opposite.  How do we reverse what the machine is telling us?",
@@ -145,6 +145,75 @@ var gniwonniw = {
   types: ['**'],
   script: 'gniwonniw'
 }
+
+var mish_mash = {
+  levelname: 'Mishmash',
+  //combine all three again, but in a more varied way than last time.
+  levelid: 13,
+  orderText: "We want cherry bars or any ball that isn't chocolate.",
+  hint: "You'll have to use all of the operators creatively.  Try making a machine that fills the first part of the order, then a machine that fills the second part, then one that combines them.",
+  sensors: ['R', 'C', 'o', '|'],
+  tools: ['AND', 'OR', 'NOT'],
+  types: ['**'],
+  script: 'mishmash'
+}
+
+var conditional = {
+  levelname: 'Conditional',
+  //use the same sensor twice... scandolous!
+  levelid: 14,
+  orderText: "I don't want any chocolates... unless it's a chocolate bar.",
+  hint: "Each operator gets used EXACTLY once.",
+  tools: ['AND', 'OR', 'NOT'],
+  sensors: ['C', '-', 'C'],
+  types: ['**'],
+  script: 'conditional'
+}
+
+var fake_it = {
+  levelname: 'Fake it',
+  //make an OR operator without the OR operator
+  levelid: 15,
+  orderText: "I want chocolate OR mint... oh, and I'll be borrowing your OR operator.  I hope you don't need it.",
+  hint: "Oh no!  Whatever will we do?  Somehow you'll have to make an OR operator from the AND and NOT operators.  ",
+  tools: ['AND', 'NOT'],
+  sensors: ['C', 'G'],
+  types: ['**'],
+  script: 'fake_it'
+}
+
+var fake_out = {
+  levelname: 'Fake out',
+  levelid: 16,
+  orderText: "I want lemon balls!  And your AND operator!  Raaaaaawr!",
+  hint: "Wait, hasn't this happened before?  Let's try and solve it the same way as last time.",
+  tools: ['OR', 'NOT'],
+  sensors: ['Y', 'o'],
+  types: ['**'],
+  script: 'fake_out'
+}
+
+var stop_gap = {
+  levelname: 'Stop gap',
+  levelid: 17,
+  orderText: "I'll take anything not mint... and I'll take your NOT operator too!",
+  tools: ['AND', 'OR'],
+  sensors: ['C', 'G', 'R', 'Y'],
+  types: ['**'],
+  script: 'stop_gap'
+}
+
+var kludge = {
+  levelname: 'Kludge',
+  levelid: 18,
+  orderText: "I want chocolate balls and sticks that aren't mint.  By the way, I'm loving that NOT operator, I hope you don't need it back!",
+  hint: "When they said 'and', it's a trick of the English language.  In our world, that means OR.  Anything we let pass will be a chocolate bar OR a stick that isn't mint.",
+  tools: ['AND', 'OR'],
+  sensors: ['|', 'R', 'Y', 'C', 'o', 'C'],
+  types: ['**'],
+  script: 'kludge'
+}
+
 
 var all_levels = [
     all_my_chocolates,
@@ -158,7 +227,13 @@ var all_levels = [
     backlash,
     botique,
     winnowing,
-    gniwonniw
+    gniwonniw,
+    mish_mash,
+    conditional,
+    fake_it,
+    fake_out,
+    stop_gap,
+    kludge
 ];
 
 
