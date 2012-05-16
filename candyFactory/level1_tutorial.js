@@ -1,12 +1,20 @@
 
 var empty_lightbulb = {type: 'lightbulb', connection_criteria: {connected_to: 'empty'}}
 
+var highlightSection = function(x, y, height, width, isCircular){
+
+}
+
+var createSpeechBubble = function(x, y, text) {
+
+}
+
 var all_my_chocolates_events = function(){
   var elements = elements_first_selected //get_elements();
   console.log(elements)
   if (has_element_where(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: 'empty'}}) &&
       has_element_where(elements, empty_lightbulb)){
-    console.log("first event!!")                                     ;
+    console.log("first event!!");
     //highlight the outgoing connector of the chocolate sensor
     //put up a dialogue box nearby that says "we must tell the machine what to do!  click on the sensor to start laying down wire."
   } else if (has_element_where(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: 'active'}}) &&
