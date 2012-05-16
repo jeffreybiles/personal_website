@@ -1,6 +1,6 @@
 var hash_sample = {type: 'sensor', sensor: 'chocolate', connection_criteria: {connection_type: 'outgoing', connected_to: 'active'}}
 
-window.filter_elements = function(elements, criterion){ //both criterion and elements are arrays
+var filter_elements = function(elements, criterion){ //both criterion and elements are arrays
   var remaining_elements = elements
   $.each(criterion, function(key, value){
     remaining_elements = remaining_elements.filter(function(element){
@@ -10,6 +10,15 @@ window.filter_elements = function(elements, criterion){ //both criterion and ele
   });
   return remaining_elements
 };
+
+var has_element_where = function(elements, criterion){
+  var element_matches = filter_elements(elements, criterion);
+  if (element_matches.length > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 var is_match = function(element, key, value){
   var i = 0;

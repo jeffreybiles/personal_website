@@ -1,19 +1,19 @@
-all_levels = [
-    all_my_chocolates,
-    a_bar_walks_into_my_tummy,
-    soyl_not_green,
-    mint_chocolate,
-    indecisive,
-    picky,
-    mint_chocolate_returns,
-    classic,
-    backlash,
-    botique,
-    winnowing,
-    gniwonniw
+var all_levels = [
+    'all_my_chocolates',
+    'a_bar_walks_into_my_tummy',
+    'soyl_not_green',
+    'mint_chocolate',
+    'indecisive',
+    'picky',
+    'mint_chocolate_returns',
+    'classic',
+    'backlash',
+    'botique',
+    'winnowing',
+    'gniwonniw'
 ]
 
-all_my_chocolates = {
+var all_my_chocolates = {
   name: 'all my chocolates',
   //this is the first level, and is meant to show how to select end-points, as well as introduce them to the concept of selecting by color.
   id: 1,
@@ -25,7 +25,7 @@ all_my_chocolates = {
   script: 'all_my_chocolates'
 };
 
-a_bar_walks_into_my_tummy = {
+var a_bar_walks_into_my_tummy = {
   name: 'a bar walks into my tummy...',
   //this is the second level, and introduces the concept of shapes.  It also gives you choices as to which sensor to select.
   id: 2,
@@ -37,7 +37,7 @@ a_bar_walks_into_my_tummy = {
   script: 'a_bar_walks_into_my_tummy'
 }
 
-soyl_not_green = {
+var soyl_not_green = {
   name: 'soyl not green',
   //this is the first level with a component, NOT.  We start with NOT because it only has one connector.
   id: 3,
@@ -49,7 +49,7 @@ soyl_not_green = {
   script: 'soyl_not_green'
 }
 
-mint_chocolate = {
+var mint_chocolate = {
   name: 'mint_chocolate',
   //this is the first level with the OR component
   id: 4,
@@ -62,7 +62,7 @@ mint_chocolate = {
   script: 'mint_chocolate'
 }
 
-indecisive = {
+var indecisive = {
   name: 'indecisive',
   //second level with the OR component
   id: 5,
@@ -75,7 +75,7 @@ indecisive = {
   script: 'indecisive'
 }
 
-picky = {
+var picky = {
   name: 'picky',
   //combines the OR and NOT component
   id: 6,
@@ -87,7 +87,7 @@ picky = {
   script: 'picky'
 }
 
-mint_chocolate_returns = {
+var mint_chocolate_returns = {
   name: 'mint chocolate returns',
   //combine OR and NOT again.  Gets the player used to thinking in reverse with the NOT.
   id: 7,
@@ -99,7 +99,7 @@ mint_chocolate_returns = {
   scripts: 'mint_chocolate_returns'
 }
 
-classic = {
+var classic = {
   name: 'classic',
   //introduce the AND operator
   id: 8,
@@ -111,7 +111,7 @@ classic = {
   script: 'classic'
 }
 
-backlash = {
+var backlash = {
   name: 'backlash',
   //combine the AND and the NOT operators
   id: 9,
@@ -123,7 +123,7 @@ backlash = {
   script: 'backlash'
 }
 
-botique = {
+var botique = {
   name: 'botique',
   //combine the AND and the OR operators
   id: 10,
@@ -137,7 +137,7 @@ botique = {
 
 //This is the end of the training levels.  From now on we should be able to include all three operators and combine them in ever more interesting ways.
 
-winnowing = {
+var winnowing = {
   name: 'winnowing',
   //this is another combination of AND and OR
   id: 11,
@@ -148,7 +148,8 @@ winnowing = {
   types: ['**'],
   script: 'winnowing'
 }
-gniwonniw = {
+
+var gniwonniw = {
   name: 'gniwonniw',
   //combine all three for the first time
   id: 12,

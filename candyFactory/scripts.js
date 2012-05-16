@@ -4,8 +4,10 @@ var circuit_changed = function(){
  var script = scripts[get_current_level.script()]
  script.call() //is this the right syntax?
 }
-
-scripts = {
-//  alldachocolate: alldachocolate_events,
-//  or1: or1_events
+window.testFirst = function(){
+  all_my_chocolates_events()
+}
+var scripts = {
+  'all_my_chocolates': all_my_chocolates_events,
+  'a_bar_walks_into_my_tummy': a_bar_walks_into_my_tummy_events
 }

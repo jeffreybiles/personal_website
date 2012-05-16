@@ -1,37 +1,21 @@
-alldachocolate = {
-  name: 'alldachocolate',
-  //this is the first level, and is meant to show how to select end-points, as well as introduce them to the concept of selecting by color.
-  id: 1,
-  order:  'only chocolate candies',
-  hint: 'this is a sample hint',
-  sensors:  ['chocolate'],
-//  analyze: function(){
-//    return [
-//      {type: 'chocolate ball', levelSays: true, circuitSays: true},
-//      {type: 'cherry ball', levelSays: true, circuitSays: false},
-//    ]
-//  },
-  tools: [],
-  types:  ['*o'], //this means "All flavors, only balls"
-  script: 'alldachocolate'
-};
 
+var empty_lightbulb = {type: 'lightbulb', connection_criteria: {connected_to: 'empty'}}
 
-//scripts.
-var alldachocolate_events = function(){
-  var elements = get_elements();
-  if (filter_elements(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: ''}}) &&
-      filter_elements(elements, {type: 'lightbulb', connection_criteria: {connected_to: ''}})){
+var all_my_chocolates_events = function(){
+  var elements = elements_first_selected //get_elements();
+  console.log(elements)
+  if (has_element_where(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: 'empty'}}) &&
+      has_element_where(elements, empty_lightbulb)){
     console.log("first event!!")                                     ;
     //highlight the outgoing connector of the chocolate sensor
     //put up a dialogue box nearby that says "we must tell the machine what to do!  click on the sensor to start laying down wire."
-  } else if (filter_elements(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: 'active'}}) &&
-      filter_elements(elements, {type: 'lightbulb', connection_criteria: {connected_to: ''}})){
+  } else if (has_element_where(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: 'active'}}) &&
+      has_element_where(elements, empty_lightbulb)){
     console.log("the user has selected the chocolate sensor!!");
     //highlight the incoming connector to the lightbulb.
     //put up a dialogue box nearby that says "good job!  Now connect it to the lightbulb!"
-  } else if (filter_elements(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: 'any'}}) &&
-      filter_elements(elements, {type: 'lightbulb', connection_criteria: {connected_to: 'any'}})) {
+  } else if (has_element_where(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: 'any'}}) &&
+      has_element_where(elements, {type: 'lightbulb', connection_criteria: {connected_to: 'any'}})) {
     console.log("the user has connected the two");
     //highlight the lever
     //put up a dialogue box that says to click on the lever
@@ -40,7 +24,14 @@ var alldachocolate_events = function(){
   }
 }
 
-//tests
+var a_bar_walks_into_my_tummy_events = function(){
+
+}
+
+
+
+
+
 elements_start = [
   {
     id: 1,
@@ -52,7 +43,7 @@ elements_start = [
         y: 100,
         width: 50,
         height: 50,
-        connected_to: ''
+        connected_to: 'empty'
       }
     ]
   },
@@ -66,7 +57,7 @@ elements_start = [
         y: 100,
         width: 10,
         height: 10,
-        connected_to: ''
+        connected_to: 'empty'
       }
     ]
   }
@@ -97,7 +88,7 @@ elements_first_selected = [
         y: 100,
         width: 10,
         height: 10,
-        connected_to: ''
+        connected_to: 'empty'
       }
     ]
   }

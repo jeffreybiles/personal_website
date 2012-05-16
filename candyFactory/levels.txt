@@ -159,9 +159,3 @@ gniwonniw = {
   types: ['**'],
   script: 'gniwonniw'
 }
-
-
-
-
-
-
