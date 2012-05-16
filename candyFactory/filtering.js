@@ -43,6 +43,7 @@ var connection_is_match = function(connection){  //'this' is the criterion
         if (connection_value == 'any') {
           var re = new RegExp(/[0-9]+/)
           this_is_a_match *= re.exec(connection.connected_to)
+          break;
         } else {
           this_is_a_match *= matches_key(connection_value, connection.connected_to);
           break;
