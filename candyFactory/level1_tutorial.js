@@ -1,29 +1,61 @@
-
-var empty_lightbulb = {type: 'lightbulb', connection_criteria: {connected_to: 'empty'}}
-
-var highlightSection = function(x, y, height, width, isCircular){
-
+var sensor = function(flavor, connection_status){
+  return {
+    type: 'sensor',
+    sensor: flavor,
+    connection_criteria: {
+      connected_to: connection_status
+    }
+  };
 }
 
-var createSpeechBubble = function(x, y, text) {
+var lightbulb = function(connection_status){
+  return {
+    type: 'lightbulb',
+    connection_criteria: {
+      connected_to: connection_status
+    }
+  }
+}
+
+find_connection = function(element, status, type){
+  return $.each(element.connections,function(i, connection){
+    if (connection.type == type && connection.connected_to == status){
+      return connection
+    }
+  })[0]
+}
+
+var find_incoming = function(element, status){return find_connection(element, status, 'incoming')}
+var find_outgoing = function(element, status){return find_connection(element, status, 'outgoing');}
+
+var highlightSection = function(highlighted, isCircular){
+  console.log("highlighting: ", highlighted.x, highlighted.y, highlighted.height, highlighted.width, isCircular)
+}
+
+var createSpeechBubble = function(hightlighted, text) {
+  console.log("creating speech bubble: ", hightlighted.x, hightlighted.y, text);
 
 }
 
 var all_my_chocolates_events = function(){
-  var elements = elements_first_selected //get_elements();
+  var elements = elements_finished//get_elements();
   console.log(elements)
-  if (has_element_where(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: 'empty'}}) &&
-      has_element_where(elements, empty_lightbulb)){
-    console.log("first event!!");
-    //highlight the outgoing connector of the chocolate sensor
-    //put up a dialogue box nearby that says "we must tell the machine what to do!  click on the sensor to start laying down wire."
-  } else if (has_element_where(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: 'active'}}) &&
-      has_element_where(elements, empty_lightbulb)){
-    console.log("the user has selected the chocolate sensor!!");
-    //highlight the incoming connector to the lightbulb.
-    //put up a dialogue box nearby that says "good job!  Now connect it to the lightbulb!"
-  } else if (has_element_where(elements, {type: 'sensor', sensor: 'chocolate', connection_criteria: {connected_to: 'any'}}) &&
-      has_element_where(elements, {type: 'lightbulb', connection_criteria: {connected_to: 'any'}})) {
+  if (has_element_where(elements, sensor('chocolate', 'empty')) &&
+      has_element_where(elements, lightbulb('empty')))
+  {
+    var sensor_out = find_outgoing(filter_elements(elements, sensor('chocolate', 'empty'))[0], 'empty');
+    highlightSection(sensor_out, true)
+    createSpeechBubble(sensor_out, "We must tell the machine what to do.  Click on the sensor to start laying down wire.")
+  }
+  else if (has_element_where(elements, sensor('chocolate', 'active')) &&
+              has_element_where(elements, lightbulb('empty')))
+  {
+    var lightbulb_in = find_incoming(filter_elements(elements, lightbulb('empty'))[0], 'empty');
+    highlightSection(lightbulb_in, true);
+    createSpeechBubble(lightbulb_in, "Good job!  Now connect it to the lightbulb!");
+  }
+  else if (has_element_where(elements, sensor('chocolate', 'any')) &&
+              has_element_where(elements, lightbulb('any'))) {
     console.log("the user has connected the two");
     //highlight the lever
     //put up a dialogue box that says to click on the lever
