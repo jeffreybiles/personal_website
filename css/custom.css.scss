@@ -84,7 +84,7 @@ button.css3button:hover {
 
 #navbar a {
   color: #ad6704;
-  font-size: 25px;
+  font-size: 30px;
   opacity: 0.5;
   padding: 10px;
   text-decoration: none;
@@ -92,15 +92,15 @@ button.css3button:hover {
 
   transition-delay: 0s;
   transition-duration: 0.25s;
-  transition-property: opacity, font-size;
+  transition-property: opacity;
   transition-timing-function: ease;
   -webkit-transition-delay: 0s;
   -webkit-transition-duration: 0.25s;
-  -webkit-transition-property: opacity, font-size;
+  -webkit-transition-property: opacity;
   -webkit-transition-timing-function: ease;
   -o-transition-delay: 0s;
   -o-transition-duration: 0.25s;
-  -o-transition-property: opacity, font-size;
+  -o-transition-property: opacity;
   -o-transition-timing-function: ease;
 }
 
@@ -109,6 +109,5 @@ button.css3button:hover {
 }
 
 #navbar:hover a {
-  font-size: 28px;
   opacity: 1;
 }
