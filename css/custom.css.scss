@@ -92,22 +92,28 @@ button.css3button:hover {
 
   transition-delay: 0s;
   transition-duration: 0.25s;
-  transition-property: opacity;
+  transition-property: opacity, color;
   transition-timing-function: ease;
   -webkit-transition-delay: 0s;
   -webkit-transition-duration: 0.25s;
-  -webkit-transition-property: opacity;
+  -webkit-transition-property: opacity, color;
   -webkit-transition-timing-function: ease;
   -o-transition-delay: 0s;
   -o-transition-duration: 0.25s;
-  -o-transition-property: opacity;
+  -o-transition-property: opacity, color;
   -o-transition-timing-function: ease;
 }
 
 #navbar:hover {
-  background-color: #f5f5f5;
+  background-color: #f2f2f2;
 }
 
 #navbar:hover a {
+  color: #7d3704;
   opacity: 1;
+}
+
+#resume_switcher {
+  text-align: center;
+  margin: 10px;
 }
