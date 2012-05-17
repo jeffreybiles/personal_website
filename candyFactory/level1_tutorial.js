@@ -57,6 +57,7 @@ var all_my_chocolates_events = function(){
   else if (has_element_where(elements, sensor('chocolate', 'any')) &&
               has_element_where(elements, lightbulb('any'))) {
     console.log("the user has connected the two");
+    var lever = getLeverLocation()
     //highlight the lever
     //put up a dialogue box that says to click on the lever
     //here we do something a little hacky... we set a click event on the lever,
