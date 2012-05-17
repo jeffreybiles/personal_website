@@ -1,4 +1,13 @@
-var hash_sample = {type: 'sensor', sensor: 'chocolate', connection_criteria: {connection_type: 'outgoing', connected_to: 'active'}}
+find_connection = function(element, status, type){
+  return $.each(element.connections,function(i, connection){
+    if (connection.type == type && connection.connected_to == status){
+      return connection
+    }
+  })[0]
+}
+
+var find_incoming = function(element, status){return find_connection(element, status, 'incoming')}
+var find_outgoing = function(element, status){return find_connection(element, status, 'outgoing');}
 
 var filter_elements = function(elements, criterion){ //both criterion and elements are arrays
   var remaining_elements = elements
@@ -55,4 +64,34 @@ var connection_is_match = function(connection){  //'this' is the criterion
 var matches_key = function(find_this, find_in){
   var re = new RegExp(''+find_this)
   if (re.exec(find_in)) {return true;} else {return false}
+}
+
+//shortcuts and standins
+
+var highlightSection = function(highlighted, isCircular){
+  console.log("highlighting: ", highlighted.x, highlighted.y, highlighted.height, highlighted.width, isCircular)
+}
+
+var createSpeechBubble = function(hightlighted, text) {
+  console.log("creating speech bubble: ", hightlighted.x, hightlighted.y, text);
+
+}
+
+var sensor = function(flavor, connection_status){
+  return {
+    type: 'sensor',
+    sensor: flavor,
+    connection_criteria: {
+      connected_to: connection_status
+    }
+  };
+}
+
+var lightbulb = function(connection_status){
+  return {
+    type: 'lightbulb',
+    connection_criteria: {
+      connected_to: connection_status
+    }
+  }
 }

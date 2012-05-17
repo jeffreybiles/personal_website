@@ -1,41 +1,4 @@
-var sensor = function(flavor, connection_status){
-  return {
-    type: 'sensor',
-    sensor: flavor,
-    connection_criteria: {
-      connected_to: connection_status
-    }
-  };
-}
 
-var lightbulb = function(connection_status){
-  return {
-    type: 'lightbulb',
-    connection_criteria: {
-      connected_to: connection_status
-    }
-  }
-}
-
-find_connection = function(element, status, type){
-  return $.each(element.connections,function(i, connection){
-    if (connection.type == type && connection.connected_to == status){
-      return connection
-    }
-  })[0]
-}
-
-var find_incoming = function(element, status){return find_connection(element, status, 'incoming')}
-var find_outgoing = function(element, status){return find_connection(element, status, 'outgoing');}
-
-var highlightSection = function(highlighted, isCircular){
-  console.log("highlighting: ", highlighted.x, highlighted.y, highlighted.height, highlighted.width, isCircular)
-}
-
-var createSpeechBubble = function(hightlighted, text) {
-  console.log("creating speech bubble: ", hightlighted.x, hightlighted.y, text);
-
-}
 
 var all_my_chocolates_events = function(){
   var elements = elements_finished//get_elements();
@@ -58,20 +21,17 @@ var all_my_chocolates_events = function(){
               has_element_where(elements, lightbulb('any'))) {
     console.log("the user has connected the two");
     var lever = getLeverLocation()
-    //highlight the lever
-    //put up a dialogue box that says to click on the lever
+    highlightSection(lever, 'rectangular');
+    createSpeechBubble(lever, "Click on the lever to test your machine!");
+
     //here we do something a little hacky... we set a click event on the lever,
     // which sets a timer (how long the checking animation takes to play) to a callback which highlights the chalkboard
+//the following should be wrapped in some sort of click event, then a timeout event.  Take care of when there are things to test on, it is too difficult without feedback.
+//    var advance_location = getAdvanceLocation();
+//    highlightSection(advance_location)
+
   }
 }
-
-var a_bar_walks_into_my_tummy_events = function(){
-
-}
-
-
-
-
 
 elements_start = [
   {
