@@ -3,25 +3,26 @@
 var all_my_chocolates_events = function(){
   var elements = elements_finished//get_elements();
   console.log(elements)
+
   if (has_element_where(elements, sensor('chocolate', 'empty')) &&
-      has_element_where(elements, lightbulb('empty')))
-  {
+      has_element_where(elements, lightbulb('empty'))) {
     var sensor_out = find_outgoing(filter_elements(elements, sensor('chocolate', 'empty'))[0], 'empty');
     highlightSection(sensor_out, true)
     createSpeechBubble(sensor_out, "We must tell the machine what to do.  Click on the sensor to start laying down wire.")
   }
+
   else if (has_element_where(elements, sensor('chocolate', 'active')) &&
-              has_element_where(elements, lightbulb('empty')))
-  {
+              has_element_where(elements, lightbulb('empty'))){
     var lightbulb_in = find_incoming(filter_elements(elements, lightbulb('empty'))[0], 'empty');
     highlightSection(lightbulb_in, true);
     createSpeechBubble(lightbulb_in, "Good job!  Now connect it to the lightbulb!");
   }
+
   else if (has_element_where(elements, sensor('chocolate', 'any')) &&
               has_element_where(elements, lightbulb('any'))) {
     console.log("the user has connected the two");
     var lever = getLeverLocation()
-    highlightSection(lever, 'rectangular');
+    highlightSection(lever, false);
     createSpeechBubble(lever, "Click on the lever to test your machine!");
 
     //here we do something a little hacky... we set a click event on the lever,

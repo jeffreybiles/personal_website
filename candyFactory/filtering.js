@@ -74,9 +74,30 @@ var highlightSection = function(highlighted, isCircular){
 
 var createSpeechBubble = function(hightlighted, text) {
   console.log("creating speech bubble: ", hightlighted.x, hightlighted.y, text);
-
 }
 
+var getLeverLocation = function(){
+  return {
+    x: 110,
+    y: 120,
+    height: 130,
+    width: 140
+  }
+}
+
+var operator = function(type, connection_type, connection_status){
+  return {
+    type: type,
+    connection_criteria: {
+      connection_type: connection_type,
+      connected_to: connection_status
+    }
+  }
+}
+
+var not = function(connection_type, connection_status){
+  return operator('NOT', connection_type, connection_status);
+}
 var sensor = function(flavor, connection_status){
   return {
     type: 'sensor',
@@ -95,3 +116,5 @@ var lightbulb = function(connection_status){
     }
   }
 }
+
+

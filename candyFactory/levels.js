@@ -24,8 +24,8 @@ var a_bar_walks_into_my_tummy = {
   script: 'a_bar_walks_into_my_tummy'
 }
 
-var soyl_not_green = {
-  levelname: 'Soyl not green',
+var not_what_I_mint= {
+  levelname: "That's not what I mint..",
   //this is the first level with a component, NOT.  We start with NOT because it only has one connector.
   levelid: 3,
   orderText: "I want everything that's not green!",
@@ -34,7 +34,7 @@ var soyl_not_green = {
   tools: ['NOT'],
   types: ['*-'],
   answers: 'C*, R*, Y*',
-  script: 'soyl_not_green'
+  script: 'not_what_I_mint'
 }
 
 var mint_chocolate = {
@@ -70,11 +70,11 @@ var picky = {
   //combines the OR and NOT component
   levelid: 6,
   orderText: "I don't know what I like, but I know what I don't like:  lemons and sticks.  Don't give me any lemons and don't give me any sticks.",
-  hint: "You'll have to combine an OR with either one or two NOTs.",
+  hint: "First, make a machine that accepts lemons or sticks.  Then reject everything that is accepted by that machine.",
   sensors: ['Y', '|'],
   tools: ['OR', 'NOT'],
   types: ['**'],
-  answers: 'Co, C-, Ro, R-, Go, G-', //update this!
+  answers: 'Co, C-, Ro, R-, Go, G-',
   script: 'picky'
 }
 
@@ -259,7 +259,7 @@ var kludge = {
 var all_levels = [
     all_my_chocolates,
     a_bar_walks_into_my_tummy,
-    soyl_not_green,
+    not_what_I_mint,
     mint_chocolate,
     indecisive,
     picky,
