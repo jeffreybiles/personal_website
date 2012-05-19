@@ -3,7 +3,7 @@ mainLoop = (canvas) ->
   if enemies.length == 0
     level++
     startGame()
-  if !player.stillAlive
+  else if !player.stillAlive
     startGame()
 
   drawBackground()
@@ -29,7 +29,7 @@ startGame = ->
   player = new Player(canvas.width/2, canvas.height/2, 20, true)
   enemyFactory(numEnemies())
   if firstTime
-    firstTime == false
+    firstTime = false
     mainLoop(canvas)
 
 

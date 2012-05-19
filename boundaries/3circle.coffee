@@ -7,7 +7,7 @@ class Circle
       @draw()
     else
       @stillAlive = false
-      loadAndPlaySound('defeat.ogg') #second parameter as a backup?
+      soundManager.play('defeat')
 
   draw: ->
     ctx.fillStyle = @color

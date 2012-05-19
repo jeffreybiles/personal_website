@@ -1,7 +1,7 @@
 collision = (hitter, hittee, modifiers = 1) ->
   hittee.dx = Math.cos(hitter.angle + Math.PI/2)*hitSpeed*modifiers
   hittee.dy = Math.sin(hitter.angle + Math.PI/2)*hitSpeed*modifiers
-  loadAndPlaySound('hit.ogg')
+  soundManager.play('hit')
 
 electronCollision = (atom1, atom2) ->
   collision(atom1, atom2, 0.3)

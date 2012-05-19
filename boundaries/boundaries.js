@@ -3,6 +3,19 @@
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
+  soundManager.url = 'soundmanagerv297a-20120318/swf';
+
+  soundManager.onready(function() {
+    soundManager.createSound({
+      id: 'hit',
+      url: 'hit.mp3'
+    });
+    return soundManager.createSound({
+      id: 'defeat',
+      url: 'defeat.mp3'
+    });
+  });
+
   canvas = document.getElementById("myCanvas");
 
   canvasId = "myCanvas";
@@ -127,7 +140,7 @@
         return this.draw();
       } else {
         this.stillAlive = false;
-        return loadAndPlaySound('defeat.ogg');
+        return soundManager.play('defeat');
       }
     };
 
@@ -246,7 +259,7 @@
     if (modifiers == null) modifiers = 1;
     hittee.dx = Math.cos(hitter.angle + Math.PI / 2) * hitSpeed * modifiers;
     hittee.dy = Math.sin(hitter.angle + Math.PI / 2) * hitSpeed * modifiers;
-    return loadAndPlaySound('hit.ogg');
+    return soundManager.play('hit');
   };
 
   electronCollision = function(atom1, atom2) {
@@ -312,8 +325,9 @@
     if (enemies.length === 0) {
       level++;
       startGame();
+    } else if (!player.stillAlive) {
+      startGame();
     }
-    if (!player.stillAlive) startGame();
     drawBackground();
     player.update();
     player.move();
@@ -356,7 +370,7 @@
     player = new Player(canvas.width / 2, canvas.height / 2, 20, true);
     enemyFactory(numEnemies());
     if (firstTime) {
-      firstTime === false;
+      firstTime = false;
       return mainLoop(canvas);
     }
   };
